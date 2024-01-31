@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Label patIDLabel1;
             System.Windows.Forms.Label label1;
-            System.Windows.Forms.Label PatidLabel;
             System.Windows.Forms.Label advAmtLabel;
             System.Windows.Forms.Label payDateLabel;
             System.Windows.Forms.Label payModeLabel;
@@ -50,9 +49,22 @@
             System.Windows.Forms.Label label11;
             System.Windows.Forms.Label label12;
             System.Windows.Forms.Label label13;
+            System.Windows.Forms.Label label21;
+            System.Windows.Forms.Label label22;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FinalBillFrm));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonPrintDrChrgs = new System.Windows.Forms.Button();
+            this.buttonIPD = new System.Windows.Forms.Button();
+            this.buttonDel = new System.Windows.Forms.Button();
+            this.buttonEstimation = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.FBMaintabPage = new System.Windows.Forms.TabPage();
+            this.textBoxAdvIds = new System.Windows.Forms.TextBox();
+            this.textBoxCountry = new System.Windows.Forms.TextBox();
+            this.textBoxPS = new System.Windows.Forms.TextBox();
+            this.textBoxPO = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.textBoxDissposableAmt = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -86,30 +98,32 @@
             this.PatNametextBox = new System.Windows.Forms.TextBox();
             this.TotAmttextBox = new System.Windows.Forms.TextBox();
             this.MedicinesAmttextBox = new System.Windows.Forms.TextBox();
-            this.Findbutton = new System.Windows.Forms.Button();
             this.DocFeesAmttextBox = new System.Windows.Forms.TextBox();
             this.DetailTotalAmttextBox = new System.Windows.Forms.TextBox();
             this.taxNameComboBox = new System.Windows.Forms.ComboBox();
             this.TaxAmttextBox = new System.Windows.Forms.TextBox();
             this.ConcessionAmttextBox = new System.Windows.Forms.TextBox();
+            this.tabPageDrChrg = new System.Windows.Forms.TabPage();
+            this.dataGridViewDocChrg = new System.Windows.Forms.DataGridView();
+            this.BillNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DrDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Doctor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DocAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textBoxDocTot = new System.Windows.Forms.TextBox();
             this.FBBedtabPage = new System.Windows.Forms.TabPage();
             this.bedManagementDataGridView = new System.Windows.Forms.DataGridView();
             this.BedAmtTextBox = new System.Windows.Forms.TextBox();
             this.FBOtherItemstabPage = new System.Windows.Forms.TabPage();
             this.OtherItemsdataGridView = new System.Windows.Forms.DataGridView();
-            this.FBID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SlNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Particulars = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FBOItemsTID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FBOItemsId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FBOItemsPerticulars = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FBOItemsAmt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OtherAmttextBox = new System.Windows.Forms.TextBox();
             this.Savebutton = new System.Windows.Forms.Button();
-            this.Cancelbutton = new System.Windows.Forms.Button();
-            this.Addbutton = new System.Windows.Forms.Button();
             this.printbutton = new System.Windows.Forms.Button();
             this.bedManagementBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.iPDBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.iPDTableAdapter = new HMS.HMSDataSetTableAdapters.IPDTableAdapter();
-            this.taxMastTableAdapter = new HMS.HMSDataSetTableAdapters.TaxMastTableAdapter();
             this.tableAdapterManager = new HMS.HMSDataSetTableAdapters.TableAdapterManager();
             this.FinalBillListdataGridView = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -133,10 +147,10 @@
             this.ChargeableAmt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AdvanceAmt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TotalReceivable = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DissposableAmt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bedManagementTableAdapter = new HMS.HMSDataSetTableAdapters.BedManagementTableAdapter();
             patIDLabel1 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
-            PatidLabel = new System.Windows.Forms.Label();
             advAmtLabel = new System.Windows.Forms.Label();
             payDateLabel = new System.Windows.Forms.Label();
             payModeLabel = new System.Windows.Forms.Label();
@@ -155,11 +169,15 @@
             label11 = new System.Windows.Forms.Label();
             label12 = new System.Windows.Forms.Label();
             label13 = new System.Windows.Forms.Label();
+            label21 = new System.Windows.Forms.Label();
+            label22 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.FBMaintabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.taxMastBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hMSDataSet)).BeginInit();
+            this.tabPageDrChrg.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDocChrg)).BeginInit();
             this.FBBedtabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bedManagementDataGridView)).BeginInit();
             this.FBOtherItemstabPage.SuspendLayout();
@@ -172,7 +190,7 @@
             // patIDLabel1
             // 
             patIDLabel1.AutoSize = true;
-            patIDLabel1.Location = new System.Drawing.Point(65, 151);
+            patIDLabel1.Location = new System.Drawing.Point(66, 70);
             patIDLabel1.Name = "patIDLabel1";
             patIDLabel1.Size = new System.Drawing.Size(28, 13);
             patIDLabel1.TabIndex = 46;
@@ -186,15 +204,6 @@
             label1.Size = new System.Drawing.Size(74, 13);
             label1.TabIndex = 45;
             label1.Text = "Patient Name:";
-            // 
-            // PatidLabel
-            // 
-            PatidLabel.AutoSize = true;
-            PatidLabel.Location = new System.Drawing.Point(39, 66);
-            PatidLabel.Name = "PatidLabel";
-            PatidLabel.Size = new System.Drawing.Size(55, 13);
-            PatidLabel.TabIndex = 42;
-            PatidLabel.Text = "Patient Id:";
             // 
             // advAmtLabel
             // 
@@ -280,7 +289,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(775, 17);
+            label5.Location = new System.Drawing.Point(775, 40);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(65, 13);
             label5.TabIndex = 69;
@@ -289,7 +298,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(775, 43);
+            label6.Location = new System.Drawing.Point(775, 66);
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(55, 13);
             label6.TabIndex = 71;
@@ -298,7 +307,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new System.Drawing.Point(775, 69);
+            label7.Location = new System.Drawing.Point(775, 92);
             label7.Name = "label7";
             label7.Size = new System.Drawing.Size(34, 13);
             label7.TabIndex = 73;
@@ -307,7 +316,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new System.Drawing.Point(775, 95);
+            label8.Location = new System.Drawing.Point(775, 118);
             label8.Name = "label8";
             label8.Size = new System.Drawing.Size(75, 13);
             label8.TabIndex = 75;
@@ -325,7 +334,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new System.Drawing.Point(775, 121);
+            label10.Location = new System.Drawing.Point(775, 144);
             label10.Name = "label10";
             label10.Size = new System.Drawing.Size(100, 13);
             label10.TabIndex = 79;
@@ -358,32 +367,99 @@
             label13.TabIndex = 85;
             label13.Text = "Bed Details:";
             // 
+            // label21
+            // 
+            label21.AutoSize = true;
+            label21.Location = new System.Drawing.Point(7, 9);
+            label21.Name = "label21";
+            label21.Size = new System.Drawing.Size(84, 13);
+            label21.TabIndex = 61;
+            label21.Text = "Doctor Charges:";
+            // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.Location = new System.Drawing.Point(832, 303);
+            label22.Name = "label22";
+            label22.Size = new System.Drawing.Size(69, 13);
+            label22.TabIndex = 62;
+            label22.Text = "Doc Amount:";
+            // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.buttonPrintDrChrgs);
+            this.panel1.Controls.Add(this.buttonIPD);
+            this.panel1.Controls.Add(this.buttonDel);
+            this.panel1.Controls.Add(this.buttonEstimation);
             this.panel1.Controls.Add(this.tabControl1);
             this.panel1.Controls.Add(this.Savebutton);
-            this.panel1.Controls.Add(this.Cancelbutton);
-            this.panel1.Controls.Add(this.Addbutton);
             this.panel1.Controls.Add(this.printbutton);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1203, 418);
+            this.panel1.Size = new System.Drawing.Size(1203, 412);
             this.panel1.TabIndex = 2;
+            // 
+            // buttonPrintDrChrgs
+            // 
+            this.buttonPrintDrChrgs.Location = new System.Drawing.Point(532, 14);
+            this.buttonPrintDrChrgs.Name = "buttonPrintDrChrgs";
+            this.buttonPrintDrChrgs.Size = new System.Drawing.Size(122, 23);
+            this.buttonPrintDrChrgs.TabIndex = 108;
+            this.buttonPrintDrChrgs.Text = "Print Doctor Charges";
+            this.buttonPrintDrChrgs.UseVisualStyleBackColor = true;
+            this.buttonPrintDrChrgs.Click += new System.EventHandler(this.buttonPrintDrChrgs_Click);
+            // 
+            // buttonIPD
+            // 
+            this.buttonIPD.Location = new System.Drawing.Point(1079, 14);
+            this.buttonIPD.Name = "buttonIPD";
+            this.buttonIPD.Size = new System.Drawing.Size(75, 23);
+            this.buttonIPD.TabIndex = 107;
+            this.buttonIPD.Text = "IPD";
+            this.buttonIPD.UseVisualStyleBackColor = true;
+            this.buttonIPD.Click += new System.EventHandler(this.buttonIPD_Click);
+            // 
+            // buttonDel
+            // 
+            this.buttonDel.Location = new System.Drawing.Point(711, 14);
+            this.buttonDel.Name = "buttonDel";
+            this.buttonDel.Size = new System.Drawing.Size(75, 23);
+            this.buttonDel.TabIndex = 88;
+            this.buttonDel.Text = "Delete";
+            this.buttonDel.UseVisualStyleBackColor = true;
+            this.buttonDel.Click += new System.EventHandler(this.buttonDel_Click);
+            // 
+            // buttonEstimation
+            // 
+            this.buttonEstimation.Location = new System.Drawing.Point(396, 14);
+            this.buttonEstimation.Name = "buttonEstimation";
+            this.buttonEstimation.Size = new System.Drawing.Size(75, 23);
+            this.buttonEstimation.TabIndex = 2;
+            this.buttonEstimation.Text = "Estimation";
+            this.buttonEstimation.UseVisualStyleBackColor = true;
+            this.buttonEstimation.Click += new System.EventHandler(this.buttonEstimation_Click);
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.FBMaintabPage);
+            this.tabControl1.Controls.Add(this.tabPageDrChrg);
             this.tabControl1.Controls.Add(this.FBBedtabPage);
             this.tabControl1.Controls.Add(this.FBOtherItemstabPage);
             this.tabControl1.Location = new System.Drawing.Point(33, 43);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1125, 360);
+            this.tabControl1.Size = new System.Drawing.Size(1125, 363);
             this.tabControl1.TabIndex = 87;
             // 
             // FBMaintabPage
             // 
+            this.FBMaintabPage.Controls.Add(this.textBoxAdvIds);
+            this.FBMaintabPage.Controls.Add(this.textBoxCountry);
+            this.FBMaintabPage.Controls.Add(this.textBoxPS);
+            this.FBMaintabPage.Controls.Add(this.textBoxPO);
+            this.FBMaintabPage.Controls.Add(this.label20);
+            this.FBMaintabPage.Controls.Add(this.textBoxDissposableAmt);
             this.FBMaintabPage.Controls.Add(this.label19);
             this.FBMaintabPage.Controls.Add(this.label18);
             this.FBMaintabPage.Controls.Add(this.label17);
@@ -418,7 +494,6 @@
             this.FBMaintabPage.Controls.Add(label8);
             this.FBMaintabPage.Controls.Add(this.PatientidTextBox);
             this.FBMaintabPage.Controls.Add(this.OthrChrgAmtstextBox);
-            this.FBMaintabPage.Controls.Add(PatidLabel);
             this.FBMaintabPage.Controls.Add(label7);
             this.FBMaintabPage.Controls.Add(label9);
             this.FBMaintabPage.Controls.Add(this.BloodAmttextBox);
@@ -428,7 +503,6 @@
             this.FBMaintabPage.Controls.Add(this.MedicinesAmttextBox);
             this.FBMaintabPage.Controls.Add(label1);
             this.FBMaintabPage.Controls.Add(label5);
-            this.FBMaintabPage.Controls.Add(this.Findbutton);
             this.FBMaintabPage.Controls.Add(this.DocFeesAmttextBox);
             this.FBMaintabPage.Controls.Add(patIDLabel1);
             this.FBMaintabPage.Controls.Add(this.DetailTotalAmttextBox);
@@ -441,10 +515,62 @@
             this.FBMaintabPage.Location = new System.Drawing.Point(4, 22);
             this.FBMaintabPage.Name = "FBMaintabPage";
             this.FBMaintabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.FBMaintabPage.Size = new System.Drawing.Size(1117, 334);
+            this.FBMaintabPage.Size = new System.Drawing.Size(1117, 337);
             this.FBMaintabPage.TabIndex = 0;
             this.FBMaintabPage.Text = "Main";
             this.FBMaintabPage.UseVisualStyleBackColor = true;
+            // 
+            // textBoxAdvIds
+            // 
+            this.textBoxAdvIds.Location = new System.Drawing.Point(376, 300);
+            this.textBoxAdvIds.Name = "textBoxAdvIds";
+            this.textBoxAdvIds.ReadOnly = true;
+            this.textBoxAdvIds.Size = new System.Drawing.Size(207, 20);
+            this.textBoxAdvIds.TabIndex = 132;
+            this.textBoxAdvIds.Visible = false;
+            // 
+            // textBoxCountry
+            // 
+            this.textBoxCountry.Location = new System.Drawing.Point(103, 300);
+            this.textBoxCountry.Name = "textBoxCountry";
+            this.textBoxCountry.ReadOnly = true;
+            this.textBoxCountry.Size = new System.Drawing.Size(204, 20);
+            this.textBoxCountry.TabIndex = 131;
+            // 
+            // textBoxPS
+            // 
+            this.textBoxPS.Location = new System.Drawing.Point(206, 274);
+            this.textBoxPS.Name = "textBoxPS";
+            this.textBoxPS.ReadOnly = true;
+            this.textBoxPS.Size = new System.Drawing.Size(100, 20);
+            this.textBoxPS.TabIndex = 130;
+            // 
+            // textBoxPO
+            // 
+            this.textBoxPO.Location = new System.Drawing.Point(101, 274);
+            this.textBoxPO.Name = "textBoxPO";
+            this.textBoxPO.ReadOnly = true;
+            this.textBoxPO.Size = new System.Drawing.Size(100, 20);
+            this.textBoxPO.TabIndex = 129;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(775, 14);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(64, 13);
+            this.label20.TabIndex = 128;
+            this.label20.Text = "Dissposable";
+            // 
+            // textBoxDissposableAmt
+            // 
+            this.textBoxDissposableAmt.Location = new System.Drawing.Point(882, 11);
+            this.textBoxDissposableAmt.Name = "textBoxDissposableAmt";
+            this.textBoxDissposableAmt.Size = new System.Drawing.Size(184, 20);
+            this.textBoxDissposableAmt.TabIndex = 127;
+            this.textBoxDissposableAmt.Text = "0";
+            this.textBoxDissposableAmt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxDissposableAmt.TextChanged += new System.EventHandler(this.textBoxDissposableAmt_TextChanged);
             // 
             // label19
             // 
@@ -476,7 +602,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(45, 229);
+            this.label16.Location = new System.Drawing.Point(46, 200);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(48, 13);
             this.label16.TabIndex = 123;
@@ -485,7 +611,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(15, 203);
+            this.label15.Location = new System.Drawing.Point(16, 174);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(78, 13);
             this.label15.TabIndex = 122;
@@ -494,7 +620,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(25, 177);
+            this.label14.Location = new System.Drawing.Point(26, 148);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(69, 13);
             this.label14.TabIndex = 121;
@@ -502,28 +628,30 @@
             // 
             // DischargedateTimePicker
             // 
-            this.DischargedateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.DischargedateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.DischargedateTimePicker.Location = new System.Drawing.Point(448, 248);
             this.DischargedateTimePicker.Name = "DischargedateTimePicker";
             this.DischargedateTimePicker.Size = new System.Drawing.Size(263, 20);
-            this.DischargedateTimePicker.TabIndex = 120;
+            this.DischargedateTimePicker.TabIndex = 7;
             this.DischargedateTimePicker.ValueChanged += new System.EventHandler(this.DischargedateTimePicker_ValueChanged);
             // 
             // AdmissiondateTimePicker
             // 
-            this.AdmissiondateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.AdmissiondateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.AdmissiondateTimePicker.Location = new System.Drawing.Point(448, 226);
             this.AdmissiondateTimePicker.Name = "AdmissiondateTimePicker";
             this.AdmissiondateTimePicker.Size = new System.Drawing.Size(263, 20);
-            this.AdmissiondateTimePicker.TabIndex = 119;
+            this.AdmissiondateTimePicker.TabIndex = 6;
+            this.AdmissiondateTimePicker.ValueChanged += new System.EventHandler(this.AdmissiondateTimePicker_ValueChanged);
             // 
             // RefDrtextBox
             // 
-            this.RefDrtextBox.Location = new System.Drawing.Point(100, 303);
+            this.RefDrtextBox.Location = new System.Drawing.Point(394, 148);
             this.RefDrtextBox.Name = "RefDrtextBox";
             this.RefDrtextBox.ReadOnly = true;
             this.RefDrtextBox.Size = new System.Drawing.Size(203, 20);
             this.RefDrtextBox.TabIndex = 118;
+            this.RefDrtextBox.Visible = false;
             // 
             // UnderDrtextBox
             // 
@@ -535,7 +663,7 @@
             // 
             // PINtextBox
             // 
-            this.PINtextBox.Location = new System.Drawing.Point(205, 277);
+            this.PINtextBox.Location = new System.Drawing.Point(206, 248);
             this.PINtextBox.Name = "PINtextBox";
             this.PINtextBox.ReadOnly = true;
             this.PINtextBox.Size = new System.Drawing.Size(100, 20);
@@ -543,7 +671,7 @@
             // 
             // CitytextBox
             // 
-            this.CitytextBox.Location = new System.Drawing.Point(99, 277);
+            this.CitytextBox.Location = new System.Drawing.Point(100, 248);
             this.CitytextBox.Name = "CitytextBox";
             this.CitytextBox.ReadOnly = true;
             this.CitytextBox.Size = new System.Drawing.Size(100, 20);
@@ -551,7 +679,7 @@
             // 
             // Address2textBox
             // 
-            this.Address2textBox.Location = new System.Drawing.Point(99, 251);
+            this.Address2textBox.Location = new System.Drawing.Point(100, 222);
             this.Address2textBox.Name = "Address2textBox";
             this.Address2textBox.ReadOnly = true;
             this.Address2textBox.Size = new System.Drawing.Size(207, 20);
@@ -559,7 +687,7 @@
             // 
             // Address1textBox
             // 
-            this.Address1textBox.Location = new System.Drawing.Point(99, 225);
+            this.Address1textBox.Location = new System.Drawing.Point(100, 196);
             this.Address1textBox.Name = "Address1textBox";
             this.Address1textBox.ReadOnly = true;
             this.Address1textBox.Size = new System.Drawing.Size(207, 20);
@@ -567,7 +695,7 @@
             // 
             // GarNametextBox
             // 
-            this.GarNametextBox.Location = new System.Drawing.Point(99, 199);
+            this.GarNametextBox.Location = new System.Drawing.Point(100, 170);
             this.GarNametextBox.Name = "GarNametextBox";
             this.GarNametextBox.ReadOnly = true;
             this.GarNametextBox.Size = new System.Drawing.Size(207, 20);
@@ -575,7 +703,7 @@
             // 
             // PatAgetextBox
             // 
-            this.PatAgetextBox.Location = new System.Drawing.Point(206, 174);
+            this.PatAgetextBox.Location = new System.Drawing.Point(207, 145);
             this.PatAgetextBox.Name = "PatAgetextBox";
             this.PatAgetextBox.ReadOnly = true;
             this.PatAgetextBox.Size = new System.Drawing.Size(100, 20);
@@ -583,7 +711,7 @@
             // 
             // PatGendertextBox
             // 
-            this.PatGendertextBox.Location = new System.Drawing.Point(100, 174);
+            this.PatGendertextBox.Location = new System.Drawing.Point(101, 145);
             this.PatGendertextBox.Name = "PatGendertextBox";
             this.PatGendertextBox.ReadOnly = true;
             this.PatGendertextBox.Size = new System.Drawing.Size(100, 20);
@@ -592,18 +720,19 @@
             // FinalpayDateDateTimePicker
             // 
             this.FinalpayDateDateTimePicker.CustomFormat = "";
+            this.FinalpayDateDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.FinalpayDateDateTimePicker.Location = new System.Drawing.Point(103, 41);
             this.FinalpayDateDateTimePicker.Name = "FinalpayDateDateTimePicker";
             this.FinalpayDateDateTimePicker.Size = new System.Drawing.Size(203, 20);
-            this.FinalpayDateDateTimePicker.TabIndex = 87;
+            this.FinalpayDateDateTimePicker.TabIndex = 1;
             this.FinalpayDateDateTimePicker.ValueChanged += new System.EventHandler(this.FinalpayDateDateTimePicker_ValueChanged_1);
             // 
             // idTextBox
             // 
             this.idTextBox.Location = new System.Drawing.Point(100, 11);
             this.idTextBox.Name = "idTextBox";
-            this.idTextBox.Size = new System.Drawing.Size(203, 20);
-            this.idTextBox.TabIndex = 1;
+            this.idTextBox.Size = new System.Drawing.Size(207, 20);
+            this.idTextBox.TabIndex = 0;
             this.idTextBox.TextChanged += new System.EventHandler(this.idTextBox_TextChanged);
             // 
             // percentageTextBox
@@ -642,15 +771,15 @@
             this.payModeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.payModeComboBox.FormattingEnabled = true;
             this.payModeComboBox.Items.AddRange(new object[] {
-            "-SELECT-",
             "UPI",
             "Cash",
             "Card",
-            "Bank Transfer"});
+            "Bank Transfer",
+            "Cheque"});
             this.payModeComboBox.Location = new System.Drawing.Point(99, 118);
             this.payModeComboBox.Name = "payModeComboBox";
-            this.payModeComboBox.Size = new System.Drawing.Size(203, 21);
-            this.payModeComboBox.TabIndex = 8;
+            this.payModeComboBox.Size = new System.Drawing.Size(207, 21);
+            this.payModeComboBox.TabIndex = 3;
             // 
             // AdvanceAmttextBox
             // 
@@ -665,15 +794,15 @@
             // 
             // IPDSearchtextBox
             // 
-            this.IPDSearchtextBox.Location = new System.Drawing.Point(99, 148);
+            this.IPDSearchtextBox.Location = new System.Drawing.Point(100, 67);
             this.IPDSearchtextBox.Name = "IPDSearchtextBox";
-            this.IPDSearchtextBox.Size = new System.Drawing.Size(203, 20);
-            this.IPDSearchtextBox.TabIndex = 84;
+            this.IPDSearchtextBox.Size = new System.Drawing.Size(207, 20);
+            this.IPDSearchtextBox.TabIndex = 2;
             this.IPDSearchtextBox.TextChanged += new System.EventHandler(this.IPDSearchtextBox_TextChanged);
             // 
             // ChargeableAmttextBox
             // 
-            this.ChargeableAmttextBox.Location = new System.Drawing.Point(882, 118);
+            this.ChargeableAmttextBox.Location = new System.Drawing.Point(882, 141);
             this.ChargeableAmttextBox.Name = "ChargeableAmttextBox";
             this.ChargeableAmttextBox.ReadOnly = true;
             this.ChargeableAmttextBox.Size = new System.Drawing.Size(184, 20);
@@ -684,27 +813,30 @@
             // 
             // PatientidTextBox
             // 
-            this.PatientidTextBox.Location = new System.Drawing.Point(100, 63);
+            this.PatientidTextBox.Location = new System.Drawing.Point(395, 170);
             this.PatientidTextBox.Name = "PatientidTextBox";
-            this.PatientidTextBox.Size = new System.Drawing.Size(176, 20);
+            this.PatientidTextBox.ReadOnly = true;
+            this.PatientidTextBox.Size = new System.Drawing.Size(207, 20);
             this.PatientidTextBox.TabIndex = 43;
+            this.PatientidTextBox.Visible = false;
+            this.PatientidTextBox.TextChanged += new System.EventHandler(this.PatientidTextBox_TextChanged);
             // 
             // OthrChrgAmtstextBox
             // 
-            this.OthrChrgAmtstextBox.Location = new System.Drawing.Point(882, 92);
+            this.OthrChrgAmtstextBox.Location = new System.Drawing.Point(882, 115);
             this.OthrChrgAmtstextBox.Name = "OthrChrgAmtstextBox";
             this.OthrChrgAmtstextBox.Size = new System.Drawing.Size(184, 20);
-            this.OthrChrgAmtstextBox.TabIndex = 74;
+            this.OthrChrgAmtstextBox.TabIndex = 11;
             this.OthrChrgAmtstextBox.Text = "0";
             this.OthrChrgAmtstextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.OthrChrgAmtstextBox.TextChanged += new System.EventHandler(this.OthrChrgAmtstextBox_TextChanged);
             // 
             // BloodAmttextBox
             // 
-            this.BloodAmttextBox.Location = new System.Drawing.Point(882, 66);
+            this.BloodAmttextBox.Location = new System.Drawing.Point(882, 89);
             this.BloodAmttextBox.Name = "BloodAmttextBox";
             this.BloodAmttextBox.Size = new System.Drawing.Size(184, 20);
-            this.BloodAmttextBox.TabIndex = 72;
+            this.BloodAmttextBox.TabIndex = 10;
             this.BloodAmttextBox.Text = "0";
             this.BloodAmttextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.BloodAmttextBox.TextChanged += new System.EventHandler(this.BloodAmttextBox_TextChanged);
@@ -714,7 +846,7 @@
             this.PatNametextBox.Location = new System.Drawing.Point(99, 92);
             this.PatNametextBox.Name = "PatNametextBox";
             this.PatNametextBox.ReadOnly = true;
-            this.PatNametextBox.Size = new System.Drawing.Size(203, 20);
+            this.PatNametextBox.Size = new System.Drawing.Size(207, 20);
             this.PatNametextBox.TabIndex = 44;
             // 
             // TotAmttextBox
@@ -730,30 +862,20 @@
             // 
             // MedicinesAmttextBox
             // 
-            this.MedicinesAmttextBox.Location = new System.Drawing.Point(882, 40);
+            this.MedicinesAmttextBox.Location = new System.Drawing.Point(882, 63);
             this.MedicinesAmttextBox.Name = "MedicinesAmttextBox";
             this.MedicinesAmttextBox.Size = new System.Drawing.Size(184, 20);
-            this.MedicinesAmttextBox.TabIndex = 70;
+            this.MedicinesAmttextBox.TabIndex = 9;
             this.MedicinesAmttextBox.Text = "0";
             this.MedicinesAmttextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.MedicinesAmttextBox.TextChanged += new System.EventHandler(this.MedicinesAmttextBox_TextChanged);
             // 
-            // Findbutton
-            // 
-            this.Findbutton.Location = new System.Drawing.Point(282, 63);
-            this.Findbutton.Name = "Findbutton";
-            this.Findbutton.Size = new System.Drawing.Size(20, 23);
-            this.Findbutton.TabIndex = 46;
-            this.Findbutton.Text = "🔎";
-            this.Findbutton.UseVisualStyleBackColor = true;
-            this.Findbutton.Click += new System.EventHandler(this.Findbutton_Click);
-            // 
             // DocFeesAmttextBox
             // 
-            this.DocFeesAmttextBox.Location = new System.Drawing.Point(882, 14);
+            this.DocFeesAmttextBox.Location = new System.Drawing.Point(882, 37);
             this.DocFeesAmttextBox.Name = "DocFeesAmttextBox";
             this.DocFeesAmttextBox.Size = new System.Drawing.Size(184, 20);
-            this.DocFeesAmttextBox.TabIndex = 68;
+            this.DocFeesAmttextBox.TabIndex = 8;
             this.DocFeesAmttextBox.Text = "0";
             this.DocFeesAmttextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.DocFeesAmttextBox.TextChanged += new System.EventHandler(this.DocFeesAmttextBox_TextChanged);
@@ -771,15 +893,12 @@
             // 
             // taxNameComboBox
             // 
-            this.taxNameComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.taxMastBindingSource, "TaxName", true));
-            this.taxNameComboBox.DataSource = this.taxMastBindingSource;
-            this.taxNameComboBox.DisplayMember = "TaxName";
             this.taxNameComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.taxNameComboBox.FormattingEnabled = true;
             this.taxNameComboBox.Location = new System.Drawing.Point(395, 43);
             this.taxNameComboBox.Name = "taxNameComboBox";
             this.taxNameComboBox.Size = new System.Drawing.Size(121, 21);
-            this.taxNameComboBox.TabIndex = 62;
+            this.taxNameComboBox.TabIndex = 4;
             this.taxNameComboBox.ValueMember = "TaxName";
             // 
             // TaxAmttextBox
@@ -798,10 +917,73 @@
             this.ConcessionAmttextBox.Location = new System.Drawing.Point(527, 69);
             this.ConcessionAmttextBox.Name = "ConcessionAmttextBox";
             this.ConcessionAmttextBox.Size = new System.Drawing.Size(184, 20);
-            this.ConcessionAmttextBox.TabIndex = 64;
+            this.ConcessionAmttextBox.TabIndex = 5;
             this.ConcessionAmttextBox.Text = "0";
             this.ConcessionAmttextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.ConcessionAmttextBox.TextChanged += new System.EventHandler(this.ConcessionAmttextBox_TextChanged);
+            // 
+            // tabPageDrChrg
+            // 
+            this.tabPageDrChrg.Controls.Add(label21);
+            this.tabPageDrChrg.Controls.Add(this.dataGridViewDocChrg);
+            this.tabPageDrChrg.Controls.Add(this.textBoxDocTot);
+            this.tabPageDrChrg.Controls.Add(label22);
+            this.tabPageDrChrg.Location = new System.Drawing.Point(4, 22);
+            this.tabPageDrChrg.Name = "tabPageDrChrg";
+            this.tabPageDrChrg.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageDrChrg.Size = new System.Drawing.Size(1117, 337);
+            this.tabPageDrChrg.TabIndex = 3;
+            this.tabPageDrChrg.Text = "Doctor Charges";
+            this.tabPageDrChrg.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewDocChrg
+            // 
+            this.dataGridViewDocChrg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewDocChrg.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.BillNo,
+            this.DrDate,
+            this.Doctor,
+            this.DocAmount});
+            this.dataGridViewDocChrg.Location = new System.Drawing.Point(10, 28);
+            this.dataGridViewDocChrg.Name = "dataGridViewDocChrg";
+            this.dataGridViewDocChrg.Size = new System.Drawing.Size(1099, 266);
+            this.dataGridViewDocChrg.TabIndex = 60;
+            this.dataGridViewDocChrg.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDocChrg_CellValueChanged);
+            this.dataGridViewDocChrg.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridViewDocChrg_RowsAdded);
+            // 
+            // BillNo
+            // 
+            this.BillNo.HeaderText = "Final Bill No.";
+            this.BillNo.Name = "BillNo";
+            this.BillNo.ReadOnly = true;
+            // 
+            // DrDate
+            // 
+            this.DrDate.HeaderText = "Date";
+            this.DrDate.Name = "DrDate";
+            // 
+            // Doctor
+            // 
+            this.Doctor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Doctor.HeaderText = "Doctor";
+            this.Doctor.MinimumWidth = 400;
+            this.Doctor.Name = "Doctor";
+            this.Doctor.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // DocAmount
+            // 
+            this.DocAmount.HeaderText = "Amount";
+            this.DocAmount.Name = "DocAmount";
+            // 
+            // textBoxDocTot
+            // 
+            this.textBoxDocTot.Location = new System.Drawing.Point(906, 300);
+            this.textBoxDocTot.Name = "textBoxDocTot";
+            this.textBoxDocTot.ReadOnly = true;
+            this.textBoxDocTot.Size = new System.Drawing.Size(203, 20);
+            this.textBoxDocTot.TabIndex = 63;
+            this.textBoxDocTot.Text = "0";
+            this.textBoxDocTot.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // FBBedtabPage
             // 
@@ -812,7 +994,7 @@
             this.FBBedtabPage.Location = new System.Drawing.Point(4, 22);
             this.FBBedtabPage.Name = "FBBedtabPage";
             this.FBBedtabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.FBBedtabPage.Size = new System.Drawing.Size(1117, 334);
+            this.FBBedtabPage.Size = new System.Drawing.Size(1117, 337);
             this.FBBedtabPage.TabIndex = 1;
             this.FBBedtabPage.Text = "Beds";
             this.FBBedtabPage.UseVisualStyleBackColor = true;
@@ -845,7 +1027,7 @@
             this.FBOtherItemstabPage.Controls.Add(label2);
             this.FBOtherItemstabPage.Location = new System.Drawing.Point(4, 22);
             this.FBOtherItemstabPage.Name = "FBOtherItemstabPage";
-            this.FBOtherItemstabPage.Size = new System.Drawing.Size(1117, 334);
+            this.FBOtherItemstabPage.Size = new System.Drawing.Size(1117, 337);
             this.FBOtherItemstabPage.TabIndex = 2;
             this.FBOtherItemstabPage.Text = "Other Items";
             this.FBOtherItemstabPage.UseVisualStyleBackColor = true;
@@ -854,10 +1036,10 @@
             // 
             this.OtherItemsdataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.OtherItemsdataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.FBID,
-            this.SlNo,
-            this.Particulars,
-            this.Amount});
+            this.FBOItemsTID,
+            this.FBOItemsId,
+            this.FBOItemsPerticulars,
+            this.FBOItemsAmt});
             this.OtherItemsdataGridView.Location = new System.Drawing.Point(6, 19);
             this.OtherItemsdataGridView.Name = "OtherItemsdataGridView";
             this.OtherItemsdataGridView.Size = new System.Drawing.Size(1099, 266);
@@ -867,29 +1049,29 @@
             this.OtherItemsdataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.OtherItemsdataGridView_RowsAdded_1);
             this.OtherItemsdataGridView.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.OtherItemsdataGridView_RowsRemoved);
             // 
-            // FBID
+            // FBOItemsTID
             // 
-            this.FBID.HeaderText = "Final Bill No.";
-            this.FBID.Name = "FBID";
-            this.FBID.ReadOnly = true;
+            this.FBOItemsTID.HeaderText = "Final Bill No.";
+            this.FBOItemsTID.Name = "FBOItemsTID";
+            this.FBOItemsTID.ReadOnly = true;
             // 
-            // SlNo
+            // FBOItemsId
             // 
-            this.SlNo.HeaderText = "SlNo";
-            this.SlNo.Name = "SlNo";
-            this.SlNo.ReadOnly = true;
+            this.FBOItemsId.HeaderText = "SlNo";
+            this.FBOItemsId.Name = "FBOItemsId";
+            this.FBOItemsId.ReadOnly = true;
             // 
-            // Particulars
+            // FBOItemsPerticulars
             // 
-            this.Particulars.HeaderText = "Particulars";
-            this.Particulars.MinimumWidth = 400;
-            this.Particulars.Name = "Particulars";
-            this.Particulars.Width = 400;
+            this.FBOItemsPerticulars.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.FBOItemsPerticulars.HeaderText = "Particulars";
+            this.FBOItemsPerticulars.MinimumWidth = 400;
+            this.FBOItemsPerticulars.Name = "FBOItemsPerticulars";
             // 
-            // Amount
+            // FBOItemsAmt
             // 
-            this.Amount.HeaderText = "Amount";
-            this.Amount.Name = "Amount";
+            this.FBOItemsAmt.HeaderText = "Amount";
+            this.FBOItemsAmt.Name = "FBOItemsAmt";
             // 
             // OtherAmttextBox
             // 
@@ -907,37 +1089,17 @@
             this.Savebutton.Location = new System.Drawing.Point(140, 14);
             this.Savebutton.Name = "Savebutton";
             this.Savebutton.Size = new System.Drawing.Size(75, 23);
-            this.Savebutton.TabIndex = 51;
+            this.Savebutton.TabIndex = 0;
             this.Savebutton.Text = "Save";
             this.Savebutton.UseVisualStyleBackColor = true;
             this.Savebutton.Click += new System.EventHandler(this.Savebutton_Click);
             // 
-            // Cancelbutton
-            // 
-            this.Cancelbutton.Location = new System.Drawing.Point(333, 14);
-            this.Cancelbutton.Name = "Cancelbutton";
-            this.Cancelbutton.Size = new System.Drawing.Size(75, 23);
-            this.Cancelbutton.TabIndex = 49;
-            this.Cancelbutton.Text = "Cancel";
-            this.Cancelbutton.UseVisualStyleBackColor = true;
-            this.Cancelbutton.Click += new System.EventHandler(this.Cancelbutton_Click);
-            // 
-            // Addbutton
-            // 
-            this.Addbutton.Location = new System.Drawing.Point(33, 14);
-            this.Addbutton.Name = "Addbutton";
-            this.Addbutton.Size = new System.Drawing.Size(75, 23);
-            this.Addbutton.TabIndex = 48;
-            this.Addbutton.Text = "Add";
-            this.Addbutton.UseVisualStyleBackColor = true;
-            this.Addbutton.Click += new System.EventHandler(this.Addbutton_Click);
-            // 
             // printbutton
             // 
-            this.printbutton.Location = new System.Drawing.Point(438, 14);
+            this.printbutton.Location = new System.Drawing.Point(266, 14);
             this.printbutton.Name = "printbutton";
             this.printbutton.Size = new System.Drawing.Size(75, 23);
-            this.printbutton.TabIndex = 9;
+            this.printbutton.TabIndex = 1;
             this.printbutton.Text = "Print";
             this.printbutton.UseVisualStyleBackColor = true;
             this.printbutton.Click += new System.EventHandler(this.printbutton_Click);
@@ -952,14 +1114,6 @@
             this.iPDBindingSource.DataMember = "IPD";
             this.iPDBindingSource.DataSource = this.hMSDataSet;
             // 
-            // iPDTableAdapter
-            // 
-            this.iPDTableAdapter.ClearBeforeFill = true;
-            // 
-            // taxMastTableAdapter
-            // 
-            this.taxMastTableAdapter.ClearBeforeFill = true;
-            // 
             // tableAdapterManager
             // 
             this.tableAdapterManager.AdvanceTableAdapter = null;
@@ -968,20 +1122,29 @@
             this.tableAdapterManager.BedNumberMastTableAdapter = null;
             this.tableAdapterManager.BedTypeMastTableAdapter = null;
             this.tableAdapterManager.BloodGroupMastTableAdapter = null;
+            this.tableAdapterManager.Connection = null;
+            this.tableAdapterManager.DischargeLinTableAdapter = null;
             this.tableAdapterManager.DischargeTableAdapter = null;
+            this.tableAdapterManager.DisposableIssHdrTableAdapter = null;
+            this.tableAdapterManager.DisposableIssLinTableAdapter = null;
             this.tableAdapterManager.DoctorDepartmentMastTableAdapter = null;
             this.tableAdapterManager.DoctorMastTableAdapter = null;
-            this.tableAdapterManager.FinalBillBed1TableAdapter = null;
+            this.tableAdapterManager.FinalBillDrTableAdapter = null;
             this.tableAdapterManager.FinalBillHdrTableAdapter = null;
             this.tableAdapterManager.FinalBillOtherAmountTableAdapter = null;
-            this.tableAdapterManager.IPDTableAdapter = this.iPDTableAdapter;
+            this.tableAdapterManager.GRNHdrTableAdapter = null;
+            this.tableAdapterManager.GRNLinTableAdapter = null;
+            this.tableAdapterManager.IPDTableAdapter = null;
             this.tableAdapterManager.ItCatMastTableAdapter = null;
+            this.tableAdapterManager.ItMastTableAdapter = null;
             this.tableAdapterManager.OPDTableAdapter = null;
             this.tableAdapterManager.PatientMastTableAdapter = null;
             this.tableAdapterManager.PrescriptionTableAdapter = null;
             this.tableAdapterManager.PresMedTableAdapter = null;
-            this.tableAdapterManager.TaxMastTableAdapter = this.taxMastTableAdapter;
+            this.tableAdapterManager.SuppMastTableAdapter = null;
+            this.tableAdapterManager.TaxMastTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = HMS.HMSDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            this.tableAdapterManager.UsersTableAdapter = null;
             // 
             // FinalBillListdataGridView
             // 
@@ -1009,13 +1172,14 @@
             this.OtherCharges,
             this.ChargeableAmt,
             this.AdvanceAmt,
-            this.TotalReceivable});
+            this.TotalReceivable,
+            this.DissposableAmt});
             this.FinalBillListdataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FinalBillListdataGridView.Location = new System.Drawing.Point(0, 418);
+            this.FinalBillListdataGridView.Location = new System.Drawing.Point(0, 412);
             this.FinalBillListdataGridView.Name = "FinalBillListdataGridView";
             this.FinalBillListdataGridView.ReadOnly = true;
             this.FinalBillListdataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.FinalBillListdataGridView.Size = new System.Drawing.Size(1203, 244);
+            this.FinalBillListdataGridView.Size = new System.Drawing.Size(1203, 250);
             this.FinalBillListdataGridView.TabIndex = 3;
             this.FinalBillListdataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FinalBillListdataGridView_CellContentClick);
             this.FinalBillListdataGridView.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.FinalBillListdataGridView_CellMouseDoubleClick);
@@ -1147,6 +1311,12 @@
             this.TotalReceivable.Name = "TotalReceivable";
             this.TotalReceivable.ReadOnly = true;
             // 
+            // DissposableAmt
+            // 
+            this.DissposableAmt.HeaderText = "DissposableAmt";
+            this.DissposableAmt.Name = "DissposableAmt";
+            this.DissposableAmt.ReadOnly = true;
+            // 
             // bedManagementTableAdapter
             // 
             this.bedManagementTableAdapter.ClearBeforeFill = true;
@@ -1158,8 +1328,10 @@
             this.ClientSize = new System.Drawing.Size(1203, 662);
             this.Controls.Add(this.FinalBillListdataGridView);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FinalBillFrm";
             this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Final Bill";
             this.Load += new System.EventHandler(this.FinalBillFrm_Load);
@@ -1169,6 +1341,9 @@
             this.FBMaintabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.taxMastBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hMSDataSet)).EndInit();
+            this.tabPageDrChrg.ResumeLayout(false);
+            this.tabPageDrChrg.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDocChrg)).EndInit();
             this.FBBedtabPage.ResumeLayout(false);
             this.FBBedtabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bedManagementDataGridView)).EndInit();
@@ -1186,9 +1361,6 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button Savebutton;
-        private System.Windows.Forms.Button Cancelbutton;
-        private System.Windows.Forms.Button Addbutton;
-        private System.Windows.Forms.Button Findbutton;
         private System.Windows.Forms.TextBox PatNametextBox;
         private System.Windows.Forms.TextBox PatientidTextBox;
         private System.Windows.Forms.TextBox BedAmtTextBox;
@@ -1197,11 +1369,9 @@
         private System.Windows.Forms.TextBox idTextBox;
         private HMSDataSet hMSDataSet;
         private System.Windows.Forms.BindingSource iPDBindingSource;
-        private HMSDataSetTableAdapters.IPDTableAdapter iPDTableAdapter;
         private System.Windows.Forms.DataGridView OtherItemsdataGridView;
         private System.Windows.Forms.TextBox OtherAmttextBox;
         private System.Windows.Forms.BindingSource taxMastBindingSource;
-        private HMSDataSetTableAdapters.TaxMastTableAdapter taxMastTableAdapter;
         private HMSDataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.ComboBox taxNameComboBox;
         private System.Windows.Forms.TextBox TaxAmttextBox;
@@ -1243,6 +1413,14 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Button buttonEstimation;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox textBoxDissposableAmt;
+        private System.Windows.Forms.Button buttonDel;
+        private System.Windows.Forms.TextBox textBoxCountry;
+        private System.Windows.Forms.TextBox textBoxPS;
+        private System.Windows.Forms.TextBox textBoxPO;
+        private System.Windows.Forms.TextBox textBoxAdvIds;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Date;
         private System.Windows.Forms.DataGridViewTextBoxColumn PatientID;
@@ -1264,9 +1442,19 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ChargeableAmt;
         private System.Windows.Forms.DataGridViewTextBoxColumn AdvanceAmt;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalReceivable;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FBID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SlNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Particulars;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DissposableAmt;
+        private System.Windows.Forms.Button buttonIPD;
+        private System.Windows.Forms.TabPage tabPageDrChrg;
+        private System.Windows.Forms.DataGridView dataGridViewDocChrg;
+        private System.Windows.Forms.TextBox textBoxDocTot;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FBOItemsTID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FBOItemsId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FBOItemsPerticulars;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FBOItemsAmt;
+        private System.Windows.Forms.Button buttonPrintDrChrgs;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BillNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DrDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Doctor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DocAmount;
     }
 }

@@ -29,9 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ItMastFrm));
             this.buttonCatMast = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonPrint = new System.Windows.Forms.Button();
+            this.textBoxOpeningStk = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.textBoxItAmt = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.comboBoxItUnit = new System.Windows.Forms.ComboBox();
@@ -61,7 +65,7 @@
             this.buttonCatMast.Location = new System.Drawing.Point(646, 22);
             this.buttonCatMast.Name = "buttonCatMast";
             this.buttonCatMast.Size = new System.Drawing.Size(108, 23);
-            this.buttonCatMast.TabIndex = 0;
+            this.buttonCatMast.TabIndex = 6;
             this.buttonCatMast.Text = "Catogory Master";
             this.buttonCatMast.UseVisualStyleBackColor = true;
             this.buttonCatMast.Click += new System.EventHandler(this.buttonCatMast_Click);
@@ -71,13 +75,16 @@
             this.buttonSave.Location = new System.Drawing.Point(114, 22);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonSave.TabIndex = 1;
+            this.buttonSave.TabIndex = 5;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.buttonPrint);
+            this.panel1.Controls.Add(this.textBoxOpeningStk);
+            this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.textBoxItAmt);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.comboBoxItUnit);
@@ -100,17 +107,50 @@
             this.panel1.Size = new System.Drawing.Size(800, 199);
             this.panel1.TabIndex = 2;
             // 
+            // buttonPrint
+            // 
+            this.buttonPrint.Location = new System.Drawing.Point(295, 22);
+            this.buttonPrint.Name = "buttonPrint";
+            this.buttonPrint.Size = new System.Drawing.Size(75, 23);
+            this.buttonPrint.TabIndex = 18;
+            this.buttonPrint.Text = "Print";
+            this.buttonPrint.UseVisualStyleBackColor = true;
+            this.buttonPrint.Click += new System.EventHandler(this.buttonPrint_Click);
+            // 
+            // textBoxOpeningStk
+            // 
+            this.textBoxOpeningStk.Location = new System.Drawing.Point(580, 76);
+            this.textBoxOpeningStk.Name = "textBoxOpeningStk";
+            this.textBoxOpeningStk.Size = new System.Drawing.Size(100, 20);
+            this.textBoxOpeningStk.TabIndex = 3;
+            this.textBoxOpeningStk.Text = "0.00";
+            this.textBoxOpeningStk.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxOpeningStk.TextChanged += new System.EventHandler(this.textBoxOpeningStk_TextChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(502, 79);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(78, 13);
+            this.label8.TabIndex = 17;
+            this.label8.Text = "Opening Stock";
+            // 
             // textBoxItAmt
             // 
-            this.textBoxItAmt.Location = new System.Drawing.Point(563, 130);
+            this.textBoxItAmt.Location = new System.Drawing.Point(580, 154);
             this.textBoxItAmt.Name = "textBoxItAmt";
+            this.textBoxItAmt.ReadOnly = true;
             this.textBoxItAmt.Size = new System.Drawing.Size(100, 20);
-            this.textBoxItAmt.TabIndex = 16;
+            this.textBoxItAmt.TabIndex = 6;
+            this.textBoxItAmt.Text = "0.00";
+            this.textBoxItAmt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxItAmt.TextChanged += new System.EventHandler(this.textBoxItAmt_TextChanged);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(502, 133);
+            this.label7.Location = new System.Drawing.Point(502, 157);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(43, 13);
             this.label7.TabIndex = 15;
@@ -130,19 +170,22 @@
             this.comboBoxItUnit.Location = new System.Drawing.Point(114, 159);
             this.comboBoxItUnit.Name = "comboBoxItUnit";
             this.comboBoxItUnit.Size = new System.Drawing.Size(100, 21);
-            this.comboBoxItUnit.TabIndex = 14;
+            this.comboBoxItUnit.TabIndex = 2;
             // 
             // textBoxItRate
             // 
-            this.textBoxItRate.Location = new System.Drawing.Point(563, 105);
+            this.textBoxItRate.Location = new System.Drawing.Point(580, 129);
             this.textBoxItRate.Name = "textBoxItRate";
             this.textBoxItRate.Size = new System.Drawing.Size(100, 20);
-            this.textBoxItRate.TabIndex = 13;
+            this.textBoxItRate.TabIndex = 4;
+            this.textBoxItRate.Text = "0.00";
+            this.textBoxItRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxItRate.TextChanged += new System.EventHandler(this.textBoxItRate_TextChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(502, 108);
+            this.label6.Location = new System.Drawing.Point(502, 132);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(30, 13);
             this.label6.TabIndex = 12;
@@ -150,19 +193,23 @@
             // 
             // textBoxCurStock
             // 
-            this.textBoxCurStock.Location = new System.Drawing.Point(563, 78);
+            this.textBoxCurStock.Location = new System.Drawing.Point(580, 102);
             this.textBoxCurStock.Name = "textBoxCurStock";
+            this.textBoxCurStock.ReadOnly = true;
             this.textBoxCurStock.Size = new System.Drawing.Size(100, 20);
-            this.textBoxCurStock.TabIndex = 11;
+            this.textBoxCurStock.TabIndex = 4;
+            this.textBoxCurStock.Text = "0.00";
+            this.textBoxCurStock.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxCurStock.TextChanged += new System.EventHandler(this.textBoxCurStock_TextChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(502, 81);
+            this.label5.Location = new System.Drawing.Point(502, 105);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 13);
+            this.label5.Size = new System.Drawing.Size(72, 13);
             this.label5.TabIndex = 10;
-            this.label5.Text = "Stock";
+            this.label5.Text = "Current Stock";
             // 
             // label4
             // 
@@ -191,7 +238,7 @@
             this.comboBoxCatList.Location = new System.Drawing.Point(114, 129);
             this.comboBoxCatList.Name = "comboBoxCatList";
             this.comboBoxCatList.Size = new System.Drawing.Size(310, 21);
-            this.comboBoxCatList.TabIndex = 6;
+            this.comboBoxCatList.TabIndex = 1;
             this.comboBoxCatList.ValueMember = "CatName";
             // 
             // itCatMastBindingSource
@@ -209,7 +256,7 @@
             this.textBoxItName.Location = new System.Drawing.Point(114, 102);
             this.textBoxItName.Name = "textBoxItName";
             this.textBoxItName.Size = new System.Drawing.Size(310, 20);
-            this.textBoxItName.TabIndex = 5;
+            this.textBoxItName.TabIndex = 0;
             // 
             // label2
             // 
@@ -224,8 +271,9 @@
             // 
             this.textBoxItCode.Location = new System.Drawing.Point(114, 76);
             this.textBoxItCode.Name = "textBoxItCode";
+            this.textBoxItCode.ReadOnly = true;
             this.textBoxItCode.Size = new System.Drawing.Size(100, 20);
-            this.textBoxItCode.TabIndex = 3;
+            this.textBoxItCode.TabIndex = 0;
             // 
             // label1
             // 
@@ -238,10 +286,13 @@
             // 
             // dataGridViewItMast
             // 
+            this.dataGridViewItMast.AllowUserToAddRows = false;
+            this.dataGridViewItMast.AllowUserToDeleteRows = false;
             this.dataGridViewItMast.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewItMast.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewItMast.Location = new System.Drawing.Point(0, 199);
             this.dataGridViewItMast.Name = "dataGridViewItMast";
+            this.dataGridViewItMast.ReadOnly = true;
             this.dataGridViewItMast.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewItMast.Size = new System.Drawing.Size(800, 251);
             this.dataGridViewItMast.TabIndex = 3;
@@ -258,11 +309,15 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.dataGridViewItMast);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "ItMastFrm";
             this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Item Master";
             this.Load += new System.EventHandler(this.ItMastFrm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ItMastFrm_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itCatMastBindingSource)).EndInit();
@@ -277,7 +332,6 @@
         private System.Windows.Forms.Button buttonCatMast;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridView dataGridViewItMast;
         private System.Windows.Forms.TextBox textBoxItCode;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxItName;
@@ -295,5 +349,9 @@
         private System.Windows.Forms.TextBox textBoxItAmt;
         private System.Windows.Forms.Label label7;
         private HMSDataSetTableAdapters.ItCatMastTableAdapter itCatMastTableAdapter;
+        private System.Windows.Forms.TextBox textBoxOpeningStk;
+        private System.Windows.Forms.Label label8;
+        public System.Windows.Forms.Button buttonPrint;
+        public System.Windows.Forms.DataGridView dataGridViewItMast;
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ItCatFrm));
             this.textBoxCatID = new System.Windows.Forms.TextBox();
             this.textBoxCatName = new System.Windows.Forms.TextBox();
             this.labelCatName = new System.Windows.Forms.Label();
@@ -52,7 +53,7 @@
             this.textBoxCatName.Location = new System.Drawing.Point(110, 90);
             this.textBoxCatName.Name = "textBoxCatName";
             this.textBoxCatName.Size = new System.Drawing.Size(338, 20);
-            this.textBoxCatName.TabIndex = 1;
+            this.textBoxCatName.TabIndex = 0;
             // 
             // labelCatName
             // 
@@ -74,14 +75,14 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(474, 146);
-            this.panel1.TabIndex = 3;
+            this.panel1.TabIndex = 0;
             // 
             // buttonSave
             // 
             this.buttonSave.Location = new System.Drawing.Point(134, 13);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonSave.TabIndex = 4;
+            this.buttonSave.TabIndex = 1;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
@@ -106,7 +107,7 @@
             this.dataGridViewCatForm.ReadOnly = true;
             this.dataGridViewCatForm.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewCatForm.Size = new System.Drawing.Size(474, 186);
-            this.dataGridViewCatForm.TabIndex = 4;
+            this.dataGridViewCatForm.TabIndex = 1;
             this.dataGridViewCatForm.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dataGridViewCatForm_MouseDoubleClick);
             // 
             // ItCatFrm
@@ -116,11 +117,15 @@
             this.ClientSize = new System.Drawing.Size(474, 332);
             this.Controls.Add(this.dataGridViewCatForm);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "ItCatFrm";
             this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Catogery Master";
             this.Load += new System.EventHandler(this.ItCatFrm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ItCatFrm_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCatForm)).EndInit();

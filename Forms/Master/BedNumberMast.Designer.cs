@@ -29,70 +29,75 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.Label idLabel;
             System.Windows.Forms.Label bedNumberLabel;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BedNumberMast));
             System.Windows.Forms.Label bedTypeLabel1;
             System.Windows.Forms.Label currentStatusLabel1;
+            System.Windows.Forms.Label label1;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BedNumberMast));
             this.hMSDataSet = new HMS.HMSDataSet();
             this.bedNumberMastBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.bedNumberMastTableAdapter = new HMS.HMSDataSetTableAdapters.BedNumberMastTableAdapter();
             this.tableAdapterManager = new HMS.HMSDataSetTableAdapters.TableAdapterManager();
-            this.bedNumberMastBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.bedNumberMastBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
-            this.idTextBox = new System.Windows.Forms.TextBox();
             this.bedNumberTextBox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.bedNumberMastDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bedTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.buttonDel = new System.Windows.Forms.Button();
+            this.textBoxRate = new System.Windows.Forms.TextBox();
+            this.buttonSave = new System.Windows.Forms.Button();
             this.currentStatusComboBox = new System.Windows.Forms.ComboBox();
+            this.bedTypeComboBox = new System.Windows.Forms.ComboBox();
             this.bedTypeMastBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.bedNumberMastDataGridView = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BedNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BedType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CurrentStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bedTypeMastTableAdapter = new HMS.HMSDataSetTableAdapters.BedTypeMastTableAdapter();
-            idLabel = new System.Windows.Forms.Label();
             bedNumberLabel = new System.Windows.Forms.Label();
             bedTypeLabel1 = new System.Windows.Forms.Label();
             currentStatusLabel1 = new System.Windows.Forms.Label();
+            label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.hMSDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bedNumberMastBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bedNumberMastBindingNavigator)).BeginInit();
-            this.bedNumberMastBindingNavigator.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bedNumberMastDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bedTypeMastBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bedNumberMastDataGridView)).BeginInit();
             this.SuspendLayout();
-            // 
-            // idLabel
-            // 
-            idLabel.AutoSize = true;
-            idLabel.Location = new System.Drawing.Point(63, 16);
-            idLabel.Name = "idLabel";
-            idLabel.Size = new System.Drawing.Size(19, 13);
-            idLabel.TabIndex = 2;
-            idLabel.Text = "Id:";
             // 
             // bedNumberLabel
             // 
             bedNumberLabel.AutoSize = true;
-            bedNumberLabel.Location = new System.Drawing.Point(13, 40);
+            bedNumberLabel.Location = new System.Drawing.Point(13, 54);
             bedNumberLabel.Name = "bedNumberLabel";
             bedNumberLabel.Size = new System.Drawing.Size(69, 13);
             bedNumberLabel.TabIndex = 4;
             bedNumberLabel.Text = "Bed Number:";
+            // 
+            // bedTypeLabel1
+            // 
+            bedTypeLabel1.AutoSize = true;
+            bedTypeLabel1.Location = new System.Drawing.Point(26, 80);
+            bedTypeLabel1.Name = "bedTypeLabel1";
+            bedTypeLabel1.Size = new System.Drawing.Size(56, 13);
+            bedTypeLabel1.TabIndex = 9;
+            bedTypeLabel1.Text = "Bed Type:";
+            // 
+            // currentStatusLabel1
+            // 
+            currentStatusLabel1.AutoSize = true;
+            currentStatusLabel1.Location = new System.Drawing.Point(347, 80);
+            currentStatusLabel1.Name = "currentStatusLabel1";
+            currentStatusLabel1.Size = new System.Drawing.Size(77, 13);
+            currentStatusLabel1.TabIndex = 10;
+            currentStatusLabel1.Text = "Current Status:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(347, 54);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(33, 13);
+            label1.TabIndex = 13;
+            label1.Text = "Rate:";
             // 
             // hMSDataSet
             // 
@@ -104,265 +109,174 @@
             this.bedNumberMastBindingSource.DataMember = "BedNumberMast";
             this.bedNumberMastBindingSource.DataSource = this.hMSDataSet;
             // 
-            // bedNumberMastTableAdapter
-            // 
-            this.bedNumberMastTableAdapter.ClearBeforeFill = true;
-            // 
             // tableAdapterManager
             // 
+            this.tableAdapterManager.AdvanceTableAdapter = null;
             this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
-            this.tableAdapterManager.BedNumberMastTableAdapter = this.bedNumberMastTableAdapter;
+            this.tableAdapterManager.BedManagementTableAdapter = null;
+            this.tableAdapterManager.BedNumberMastTableAdapter = null;
             this.tableAdapterManager.BedTypeMastTableAdapter = null;
             this.tableAdapterManager.BloodGroupMastTableAdapter = null;
+            this.tableAdapterManager.Connection = null;
+            this.tableAdapterManager.DischargeLinTableAdapter = null;
+            this.tableAdapterManager.DischargeTableAdapter = null;
+            this.tableAdapterManager.DisposableIssHdrTableAdapter = null;
+            this.tableAdapterManager.DisposableIssLinTableAdapter = null;
             this.tableAdapterManager.DoctorDepartmentMastTableAdapter = null;
             this.tableAdapterManager.DoctorMastTableAdapter = null;
+            this.tableAdapterManager.FinalBillHdrTableAdapter = null;
+            this.tableAdapterManager.FinalBillOtherAmountTableAdapter = null;
+            this.tableAdapterManager.GRNHdrTableAdapter = null;
+            this.tableAdapterManager.GRNLinTableAdapter = null;
+            this.tableAdapterManager.IPDTableAdapter = null;
+            this.tableAdapterManager.ItCatMastTableAdapter = null;
+            this.tableAdapterManager.ItMastTableAdapter = null;
+            this.tableAdapterManager.OPDTableAdapter = null;
             this.tableAdapterManager.PatientMastTableAdapter = null;
+            this.tableAdapterManager.PrescriptionTableAdapter = null;
+            this.tableAdapterManager.PresMedTableAdapter = null;
+            this.tableAdapterManager.SuppMastTableAdapter = null;
+            this.tableAdapterManager.TaxMastTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = HMS.HMSDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
-            // 
-            // bedNumberMastBindingNavigator
-            // 
-            this.bedNumberMastBindingNavigator.AddNewItem = this.bindingNavigatorAddNewItem;
-            this.bedNumberMastBindingNavigator.BindingSource = this.bedNumberMastBindingSource;
-            this.bedNumberMastBindingNavigator.CountItem = this.bindingNavigatorCountItem;
-            this.bedNumberMastBindingNavigator.DeleteItem = this.bindingNavigatorDeleteItem;
-            this.bedNumberMastBindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bindingNavigatorMoveFirstItem,
-            this.bindingNavigatorMovePreviousItem,
-            this.bindingNavigatorSeparator,
-            this.bindingNavigatorPositionItem,
-            this.bindingNavigatorCountItem,
-            this.bindingNavigatorSeparator1,
-            this.bindingNavigatorMoveNextItem,
-            this.bindingNavigatorMoveLastItem,
-            this.bindingNavigatorSeparator2,
-            this.bindingNavigatorAddNewItem,
-            this.bindingNavigatorDeleteItem,
-            this.bedNumberMastBindingNavigatorSaveItem});
-            this.bedNumberMastBindingNavigator.Location = new System.Drawing.Point(0, 0);
-            this.bedNumberMastBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
-            this.bedNumberMastBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
-            this.bedNumberMastBindingNavigator.MoveNextItem = this.bindingNavigatorMoveNextItem;
-            this.bedNumberMastBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
-            this.bedNumberMastBindingNavigator.Name = "bedNumberMastBindingNavigator";
-            this.bedNumberMastBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.bedNumberMastBindingNavigator.Size = new System.Drawing.Size(800, 25);
-            this.bedNumberMastBindingNavigator.TabIndex = 0;
-            this.bedNumberMastBindingNavigator.Text = "bindingNavigator1";
-            // 
-            // bindingNavigatorAddNewItem
-            // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorAddNewItem.Text = "Add new";
-            // 
-            // bindingNavigatorCountItem
-            // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
-            this.bindingNavigatorCountItem.Text = "of {0}";
-            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
-            // 
-            // bindingNavigatorDeleteItem
-            // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorDeleteItem.Text = "Delete";
-            // 
-            // bindingNavigatorMoveFirstItem
-            // 
-            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
-            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
-            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveFirstItem.Text = "Move first";
-            // 
-            // bindingNavigatorMovePreviousItem
-            // 
-            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
-            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
-            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
-            // 
-            // bindingNavigatorSeparator
-            // 
-            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorPositionItem
-            // 
-            this.bindingNavigatorPositionItem.AccessibleName = "Position";
-            this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
-            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
-            this.bindingNavigatorPositionItem.Text = "0";
-            this.bindingNavigatorPositionItem.ToolTipText = "Current position";
-            // 
-            // bindingNavigatorSeparator1
-            // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorMoveNextItem
-            // 
-            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
-            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
-            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveNextItem.Text = "Move next";
-            // 
-            // bindingNavigatorMoveLastItem
-            // 
-            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
-            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
-            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveLastItem.Text = "Move last";
-            // 
-            // bindingNavigatorSeparator2
-            // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bedNumberMastBindingNavigatorSaveItem
-            // 
-            this.bedNumberMastBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bedNumberMastBindingNavigatorSaveItem.Image = ((System.Drawing.Image)(resources.GetObject("bedNumberMastBindingNavigatorSaveItem.Image")));
-            this.bedNumberMastBindingNavigatorSaveItem.Name = "bedNumberMastBindingNavigatorSaveItem";
-            this.bedNumberMastBindingNavigatorSaveItem.Size = new System.Drawing.Size(23, 22);
-            this.bedNumberMastBindingNavigatorSaveItem.Text = "Save Data";
-            this.bedNumberMastBindingNavigatorSaveItem.Click += new System.EventHandler(this.bedNumberMastBindingNavigatorSaveItem_Click);
-            // 
-            // idTextBox
-            // 
-            this.idTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bedNumberMastBindingSource, "Id", true));
-            this.idTextBox.Location = new System.Drawing.Point(88, 13);
-            this.idTextBox.Name = "idTextBox";
-            this.idTextBox.Size = new System.Drawing.Size(121, 20);
-            this.idTextBox.TabIndex = 3;
+            this.tableAdapterManager.UsersTableAdapter = null;
             // 
             // bedNumberTextBox
             // 
             this.bedNumberTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bedNumberMastBindingSource, "BedNumber", true));
-            this.bedNumberTextBox.Location = new System.Drawing.Point(88, 37);
+            this.bedNumberTextBox.Location = new System.Drawing.Point(88, 51);
             this.bedNumberTextBox.Name = "bedNumberTextBox";
             this.bedNumberTextBox.Size = new System.Drawing.Size(121, 20);
-            this.bedNumberTextBox.TabIndex = 5;
+            this.bedNumberTextBox.TabIndex = 1;
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.buttonDel);
+            this.panel1.Controls.Add(this.textBoxRate);
+            this.panel1.Controls.Add(label1);
+            this.panel1.Controls.Add(this.buttonSave);
             this.panel1.Controls.Add(currentStatusLabel1);
             this.panel1.Controls.Add(this.currentStatusComboBox);
             this.panel1.Controls.Add(bedTypeLabel1);
             this.panel1.Controls.Add(this.bedTypeComboBox);
-            this.panel1.Controls.Add(this.idTextBox);
-            this.panel1.Controls.Add(idLabel);
             this.panel1.Controls.Add(this.bedNumberTextBox);
             this.panel1.Controls.Add(bedNumberLabel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 25);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 104);
+            this.panel1.Size = new System.Drawing.Size(561, 129);
             this.panel1.TabIndex = 12;
             // 
-            // bedNumberMastDataGridView
+            // buttonDel
             // 
-            this.bedNumberMastDataGridView.AutoGenerateColumns = false;
-            this.bedNumberMastDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.bedNumberMastDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4});
-            this.bedNumberMastDataGridView.DataSource = this.bedNumberMastBindingSource;
-            this.bedNumberMastDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bedNumberMastDataGridView.Location = new System.Drawing.Point(0, 129);
-            this.bedNumberMastDataGridView.Name = "bedNumberMastDataGridView";
-            this.bedNumberMastDataGridView.Size = new System.Drawing.Size(800, 321);
-            this.bedNumberMastDataGridView.TabIndex = 12;
+            this.buttonDel.Location = new System.Drawing.Point(339, 10);
+            this.buttonDel.Name = "buttonDel";
+            this.buttonDel.Size = new System.Drawing.Size(75, 23);
+            this.buttonDel.TabIndex = 106;
+            this.buttonDel.Text = "Delete";
+            this.buttonDel.UseVisualStyleBackColor = true;
+            this.buttonDel.Click += new System.EventHandler(this.buttonDel_Click);
             // 
-            // dataGridViewTextBoxColumn1
+            // textBoxRate
             // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Id";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.textBoxRate.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bedNumberMastBindingSource, "BedNumber", true));
+            this.textBoxRate.Location = new System.Drawing.Point(430, 51);
+            this.textBoxRate.Name = "textBoxRate";
+            this.textBoxRate.Size = new System.Drawing.Size(121, 20);
+            this.textBoxRate.TabIndex = 12;
+            this.textBoxRate.Text = "0";
+            this.textBoxRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // dataGridViewTextBoxColumn2
+            // buttonSave
             // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "BedNumber";
-            this.dataGridViewTextBoxColumn2.HeaderText = "BedNumber";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "BedType";
-            this.dataGridViewTextBoxColumn3.HeaderText = "BedType";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "CurrentStatus";
-            this.dataGridViewTextBoxColumn4.HeaderText = "CurrentStatus";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // bedTypeLabel1
-            // 
-            bedTypeLabel1.AutoSize = true;
-            bedTypeLabel1.Location = new System.Drawing.Point(26, 66);
-            bedTypeLabel1.Name = "bedTypeLabel1";
-            bedTypeLabel1.Size = new System.Drawing.Size(56, 13);
-            bedTypeLabel1.TabIndex = 9;
-            bedTypeLabel1.Text = "Bed Type:";
-            // 
-            // bedTypeComboBox
-            // 
-            this.bedTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bedNumberMastBindingSource, "BedType", true));
-            this.bedTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.bedTypeMastBindingSource, "BedType", true));
-            this.bedTypeComboBox.DataSource = this.bedTypeMastBindingSource;
-            this.bedTypeComboBox.DisplayMember = "BedType";
-            this.bedTypeComboBox.FormattingEnabled = true;
-            this.bedTypeComboBox.Location = new System.Drawing.Point(88, 63);
-            this.bedTypeComboBox.Name = "bedTypeComboBox";
-            this.bedTypeComboBox.Size = new System.Drawing.Size(121, 21);
-            this.bedTypeComboBox.TabIndex = 10;
-            this.bedTypeComboBox.ValueMember = "BedType";
-            // 
-            // currentStatusLabel1
-            // 
-            currentStatusLabel1.AutoSize = true;
-            currentStatusLabel1.Location = new System.Drawing.Point(349, 16);
-            currentStatusLabel1.Name = "currentStatusLabel1";
-            currentStatusLabel1.Size = new System.Drawing.Size(77, 13);
-            currentStatusLabel1.TabIndex = 10;
-            currentStatusLabel1.Text = "Current Status:";
+            this.buttonSave.Location = new System.Drawing.Point(134, 10);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.TabIndex = 11;
+            this.buttonSave.Text = "Save";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // currentStatusComboBox
             // 
             this.currentStatusComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bedNumberMastBindingSource, "CurrentStatus", true));
+            this.currentStatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.currentStatusComboBox.FormattingEnabled = true;
             this.currentStatusComboBox.Items.AddRange(new object[] {
             "No",
             "Yes"});
-            this.currentStatusComboBox.Location = new System.Drawing.Point(432, 13);
+            this.currentStatusComboBox.Location = new System.Drawing.Point(430, 77);
             this.currentStatusComboBox.Name = "currentStatusComboBox";
             this.currentStatusComboBox.Size = new System.Drawing.Size(121, 21);
-            this.currentStatusComboBox.TabIndex = 11;
+            this.currentStatusComboBox.TabIndex = 3;
+            // 
+            // bedTypeComboBox
+            // 
+            this.bedTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bedNumberMastBindingSource, "BedType", true));
+            this.bedTypeComboBox.DataSource = this.bedTypeMastBindingSource;
+            this.bedTypeComboBox.DisplayMember = "BedType";
+            this.bedTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.bedTypeComboBox.FormattingEnabled = true;
+            this.bedTypeComboBox.Location = new System.Drawing.Point(88, 77);
+            this.bedTypeComboBox.Name = "bedTypeComboBox";
+            this.bedTypeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.bedTypeComboBox.TabIndex = 2;
+            this.bedTypeComboBox.ValueMember = "BedType";
             // 
             // bedTypeMastBindingSource
             // 
             this.bedTypeMastBindingSource.DataMember = "BedTypeMast";
             this.bedTypeMastBindingSource.DataSource = this.hMSDataSet;
+            // 
+            // bedNumberMastDataGridView
+            // 
+            this.bedNumberMastDataGridView.AllowUserToAddRows = false;
+            this.bedNumberMastDataGridView.AllowUserToDeleteRows = false;
+            this.bedNumberMastDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.bedNumberMastDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
+            this.BedNumber,
+            this.BedType,
+            this.CurrentStatus,
+            this.Rate});
+            this.bedNumberMastDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bedNumberMastDataGridView.Location = new System.Drawing.Point(0, 129);
+            this.bedNumberMastDataGridView.Name = "bedNumberMastDataGridView";
+            this.bedNumberMastDataGridView.ReadOnly = true;
+            this.bedNumberMastDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.bedNumberMastDataGridView.Size = new System.Drawing.Size(561, 321);
+            this.bedNumberMastDataGridView.TabIndex = 12;
+            this.bedNumberMastDataGridView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.bedNumberMastDataGridView_MouseDoubleClick);
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            // 
+            // BedNumber
+            // 
+            this.BedNumber.HeaderText = "BedNumber";
+            this.BedNumber.Name = "BedNumber";
+            this.BedNumber.ReadOnly = true;
+            // 
+            // BedType
+            // 
+            this.BedType.HeaderText = "BedType";
+            this.BedType.Name = "BedType";
+            this.BedType.ReadOnly = true;
+            // 
+            // CurrentStatus
+            // 
+            this.CurrentStatus.HeaderText = "CurrentStatus";
+            this.CurrentStatus.Name = "CurrentStatus";
+            this.CurrentStatus.ReadOnly = true;
+            // 
+            // Rate
+            // 
+            this.Rate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Rate.HeaderText = "Rate";
+            this.Rate.Name = "Rate";
+            this.Rate.ReadOnly = true;
             // 
             // bedTypeMastTableAdapter
             // 
@@ -372,26 +286,25 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(561, 450);
             this.Controls.Add(this.bedNumberMastDataGridView);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.bedNumberMastBindingNavigator);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "BedNumberMast";
             this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bed Number Master";
             this.Load += new System.EventHandler(this.BedNumberMast_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BedNumberMast_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.hMSDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bedNumberMastBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bedNumberMastBindingNavigator)).EndInit();
-            this.bedNumberMastBindingNavigator.ResumeLayout(false);
-            this.bedNumberMastBindingNavigator.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bedNumberMastDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bedTypeMastBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bedNumberMastDataGridView)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -399,33 +312,22 @@
 
         private HMSDataSet hMSDataSet;
         private System.Windows.Forms.BindingSource bedNumberMastBindingSource;
-        private HMSDataSetTableAdapters.BedNumberMastTableAdapter bedNumberMastTableAdapter;
         private HMSDataSetTableAdapters.TableAdapterManager tableAdapterManager;
-        private System.Windows.Forms.BindingNavigator bedNumberMastBindingNavigator;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
-        private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
-        private System.Windows.Forms.ToolStripTextBox bindingNavigatorPositionItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator1;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
-        private System.Windows.Forms.ToolStripButton bedNumberMastBindingNavigatorSaveItem;
-        private System.Windows.Forms.TextBox idTextBox;
         private System.Windows.Forms.TextBox bedNumberTextBox;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView bedNumberMastDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.ComboBox currentStatusComboBox;
         private System.Windows.Forms.ComboBox bedTypeComboBox;
         private System.Windows.Forms.BindingSource bedTypeMastBindingSource;
         private HMSDataSetTableAdapters.BedTypeMastTableAdapter bedTypeMastTableAdapter;
+        private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.TextBox textBoxRate;
+        private System.Windows.Forms.Button buttonDel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BedNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BedType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CurrentStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Rate;
     }
 }

@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Configuration;
-
+using HMS.Forms.Transaction.IPD;
 
 namespace HMS.Forms.Transaction
 {
     public partial class BedMangFrm : Form
     {
         string connectionString = ConfigurationManager.ConnectionStrings["HMS.Properties.Settings.HMSConnectionString"].ConnectionString;
-        // SqlConnection con = new SqlConnection(@"Data Source=.;Initial Catalog=HMS;Integrated Security=True");
+        
         public BedMangFrm()
         {
             InitializeComponent();
@@ -30,46 +30,35 @@ namespace HMS.Forms.Transaction
             // TODO: This line of code loads data into the 'hMSDataSet.DoctorDepartmentMast' table. You can move, or remove it, as needed.
             this.doctorDepartmentMastTableAdapter.Fill(this.hMSDataSet.DoctorDepartmentMast);
             // TODO: This line of code loads data into the 'hMSDataSet.BedManagement' table. You can move, or remove it, as needed.
-            this.bedManagementTableAdapter.Fill(this.hMSDataSet.BedManagement);
+            //this.bedManagementTableAdapter.Fill(this.hMSDataSet.BedManagement);
             // TODO: This line of code loads data into the 'hMSDataSet.BedNumberMast' table. You can move, or remove it, as needed.
             this.bedNumberMastTableAdapter.Fill(this.hMSDataSet.BedNumberMast);
             // TODO: This line of code loads data into the 'hMSDataSet.BedTypeMast' table. You can move, or remove it, as needed.
             this.bedTypeMastTableAdapter.Fill(this.hMSDataSet.BedTypeMast);
             Display();
-
-        }
-
-        private void Addbutton_Click(object sender, EventArgs e)
-        {
-
-            idTextBox.Text = "";
-            IPDSearchtextBox.Text = "";
-            PatientNametextBox.Text = "";
-            GendertextBox.Text = "";
-            AgetextBox.Text = "";
+           // idTextBox.Text = string.Empty;
+            IPDSearchtextBox.Text = "RNH/";
+            PatientNametextBox.Text = string.Empty;
+            GendertextBox.Text = string.Empty;
+            AgetextBox.Text = string.Empty;
             DoctorNameComboBox.SelectedIndex = -1;
-            AdmissiondateTimePicker.Text = "";
-            FromDtDateTimePicker.Text = "";
+            AdmissiondateTimePicker.Value = DateTime.Now; // Set to desired default date or leave as is
+            FromDtDateTimePicker.Value = DateTime.Now; // Set to desired default date or leave as is
             bedTypeComboBox.SelectedIndex = -1;
             bedNoComboBox.SelectedIndex = -1;
-            ToDtdateTimePicker.Text = "";
-            DaystextBox.Text = "";
-            BedRateTextBox.Text = "";
-            BedAmounttextBox.Text = "";
-            
-
-            idTextBox.Focus();
-            Display();
-
+            ToDtdateTimePicker.Value = DateTime.Now; // Set to desired default date or leave as is
+            DaystextBox.Text = "0";
+            BedRateTextBox.Text = "0";
+            BedAmounttextBox.Text = "0";
+            idTextBox.Text = GetNextAvailableId().ToString();
         }
-
 
         void Display()
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 
-                SqlDataAdapter sda = new SqlDataAdapter("Select * from BedManagement", con);
+                SqlDataAdapter sda = new SqlDataAdapter("Select * from BedManagement ORDER BY Id DESC", con);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
                 BedManagedataGridView.Rows.Clear();
@@ -95,28 +84,6 @@ namespace HMS.Forms.Transaction
 
         }
 
-        private void Cancelbutton_Click(object sender, EventArgs e)
-        {
-            idTextBox.Text = "";
-            IPDSearchtextBox.Text = "";
-            PatientNametextBox.Text = "";
-            GendertextBox.Text = "";
-            AgetextBox.Text = "";
-            DoctorNameComboBox.SelectedIndex = -1;
-            AdmissiondateTimePicker.Text = "";
-            FromDtDateTimePicker.Text = "";
-            bedTypeComboBox.SelectedIndex = -1;
-            bedNoComboBox.SelectedIndex = -1;
-            ToDtdateTimePicker.Text = "";
-            DaystextBox.Text = "";
-            BedRateTextBox.Text = "";
-            BedAmounttextBox.Text = "";
-
-
-            idTextBox.Focus();
-            Display();
-
-        }
 
         private void IPDSearchtextBox_TextChanged(object sender, EventArgs e)
         {
@@ -189,10 +156,7 @@ namespace HMS.Forms.Transaction
 
         }
 
-        private void DoctorNameComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+       
 
         private void ToDtdateTimePicker_ValueChanged(object sender, EventArgs e)
         {
@@ -248,163 +212,294 @@ namespace HMS.Forms.Transaction
             }
         }
 
-       
-
-
         private void Savebutton_Click(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
             using (SqlConnection con = new SqlConnection(connectionString))
-            //string connectionString = "Data Source=.;Initial Catalog=HMS;Integrated Security=True"; // Replace with your connection string
-
-           // using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string query = @"INSERT INTO BedManagement (Id, IPD, DrName, FromDate, BedType, BedNo, Todate, Days, Rate, BedAmount, Patient)
-                         VALUES (@Id, @IPD, @DrName, @FromDate, @BedType, @BedNo, @Todate, @Days, @Rate, @BedAmount, @Patient)";
+                string checkIfExistsQuery = "SELECT COUNT(*) FROM BedManagement WHERE Id = @Id";
+                string insertOrUpdateQuery = @"
+            IF EXISTS (SELECT 1 FROM BedManagement WHERE Id = @Id)
+            BEGIN
+                UPDATE BedManagement 
+                SET IPD = @IPD, DrName = @DrName, FromDate = @FromDate, BedType = @BedType, BedNo = @BedNo, Todate = @Todate, 
+                    Days = @Days, Rate = @Rate, BedAmount = @BedAmount, Patient = @Patient
+                WHERE Id = @Id
+            END
+            ELSE
+            BEGIN
+                INSERT INTO BedManagement (IPD, DrName, FromDate, BedType, BedNo, Todate, Days, Rate, BedAmount, Patient)
+                VALUES (@IPD, @DrName, @FromDate, @BedType, @BedNo, @Todate, @Days, @Rate, @BedAmount, @Patient)
+            END";
 
-                using (SqlCommand command = new SqlCommand(query, con))
+                using (SqlCommand checkIfExistsCommand = new SqlCommand(checkIfExistsQuery, con))
+                using (SqlCommand insertOrUpdateCommand = new SqlCommand(insertOrUpdateQuery, con))
                 {
-                    command.Parameters.AddWithValue("@Id", idTextBox.Text);
-                    command.Parameters.AddWithValue("@IPD", IPDSearchtextBox.Text);
-                    command.Parameters.AddWithValue("@DrName", DoctorNameComboBox.Text);
-                    command.Parameters.AddWithValue("@FromDate", FromDtDateTimePicker.Value);
-                    command.Parameters.AddWithValue("@BedType", bedTypeComboBox.Text);
-                    command.Parameters.AddWithValue("@BedNo", bedNoComboBox.Text);
-                    command.Parameters.AddWithValue("@Todate", ToDtdateTimePicker.Value);
-                    command.Parameters.AddWithValue("@Days", int.Parse(DaystextBox.Text));
-                    command.Parameters.AddWithValue("@Rate", decimal.Parse(BedRateTextBox.Text));
-                    command.Parameters.AddWithValue("@BedAmount", decimal.Parse(BedAmounttextBox.Text));
-                    command.Parameters.AddWithValue("@Patient", IPDSearchtextBox.Text);
+                    checkIfExistsCommand.Parameters.AddWithValue("@Id", idTextBox.Text);
+                    insertOrUpdateCommand.Parameters.AddWithValue("@Id", idTextBox.Text);
+                    insertOrUpdateCommand.Parameters.AddWithValue("@IPD", IPDSearchtextBox.Text);
+                    insertOrUpdateCommand.Parameters.AddWithValue("@DrName", DoctorNameComboBox.Text);
+                    insertOrUpdateCommand.Parameters.AddWithValue("@FromDate", FromDtDateTimePicker.Value);
+                    insertOrUpdateCommand.Parameters.AddWithValue("@BedType", bedTypeComboBox.Text);
+                    insertOrUpdateCommand.Parameters.AddWithValue("@BedNo", bedNoComboBox.Text);
+                    insertOrUpdateCommand.Parameters.AddWithValue("@Todate", (object)ToDtdateTimePicker.Value ?? DBNull.Value);
+                    insertOrUpdateCommand.Parameters.AddWithValue("@Days", int.Parse(DaystextBox.Text));
+                    insertOrUpdateCommand.Parameters.AddWithValue("@Rate", decimal.Parse(BedRateTextBox.Text));
+                    insertOrUpdateCommand.Parameters.AddWithValue("@BedAmount", decimal.Parse(BedAmounttextBox.Text));
+                    insertOrUpdateCommand.Parameters.AddWithValue("@Patient", IPDSearchtextBox.Text);
 
-                    // try
-                    //  {
                     con.Open();
-                    int rowsAffected = command.ExecuteNonQuery();
-                    if (rowsAffected > 0)
-                    {
-                        MessageBox.Show("Data saved successfully!");
-                        // Optionally, clear the fields after successful save
-                        ClearFields();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Failed to save data!");
-                    }
-                    //  }
-                    //  catch (Exception ex)
-                    //  {
-                    //      MessageBox.Show("Error: " + ex.Message);
-                    //  }
+                    SqlTransaction transaction = con.BeginTransaction();
 
+                    try
+                    {
+                        checkIfExistsCommand.Transaction = transaction;
+                        int existingRecordCount = (int)checkIfExistsCommand.ExecuteScalar();
+
+                        insertOrUpdateCommand.Transaction = transaction;
+
+                        if (existingRecordCount > 0)
+                        {
+                            int rowsAffected = insertOrUpdateCommand.ExecuteNonQuery();
+                            if (rowsAffected > 0)
+                            {
+                                // Optionally, clear the fields after successful save
+                                ClearFields();
+                                transaction.Commit();
+                                MessageBox.Show("Data updated successfully!");
+                            }
+                            else
+                            {
+                                transaction.Rollback();
+                                MessageBox.Show("Failed to update data!");
+                            }
+                        }
+                        else
+                        {
+                            int rowsAffected = insertOrUpdateCommand.ExecuteNonQuery();
+                            if (rowsAffected > 0)
+                            {
+                                // Optionally, clear the fields after successful save
+                                ClearFields();
+                                transaction.Commit();
+                                MessageBox.Show("Data saved successfully!");
+                            }
+                            else
+                            {
+                                transaction.Rollback();
+                                MessageBox.Show("Failed to save data!");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        MessageBox.Show("Error: " + ex.Message);
+                    }
+                    finally
+                    {
+                        transaction.Dispose();
+                    }
+
+                    //idTextBox.Text = string.Empty;
+                    IPDSearchtextBox.Text = "RNH/";
+                    PatientNametextBox.Text = string.Empty;
+                    GendertextBox.Text = string.Empty;
+                    AgetextBox.Text = string.Empty;
+                    DoctorNameComboBox.SelectedIndex = -1;
+                    AdmissiondateTimePicker.Value = DateTime.Now; // Set to desired default date or leave as is
+                    FromDtDateTimePicker.Value = DateTime.Now; // Set to desired default date or leave as is
+                    bedTypeComboBox.SelectedIndex = -1;
+                    bedNoComboBox.SelectedIndex = -1;
+                    ToDtdateTimePicker.Value = DateTime.Now; // Set to desired default date or leave as is
+                    DaystextBox.Text = "0";
+                    BedRateTextBox.Text = "0";
+                    BedAmounttextBox.Text = "0";
                     Display();
+                    
                 }
             }
+            IPDSearchtextBox.ReadOnly = false;
+            idTextBox.Text = GetNextAvailableId().ToString();
 
         }
-
 
 
         // Optional: Clear fields after successful save
         private void ClearFields()
         {
-            idTextBox.Text = "";
-            IPDSearchtextBox.Text = "";
+           // idTextBox.Text = "";
+            IPDSearchtextBox.Text = "RNH/";
             DoctorNameComboBox.Text = "";
             FromDtDateTimePicker.Value = DateTime.Today;
             bedTypeComboBox.Text = "";
             bedNoComboBox.Text = "";
-            ToDtdateTimePicker.Value = DateTime.Today;
-            DaystextBox.Text = "";
-            BedRateTextBox.Text = "";
-            BedAmounttextBox.Text = "";
+            ToDtdateTimePicker.Value = DateTime.Now;
+            DaystextBox.Text = "0";
+            BedRateTextBox.Text = "0";
+            BedAmounttextBox.Text = "0";
 
             idTextBox.Focus();
         }
 
         private void BedManagedataGridView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            idTextBox.Text                          = BedManagedataGridView.SelectedRows[0].Cells[0].Value.ToString();
-            IPDSearchtextBox.Text                   = BedManagedataGridView.SelectedRows[0].Cells[1].Value.ToString();
-            PatientNametextBox.Text                 = BedManagedataGridView.SelectedRows[0].Cells[2].Value.ToString();
-            DoctorNameComboBox.SelectedIndex = DoctorNameComboBox.FindStringExact(BedManagedataGridView.SelectedRows[0].Cells[3].Value.ToString());
-//            DoctorNameComboBox.Text                 = BedManagedataGridView.SelectedRows[0].Cells[3].Value.ToString();
-            FromDtDateTimePicker.Text               = BedManagedataGridView.SelectedRows[0].Cells[4].Value.ToString();
-            bedTypeComboBox.SelectedIndex = bedTypeComboBox.FindStringExact(BedManagedataGridView.SelectedRows[0].Cells[5].Value.ToString());
-            //bedTypeComboBox.Text                    = BedManagedataGridView.SelectedRows[0].Cells[5].Value.ToString();
-            //bedNoComboBox.Text                      = BedManagedataGridView.SelectedRows[0].Cells[6].Value.ToString();
-            bedNoComboBox.SelectedIndex = bedNoComboBox.FindStringExact(BedManagedataGridView.SelectedRows[0].Cells[6].Value.ToString());
-            ToDtdateTimePicker.Text                 = BedManagedataGridView.SelectedRows[0].Cells[7].Value.ToString();
-            DaystextBox.Text                        = BedManagedataGridView.SelectedRows[0].Cells[8].Value.ToString();
-            BedRateTextBox.Text                     = BedManagedataGridView.SelectedRows[0].Cells[9].Value.ToString();
-            BedAmounttextBox.Text                   = BedManagedataGridView.SelectedRows[0].Cells[10].Value.ToString();
-
-            /*
-            DoctorNameComboBox.SelectedIndex        = DoctorNameComboBox.FindStringExact(BedManagedataGridView.SelectedRows[0].Cells[3].Value.ToString());
-            
-            
-            */
-
-        }
-
-        private void Updatebutton_Click(object sender, EventArgs e)
-        {
-
+            IPDSearchtextBox.ReadOnly = true;
             using (SqlConnection con = new SqlConnection(connectionString))
-            //string connectionString = "Data Source=.;Initial Catalog=HMS;Integrated Security=True"; // Replace with your connection string
-
-            //using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string query = @"UPDATE BedManagement 
-                        SET IPD = @IPD, 
-                            DrName = @DrName, 
-                            FromDate = @FromDate, 
-                            BedType = @BedType, 
-                            BedNo = @BedNo, 
-                            Todate = @Todate, 
-                            Days = @Days, 
-                            Rate = @Rate, 
-                            BedAmount = @BedAmount, 
-                            Patient = @Patient 
-                        WHERE Id = @Id";
+                DataGridViewRow selectedRow = BedManagedataGridView.CurrentRow;
 
-                using (SqlCommand command = new SqlCommand(query, con))
+                if (selectedRow != null)
                 {
-                    command.Parameters.AddWithValue("@Id", idTextBox.Text);
-                    command.Parameters.AddWithValue("@IPD", IPDSearchtextBox.Text);
-                    command.Parameters.AddWithValue("@DrName", DoctorNameComboBox.Text);
-                    command.Parameters.AddWithValue("@FromDate", FromDtDateTimePicker.Value);
-                    command.Parameters.AddWithValue("@BedType", bedTypeComboBox.Text);
-                    command.Parameters.AddWithValue("@BedNo", bedNoComboBox.Text);
-                    command.Parameters.AddWithValue("@Todate", ToDtdateTimePicker.Value);
-                    command.Parameters.AddWithValue("@Days", int.Parse(DaystextBox.Text));
-                    command.Parameters.AddWithValue("@Rate", decimal.Parse(BedRateTextBox.Text));
-                    command.Parameters.AddWithValue("@BedAmount", decimal.Parse(BedAmounttextBox.Text));
-                    command.Parameters.AddWithValue("@Patient", IPDSearchtextBox.Text);
+                    int selectedId = Convert.ToInt32(selectedRow.Cells["Id"].Value);
 
+                    // Create and open a SQL connection
                     con.Open();
-                    int rowsAffected = command.ExecuteNonQuery();
-                    if (rowsAffected > 0)
-                    {
-                        MessageBox.Show("Data updated successfully!");
-                        // Optionally, clear the fields after successful update
-                        ClearFields();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Failed to update data!");
-                    }
 
-                    Display(); // Assuming this function displays updated data
+                    // Prepare the SQL query to fetch data based on Id
+                    string query = "SELECT Id, Patient, BedType, BedNo, FromDate, BedAmount, IPD, Todate, Days, Rate, DrName " +
+                                   "FROM BedManagement " +
+                                   "WHERE Id = @SelectedId";
+
+                    // Create a SqlCommand with the connection and query
+                    using (SqlCommand command = new SqlCommand(query, con))
+                    {
+                        command.Parameters.AddWithValue("@SelectedId", selectedId);
+
+                        // Execute the query
+                        SqlDataReader reader = command.ExecuteReader();
+
+                        if (reader.Read()) // If data is fetched
+                        {
+                            // Populate UI elements with fetched data
+                            idTextBox.Text = reader["Id"].ToString();
+                            PatientNametextBox.Text = reader["Patient"].ToString();
+                            bedTypeComboBox.Text = reader["BedType"].ToString();
+                            bedNoComboBox.Text = reader["BedNo"].ToString();
+                            FromDtDateTimePicker.Value = Convert.ToDateTime(reader["FromDate"]);
+                            BedAmounttextBox.Text = reader["BedAmount"].ToString();
+                            IPDSearchtextBox.Text = reader["IPD"].ToString();
+                            ToDtdateTimePicker.Value = Convert.ToDateTime(reader["Todate"]);
+                            DaystextBox.Text = reader["Days"].ToString();
+                            BedRateTextBox.Text = reader["Rate"].ToString();
+                            DoctorNameComboBox.Text = reader["DrName"].ToString();
+                        }
+
+                        // Close the reader
+                        reader.Close();
+                    }
                 }
             }
-            
 
         }
+
+        
 
         private void bedTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
 
+        }
+
+        private void BedMangFrm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                SendKeys.Send("{TAB}");
+            }
+        }
+
+        private int GetNextAvailableId()
+        {
+            int nextId = 1;
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string query = "SELECT MAX(Id) + 1 AS NextId FROM BedManagement";
+
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    con.Open();
+                    object result = command.ExecuteScalar();
+
+                    if (result != DBNull.Value)
+                    {
+                        nextId = Convert.ToInt32(result);
+                    }
+                }
+            }
+
+            return nextId;
+        }
+
+        private void buttonDel_Click(object sender, EventArgs e)
+        {
+            // Ensure that the user has selected a row in the IPDdataGridView
+            if (BedManagedataGridView.SelectedRows.Count > 0)
+            {
+                // Get the selected row
+                DataGridViewRow selectedRow = BedManagedataGridView.SelectedRows[0];
+
+                // Retrieve the value from the "IPD" column and set it to idToDelete
+                string idToDelete = selectedRow.Cells["Id"].Value.ToString();
+
+                // Prompt the user to confirm the deletion
+                DialogResult result = MessageBox.Show("Are you sure you want to delete this record?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    // Perform deletion
+                    DeleteRecord(idToDelete);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a record to delete.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void DeleteRecord(string idToDelete)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+
+                using (SqlTransaction transaction = con.BeginTransaction())
+                {
+                    try
+                    {
+
+                        // Then delete from IPD table
+                        using (SqlCommand cmdDischarge = new SqlCommand("DELETE FROM BedManagement WHERE Id = @Id", con, transaction))
+                        {
+                            cmdDischarge.Parameters.AddWithValue("@Id", idToDelete);
+                            cmdDischarge.ExecuteNonQuery();
+                        }
+
+                        transaction.Commit();
+                        MessageBox.Show("Record deleted successfully!");
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        MessageBox.Show("Error while deleting record: " + ex.Message);
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+                }
+            }
+
+            // Refresh the displayed data after deletion
+            Display();
+
+        }
+
+        private void buttonIPD_Click(object sender, EventArgs e)
+        {
+            IPDFrm myForm = new IPDFrm();
+
+            myForm.ShowDialog();
         }
     }
 }

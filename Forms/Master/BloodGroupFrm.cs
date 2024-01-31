@@ -41,5 +41,13 @@ namespace HMS.Forms.Master
             this.bloodGroupMastTableAdapter.Fill(this.hMSDataSet.BloodGroupMast);
 
         }
+
+        private void BloodGroupFrm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                SendKeys.Send("{TAB}");
+            }
+        }
     }
 }

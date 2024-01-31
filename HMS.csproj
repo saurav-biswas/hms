@@ -16,22 +16,25 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>publish\</PublishUrl>
+    <PublishUrl>C:\Users\saura\OneDrive\TAMSS WEB TRADE\HMS\DESKTOP APPLICATION\PUBLISH\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateEnabled>false</UpdateEnabled>
     <UpdateMode>Background</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
+    <MapFileExtensions>false</MapFileExtensions>
+    <ProductName>HMS</ProductName>
+    <PublisherName>Kolkata Websites</PublisherName>
     <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <ApplicationRevision>9</ApplicationRevision>
+    <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperEnabled>false</BootstrapperEnabled>
+    <BootstrapperComponentsLocation>Relative</BootstrapperComponentsLocation>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -74,8 +77,9 @@
   <PropertyGroup>
     <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup>
-    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
@@ -190,11 +194,23 @@
     <Compile Include="Forms\Master\PatientMastFrm.Designer.cs">
       <DependentUpon>PatientMastFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Master\SupMast.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Master\SupMast.Designer.cs">
+      <DependentUpon>SupMast.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Master\TaxMast.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Master\TaxMast.Designer.cs">
       <DependentUpon>TaxMast.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Master\UserList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Master\UserList.Designer.cs">
+      <DependentUpon>UserList.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Transaction\BedMangFrm.cs">
       <SubType>Form</SubType>
@@ -208,29 +224,17 @@
     <Compile Include="Forms\Transaction\DischargeFrm.Designer.cs">
       <DependentUpon>DischargeFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Transaction\DisposableIssFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Transaction\DisposableIssFrm.Designer.cs">
+      <DependentUpon>DisposableIssFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Transaction\IPDFrm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Transaction\IPDFrm.Designer.cs">
       <DependentUpon>IPDFrm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Transaction\OPD.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Transaction\OPD.Designer.cs">
-      <DependentUpon>OPD.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Transaction\PrescriptionAdd.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Transaction\PrescriptionAdd.Designer.cs">
-      <DependentUpon>PrescriptionAdd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Transaction\PrescriptionList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Transaction\PrescriptionList.Designer.cs">
-      <DependentUpon>PrescriptionList.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Transaction\StkRecdFrm.cs">
       <SubType>Form</SubType>
@@ -253,6 +257,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AdmissionRep.rpt</DependentUpon>
       <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Reports\AdmissionReportViewer.cs">
       <SubType>Form</SubType>
@@ -265,6 +270,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AdvancePayRep.rpt</DependentUpon>
       <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Reports\AdvcrystalReportViewer.cs">
       <SubType>Form</SubType>
@@ -272,11 +278,19 @@
     <Compile Include="Reports\AdvcrystalReportViewer.Designer.cs">
       <DependentUpon>AdvcrystalReportViewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\DischargeAdviceRpt.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DischargeAdviceRpt.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Reports\DischargeSlipRpt.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DischargeSlipRpt.rpt</DependentUpon>
       <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Reports\DischargeSlipViewer.cs">
       <SubType>Form</SubType>
@@ -284,11 +298,38 @@
     <Compile Include="Reports\DischargeSlipViewer.Designer.cs">
       <DependentUpon>DischargeSlipViewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\EstimationRpt.cs">
+      <DependentUpon>EstimationRpt.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Reports\EstimationViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\EstimationViewer.Designer.cs">
+      <DependentUpon>EstimationViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\FinalBillDr.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinalBillDr.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Reports\FinalBillDrViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\FinalBillDrViewer.Designer.cs">
+      <DependentUpon>FinalBillDrViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\FinalBillRep.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FinalBillRep.rpt</DependentUpon>
       <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Reports\FinalBillReportViewer.cs">
       <SubType>Form</SubType>
@@ -296,11 +337,63 @@
     <Compile Include="Reports\FinalBillReportViewer.Designer.cs">
       <DependentUpon>FinalBillReportViewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\IPDListReportViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\IPDListReportViewer.Designer.cs">
+      <DependentUpon>IPDListReportViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\IPDListRpt.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IPDListRpt.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="obj\IPDListRptViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="obj\IPDListRptViewer.Designer.cs">
+      <DependentUpon>IPDListRptViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\ReportViewer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\ReportViewer.Designer.cs">
       <DependentUpon>ReportViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rptBillBedSummary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBillBedSummary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Reports\rptDrFBSummery.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptDrFBSummery.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Reports\rptFinalBIllOtherPayment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptFinalBIllOtherPayment.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Reports\StkStatementDtl.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StkStatementDtl.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\StkStatementDtlViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\StkStatementDtlViewer.Designer.cs">
+      <DependentUpon>StkStatementDtlViewer.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Forms\Billing\AdvPayFrm.resx">
       <DependentUpon>AdvPayFrm.cs</DependentUpon>
@@ -338,8 +431,14 @@
     <EmbeddedResource Include="Forms\Master\PatientMastFrm.resx">
       <DependentUpon>PatientMastFrm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Master\SupMast.resx">
+      <DependentUpon>SupMast.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Master\TaxMast.resx">
       <DependentUpon>TaxMast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Master\UserList.resx">
+      <DependentUpon>UserList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Transaction\BedMangFrm.resx">
       <DependentUpon>BedMangFrm.cs</DependentUpon>
@@ -347,17 +446,11 @@
     <EmbeddedResource Include="Forms\Transaction\DischargeFrm.resx">
       <DependentUpon>DischargeFrm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Transaction\DisposableIssFrm.resx">
+      <DependentUpon>DisposableIssFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Transaction\IPDFrm.resx">
       <DependentUpon>IPDFrm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Transaction\OPD.resx">
-      <DependentUpon>OPD.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Transaction\PrescriptionAdd.resx">
-      <DependentUpon>PrescriptionAdd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Transaction\PrescriptionList.resx">
-      <DependentUpon>PrescriptionList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Transaction\StkRecdFrm.resx">
       <DependentUpon>StkRecdFrm.cs</DependentUpon>
@@ -375,6 +468,7 @@
     <EmbeddedResource Include="Reports\AdmissionRep.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>AdmissionRep.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\AdmissionReportViewer.resx">
       <DependentUpon>AdmissionReportViewer.cs</DependentUpon>
@@ -382,26 +476,83 @@
     <EmbeddedResource Include="Reports\AdvancePayRep.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>AdvancePayRep.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\AdvcrystalReportViewer.resx">
       <DependentUpon>AdvcrystalReportViewer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DischargeAdviceRpt.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DischargeAdviceRpt.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\DischargeSlipRpt.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DischargeSlipRpt.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\DischargeSlipViewer.resx">
       <DependentUpon>DischargeSlipViewer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\EstimationRpt.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>EstimationRpt.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\EstimationViewer.resx">
+      <DependentUpon>EstimationViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\FinalBillDr.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>FinalBillDr.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\FinalBillDrViewer.resx">
+      <DependentUpon>FinalBillDrViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\FinalBillRep.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>FinalBillRep.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\FinalBillReportViewer.resx">
       <DependentUpon>FinalBillReportViewer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\IPDListReportViewer.resx">
+      <DependentUpon>IPDListReportViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\IPDListRpt.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>IPDListRpt.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="obj\IPDListRptViewer.resx">
+      <DependentUpon>IPDListRptViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportViewer.resx">
       <DependentUpon>ReportViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rptBillBedSummary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBillBedSummary.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rptDrFBSummery.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptDrFBSummery.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rptFinalBIllOtherPayment.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptFinalBIllOtherPayment.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\StkStatementDtl.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>StkStatementDtl.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\StkStatementDtlViewer.resx">
+      <DependentUpon>StkStatementDtlViewer.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Grid.mvc.readme" />
     <None Include="HMSDataSet.xsc">
@@ -438,6 +589,7 @@
     <None Include="Resources\print_icon.png" />
     <Content Include="hms-logo.ico" />
     <None Include="Resources\logo-icon.bmp" />
+    <None Include="Resources\hms-logo.png" />
     <Content Include="Scripts\gridmvc.js" />
     <Content Include="Scripts\gridmvc.lang.ru.js" />
     <Content Include="Scripts\gridmvc.min.js" />

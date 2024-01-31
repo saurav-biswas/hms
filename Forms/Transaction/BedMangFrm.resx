@@ -157,81 +157,137 @@
     <value>False</value>
   </metadata>
   <metadata name="dischargeBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>690, 56</value>
-  </metadata>
-  <metadata name="dischargeBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>690, 56</value>
+    <value>235, 17</value>
   </metadata>
   <metadata name="hMSDataSet.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>873, 56</value>
-  </metadata>
-  <metadata name="hMSDataSet.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>873, 56</value>
+    <value>418, 17</value>
   </metadata>
   <metadata name="patientMastBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 95</value>
+    <value>537, 17</value>
   </metadata>
   <metadata name="iPDBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>406, 95</value>
+    <value>733, 17</value>
   </metadata>
   <metadata name="iPDTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>555, 95</value>
+    <value>882, 17</value>
   </metadata>
   <metadata name="dischargeTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>698, 95</value>
+    <value>17, 56</value>
   </metadata>
   <metadata name="tableAdapterManager.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>875, 95</value>
+    <value>194, 56</value>
   </metadata>
   <metadata name="patientMastTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>205, 134</value>
+    <value>365, 56</value>
   </metadata>
   <metadata name="doctorMastBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>747, 212</value>
+    <value>270, 134</value>
   </metadata>
   <metadata name="bedNumberMastBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 173</value>
-  </metadata>
-  <metadata name="bedNumberMastBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 173</value>
+    <value>17, 95</value>
   </metadata>
   <metadata name="bedTypeMastBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>395, 134</value>
-  </metadata>
-  <metadata name="doctorMastBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>747, 212</value>
-  </metadata>
-  <metadata name="bedTypeMastBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>395, 134</value>
+    <value>555, 56</value>
   </metadata>
   <metadata name="bedTypeMastTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>599, 134</value>
+    <value>759, 56</value>
   </metadata>
   <metadata name="bedNumberMastTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>240, 173</value>
-  </metadata>
-  <metadata name="Doctor.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
+    <value>240, 95</value>
   </metadata>
   <metadata name="Doctor.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="bedManagementBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>457, 173</value>
-  </metadata>
-  <metadata name="bedManagementTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 212</value>
+    <value>457, 95</value>
   </metadata>
   <metadata name="doctorDepartmentMastBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>235, 212</value>
+    <value>681, 95</value>
   </metadata>
   <metadata name="doctorDepartmentMastTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>494, 212</value>
+    <value>17, 134</value>
   </metadata>
   <metadata name="doctorMastTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 251</value>
+    <value>463, 134</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>120</value>
+    <value>25</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAICAAAAEAIACoEAAAFgAAACgAAAAgAAAAQAAAAAEAIAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAABrXjEAbF4xAmpeMwJqXjIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAABFOysARz0tCUI8OAdvVxpPa1QZXUlDNgdHPi4LRDspAI+HfgAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAC5rZwAVUkqAGFVNAZJQCs7U0goR35mGZp6YxukW00mSEY7KkZdUzYIRS0SAIiF
+        awAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAQTkoAEE6KBJDOikyXFAwOWBVNkNdUzNKgnAfhIJuHJFcTipNWk4zRV1R
+        MURBOCcuQzgpGkE2JwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        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
+        OlddUS9aWkogvox/IYi2sCCiqKEig2NSH61hThv/Yk8exWxcNQ9qZkwFWkkdqFZDGP9SQRrBmY0hfq+k
+        IaKOgSKFSDkav09DJWFlWDVNUkgsV01GL0ZORzYHTkY1AAAAAAAAAAAAAAAAAAAAAABVTC4AXVElAFxS
+        LDhyZzlPa185ZHp4OlJsYSqPZlUjqLKsIZG3syeOoZoqZWxbIaJkUh/UYlEesF9NHa5dSh3RXkwer5GG
+        JGmyqyaDrqYjlFhJHqBVSSKif3s3Zm1iMGFkWTdCT0UsO1BAEABNRTQAAAAAAAAAAAAAAAAAAAAAAAAA
+        AABeUSoAYFMsGnRnOFtqYTZramIyWmFXLm1gTya0eWolkbu4I427uSKgt7Yfj5uTIHuAcx+JfW4ei5CH
+        Hnuxrh2HtrMeoLOvIpBzZyGJTj8fuFRIJ3iEfDxdk409RmRaO0JORC0eTUMrAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAJaSXAD///8AaF0yO311L3ZqXDVhXVMxZlxQKXhlUiWydmYjlrGuIYfAwR+cwcAdocC/
+        Gp+/vxmfvb4aoLy8HJ2uqx+KbWIgkVNDILVVRyh7U0YscGldOFyOgztPi4AxPHZweQKCd08AAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAmZljAM7amQGCf1MYZloxTnJnK3VlWyptVUoqX2BRLHllVCeoZVUjrn9z
+        IZWcliCIrKcghaupH4aalh+HeXAeklhKHq5URiKsVEYof0o9KF9aTydxb2gqgm1iKGaNhC82hIN9A4aB
+        VwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA29/QAD8qAABlVilAl5Apjn91KYJkWy5hfXY5WHdr
+        QWJgUimEY1MlqmRSJaxiUCO0Xk4jslxLIqtaSiGqUEIijWhdNWZ5bjJvW1ElZ3FqKX6alS6QVkolUqGt
+        aQOHi0IAhoZZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZ1otAGZZLxJvYC5OcWY4SKin
+        L2WmqCOUgHcvaoh4KIGNfCWVcGMve1dLKGVUSSdjXVAydG9fPWxcUDBxc2kkb52SIVKVjSJmYlktS1BC
+        Ik5JOyMXSDohAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA6JiQAeH5dAE5O
+        QQGZomwOsLVJOK+zNV+TizJwrKIoZZ2NIkuIeSGSbWIuT2piLExtXzJ+f3E4gHNoOH9uZS92raclYqGd
+        LVOMjFYTdoFHAn6FSwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AACGjVcAgotWAJKaWgKmrnAKra9kF4+IPEm2uDB1v78ldYqDLmyNhCFYi4IdX29iNGd6bTuCb2E4gl5S
+        MVSdmUsglJRgC4OCXAKCikwAgYhNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAJ6hPQCmqDsDiI1GEo6LNEaQiS5bioY0ObO2HKWloBuyg30wQmVW
+        MlFeTy5HZmA1FayjQAOVjjcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJuzVACaslQBo8JYAISVXwKIiT0XxM0ffbzA
+        HYyGgTEfaXJYAqikRACQlk0BjZNIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALjB
+        QAC7xUIMu8U/D7a+PQDY7JcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAA/////////////n////gf///wD///wAP//wAA//wAAD/8AAA/+AAAH/gA
+        AA/wAAAP8AAAD+AAAA/gAAAH4ACAB+AH4AfgAIAH4AAAB+AAAAfwAAAP8AAAD/gAAA/wAAAP/AAAH/wA
+        AD/+AAB//wAA///AA///6Bf///5///////8=
+</value>
+  </data>
 </root>

@@ -125,6 +125,14 @@ namespace HMS.Forms.Master
             }
         }
 
+        private void ItCatFrm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                SendKeys.Send("{TAB}");
+            }
+        }
+
         // Other form initialization code and event handlers...
     }
 }

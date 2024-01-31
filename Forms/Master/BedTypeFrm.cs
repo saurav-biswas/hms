@@ -39,5 +39,13 @@ namespace HMS.Forms.Master
             this.bedTypeMastTableAdapter.Fill(this.hMSDataSet.BedTypeMast);
 
         }
+
+        private void BedTypeFrm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                SendKeys.Send("{TAB}");
+            }
+        }
     }
 }

@@ -15,11 +15,14 @@ using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Windows.Forms;
 using CrystalDecisions.Shared;
 using System.Configuration;
+using HMS.Reports;
+using System.Data.SqlClient;
 
 namespace HMS.Forms
 {
     public partial class MainFrm : Form
     {
+        string connectionString = ConfigurationManager.ConnectionStrings["HMS.Properties.Settings.HMSConnectionString"].ConnectionString;
         public MainFrm()
         {
             InitializeComponent();
@@ -93,9 +96,9 @@ namespace HMS.Forms
 
         private void oPDToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OPD myForm = new OPD();
+            //OPD myForm = new OPD();
 
-            myForm.ShowDialog();
+           // myForm.ShowDialog();
         }
 
         private void iPDToolStripMenuItem_Click(object sender, EventArgs e)
@@ -107,9 +110,9 @@ namespace HMS.Forms
 
         private void prescriptionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PrescriptionList myForm = new PrescriptionList();
+            //PrescriptionList myForm = new PrescriptionList();
 
-            myForm.ShowDialog();
+            //myForm.ShowDialog();
         }
 
         private void bedManagementToolStripMenuItem_Click(object sender, EventArgs e)
@@ -152,6 +155,68 @@ namespace HMS.Forms
             StkRecdFrm myForm = new StkRecdFrm();
 
             myForm.ShowDialog();
+        }
+
+        private void iPDRegisterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IPDListReportViewer myForm = new IPDListReportViewer();
+            myForm.ShowDialog();
+        }
+
+        private void disposableIssueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DisposableIssFrm myForm = new DisposableIssFrm();
+            myForm.ShowDialog();
+        }
+
+        private ItMastFrm itMastForm;
+
+        private void stockReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadDataItMast();
+
+            if (itMastForm == null || itMastForm.IsDisposed)
+            {
+                itMastForm = new ItMastFrm();
+            }
+
+            itMastForm.HandlePrintRequest();
+        }
+
+        private void LoadDataItMast()
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+                string query = "SELECT * FROM ItMast";
+                SqlDataAdapter adapter = new SqlDataAdapter(query, con);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                if (itMastForm == null || itMastForm.IsDisposed)
+                {
+                    itMastForm = new ItMastFrm();
+                }
+
+                itMastForm.dataGridViewItMast.DataSource = dt;
+            }
+        }
+
+
+        private void usersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UserList myForm = new UserList();
+            myForm.ShowDialog();
+        }
+
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }

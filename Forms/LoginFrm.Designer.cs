@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.IDtextBox = new System.Windows.Forms.TextBox();
@@ -47,7 +48,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(45, 28);
+            this.label1.Location = new System.Drawing.Point(20, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(18, 13);
             this.label1.TabIndex = 0;
@@ -56,7 +57,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(45, 52);
+            this.label2.Location = new System.Drawing.Point(20, 52);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 1;
@@ -64,34 +65,35 @@
             // 
             // IDtextBox
             // 
-            this.IDtextBox.Location = new System.Drawing.Point(128, 20);
+            this.IDtextBox.Location = new System.Drawing.Point(103, 20);
             this.IDtextBox.Name = "IDtextBox";
             this.IDtextBox.Size = new System.Drawing.Size(172, 20);
-            this.IDtextBox.TabIndex = 2;
+            this.IDtextBox.TabIndex = 0;
             // 
             // PasswordtextBox
             // 
-            this.PasswordtextBox.Location = new System.Drawing.Point(128, 49);
+            this.PasswordtextBox.Location = new System.Drawing.Point(103, 49);
             this.PasswordtextBox.Name = "PasswordtextBox";
+            this.PasswordtextBox.PasswordChar = '*';
             this.PasswordtextBox.Size = new System.Drawing.Size(172, 20);
-            this.PasswordtextBox.TabIndex = 3;
+            this.PasswordtextBox.TabIndex = 1;
             // 
             // Okbutton
             // 
-            this.Okbutton.Location = new System.Drawing.Point(90, 87);
+            this.Okbutton.Location = new System.Drawing.Point(103, 87);
             this.Okbutton.Name = "Okbutton";
             this.Okbutton.Size = new System.Drawing.Size(75, 23);
-            this.Okbutton.TabIndex = 4;
+            this.Okbutton.TabIndex = 2;
             this.Okbutton.Text = "Ok";
             this.Okbutton.UseVisualStyleBackColor = true;
             this.Okbutton.Click += new System.EventHandler(this.Okbutton_Click);
             // 
             // Cancelbutton
             // 
-            this.Cancelbutton.Location = new System.Drawing.Point(225, 87);
+            this.Cancelbutton.Location = new System.Drawing.Point(200, 87);
             this.Cancelbutton.Name = "Cancelbutton";
             this.Cancelbutton.Size = new System.Drawing.Size(75, 23);
-            this.Cancelbutton.TabIndex = 5;
+            this.Cancelbutton.TabIndex = 3;
             this.Cancelbutton.Text = "Cancel";
             this.Cancelbutton.UseVisualStyleBackColor = true;
             this.Cancelbutton.Click += new System.EventHandler(this.Cancelbutton_Click);
@@ -119,18 +121,22 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(321, 131);
+            this.ClientSize = new System.Drawing.Size(292, 131);
+            this.ControlBox = false;
             this.Controls.Add(this.Cancelbutton);
             this.Controls.Add(this.Okbutton);
             this.Controls.Add(this.PasswordtextBox);
             this.Controls.Add(this.IDtextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "Login";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Login_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.hMSDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hMSDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.doctorDepartmentMastBindingSource)).EndInit();

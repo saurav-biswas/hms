@@ -41,23 +41,14 @@
             System.Windows.Forms.Label patAddress1Label;
             System.Windows.Forms.Label patCityLabel;
             System.Windows.Forms.Label patPINLabel;
+            System.Windows.Forms.Label label1;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PatientMastFrm));
-            this.patientMastBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.patientMastBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.hMSDataSet = new HMS.HMSDataSet();
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.patientMastBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonDel = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.comboBoxReligion = new System.Windows.Forms.ComboBox();
             this.patPINTextBox = new System.Windows.Forms.TextBox();
             this.patCityTextBox = new System.Windows.Forms.TextBox();
             this.patAddress2TextBox = new System.Windows.Forms.TextBox();
@@ -78,20 +69,16 @@
             this.doctorMastTableAdapter = new HMS.HMSDataSetTableAdapters.DoctorMastTableAdapter();
             this.bloodGroupMastTableAdapter = new HMS.HMSDataSetTableAdapters.BloodGroupMastTableAdapter();
             this.patientMastDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PatName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PatPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PatBalAmt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PatDOB = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PatBloodGroup = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PatGender = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PatCity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PatUnderDr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PatRefferedBy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             idLabel = new System.Windows.Forms.Label();
             patNameLabel = new System.Windows.Forms.Label();
             patQualificationLabel = new System.Windows.Forms.Label();
@@ -104,8 +91,7 @@
             patAddress1Label = new System.Windows.Forms.Label();
             patCityLabel = new System.Windows.Forms.Label();
             patPINLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.patientMastBindingNavigator)).BeginInit();
-            this.patientMastBindingNavigator.SuspendLayout();
+            label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.patientMastBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hMSDataSet)).BeginInit();
             this.panel1.SuspendLayout();
@@ -117,7 +103,7 @@
             // idLabel
             // 
             idLabel.AutoSize = true;
-            idLabel.Location = new System.Drawing.Point(58, 20);
+            idLabel.Location = new System.Drawing.Point(68, 60);
             idLabel.Name = "idLabel";
             idLabel.Size = new System.Drawing.Size(19, 13);
             idLabel.TabIndex = 0;
@@ -126,7 +112,7 @@
             // patNameLabel
             // 
             patNameLabel.AutoSize = true;
-            patNameLabel.Location = new System.Drawing.Point(39, 42);
+            patNameLabel.Location = new System.Drawing.Point(49, 82);
             patNameLabel.Name = "patNameLabel";
             patNameLabel.Size = new System.Drawing.Size(38, 13);
             patNameLabel.TabIndex = 2;
@@ -135,7 +121,7 @@
             // patQualificationLabel
             // 
             patQualificationLabel.AutoSize = true;
-            patQualificationLabel.Location = new System.Drawing.Point(9, 68);
+            patQualificationLabel.Location = new System.Drawing.Point(19, 108);
             patQualificationLabel.Name = "patQualificationLabel";
             patQualificationLabel.Size = new System.Drawing.Size(68, 13);
             patQualificationLabel.TabIndex = 4;
@@ -144,7 +130,7 @@
             // patRefferedByLabel
             // 
             patRefferedByLabel.AutoSize = true;
-            patRefferedByLabel.Location = new System.Drawing.Point(11, 94);
+            patRefferedByLabel.Location = new System.Drawing.Point(21, 134);
             patRefferedByLabel.Name = "patRefferedByLabel";
             patRefferedByLabel.Size = new System.Drawing.Size(66, 13);
             patRefferedByLabel.TabIndex = 6;
@@ -153,7 +139,7 @@
             // patPhoneLabel
             // 
             patPhoneLabel.AutoSize = true;
-            patPhoneLabel.Location = new System.Drawing.Point(387, 16);
+            patPhoneLabel.Location = new System.Drawing.Point(397, 56);
             patPhoneLabel.Name = "patPhoneLabel";
             patPhoneLabel.Size = new System.Drawing.Size(41, 13);
             patPhoneLabel.TabIndex = 8;
@@ -162,7 +148,7 @@
             // patEmailLabel
             // 
             patEmailLabel.AutoSize = true;
-            patEmailLabel.Location = new System.Drawing.Point(393, 42);
+            patEmailLabel.Location = new System.Drawing.Point(403, 82);
             patEmailLabel.Name = "patEmailLabel";
             patEmailLabel.Size = new System.Drawing.Size(35, 13);
             patEmailLabel.TabIndex = 10;
@@ -171,7 +157,7 @@
             // patDOBLabel
             // 
             patDOBLabel.AutoSize = true;
-            patDOBLabel.Location = new System.Drawing.Point(395, 68);
+            patDOBLabel.Location = new System.Drawing.Point(405, 108);
             patDOBLabel.Name = "patDOBLabel";
             patDOBLabel.Size = new System.Drawing.Size(33, 13);
             patDOBLabel.TabIndex = 12;
@@ -180,7 +166,7 @@
             // patBloodGroupLabel
             // 
             patBloodGroupLabel.AutoSize = true;
-            patBloodGroupLabel.Location = new System.Drawing.Point(359, 94);
+            patBloodGroupLabel.Location = new System.Drawing.Point(369, 134);
             patBloodGroupLabel.Name = "patBloodGroupLabel";
             patBloodGroupLabel.Size = new System.Drawing.Size(69, 13);
             patBloodGroupLabel.TabIndex = 14;
@@ -189,7 +175,7 @@
             // patGenderLabel
             // 
             patGenderLabel.AutoSize = true;
-            patGenderLabel.Location = new System.Drawing.Point(381, 121);
+            patGenderLabel.Location = new System.Drawing.Point(391, 161);
             patGenderLabel.Name = "patGenderLabel";
             patGenderLabel.Size = new System.Drawing.Size(45, 13);
             patGenderLabel.TabIndex = 16;
@@ -198,7 +184,7 @@
             // patAddress1Label
             // 
             patAddress1Label.AutoSize = true;
-            patAddress1Label.Location = new System.Drawing.Point(29, 148);
+            patAddress1Label.Location = new System.Drawing.Point(39, 188);
             patAddress1Label.Name = "patAddress1Label";
             patAddress1Label.Size = new System.Drawing.Size(48, 13);
             patAddress1Label.TabIndex = 18;
@@ -207,7 +193,7 @@
             // patCityLabel
             // 
             patCityLabel.AutoSize = true;
-            patCityLabel.Location = new System.Drawing.Point(399, 148);
+            patCityLabel.Location = new System.Drawing.Point(409, 188);
             patCityLabel.Name = "patCityLabel";
             patCityLabel.Size = new System.Drawing.Size(27, 13);
             patCityLabel.TabIndex = 22;
@@ -216,50 +202,20 @@
             // patPINLabel
             // 
             patPINLabel.AutoSize = true;
-            patPINLabel.Location = new System.Drawing.Point(398, 174);
+            patPINLabel.Location = new System.Drawing.Point(408, 214);
             patPINLabel.Name = "patPINLabel";
             patPINLabel.Size = new System.Drawing.Size(28, 13);
             patPINLabel.TabIndex = 24;
             patPINLabel.Text = "PIN:";
             // 
-            // patientMastBindingNavigator
+            // label1
             // 
-            this.patientMastBindingNavigator.AddNewItem = this.bindingNavigatorAddNewItem;
-            this.patientMastBindingNavigator.BindingSource = this.patientMastBindingSource;
-            this.patientMastBindingNavigator.CountItem = this.bindingNavigatorCountItem;
-            this.patientMastBindingNavigator.DeleteItem = this.bindingNavigatorDeleteItem;
-            this.patientMastBindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bindingNavigatorMoveFirstItem,
-            this.bindingNavigatorMovePreviousItem,
-            this.bindingNavigatorSeparator,
-            this.bindingNavigatorPositionItem,
-            this.bindingNavigatorCountItem,
-            this.bindingNavigatorSeparator1,
-            this.bindingNavigatorMoveNextItem,
-            this.bindingNavigatorMoveLastItem,
-            this.bindingNavigatorSeparator2,
-            this.bindingNavigatorAddNewItem,
-            this.bindingNavigatorDeleteItem,
-            this.patientMastBindingNavigatorSaveItem});
-            this.patientMastBindingNavigator.Location = new System.Drawing.Point(0, 0);
-            this.patientMastBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
-            this.patientMastBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
-            this.patientMastBindingNavigator.MoveNextItem = this.bindingNavigatorMoveNextItem;
-            this.patientMastBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
-            this.patientMastBindingNavigator.Name = "patientMastBindingNavigator";
-            this.patientMastBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.patientMastBindingNavigator.Size = new System.Drawing.Size(830, 25);
-            this.patientMastBindingNavigator.TabIndex = 0;
-            this.patientMastBindingNavigator.Text = "bindingNavigator1";
-            // 
-            // bindingNavigatorAddNewItem
-            // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorAddNewItem.Text = "Add new";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(39, 160);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(48, 13);
+            label1.TabIndex = 26;
+            label1.Text = "Religion:";
             // 
             // patientMastBindingSource
             // 
@@ -271,94 +227,12 @@
             this.hMSDataSet.DataSetName = "HMSDataSet";
             this.hMSDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // bindingNavigatorCountItem
-            // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
-            this.bindingNavigatorCountItem.Text = "of {0}";
-            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
-            // 
-            // bindingNavigatorDeleteItem
-            // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorDeleteItem.Text = "Delete";
-            // 
-            // bindingNavigatorMoveFirstItem
-            // 
-            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
-            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
-            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveFirstItem.Text = "Move first";
-            // 
-            // bindingNavigatorMovePreviousItem
-            // 
-            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
-            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
-            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
-            // 
-            // bindingNavigatorSeparator
-            // 
-            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorPositionItem
-            // 
-            this.bindingNavigatorPositionItem.AccessibleName = "Position";
-            this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
-            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
-            this.bindingNavigatorPositionItem.Text = "0";
-            this.bindingNavigatorPositionItem.ToolTipText = "Current position";
-            // 
-            // bindingNavigatorSeparator1
-            // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorMoveNextItem
-            // 
-            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
-            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
-            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveNextItem.Text = "Move next";
-            // 
-            // bindingNavigatorMoveLastItem
-            // 
-            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
-            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
-            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveLastItem.Text = "Move last";
-            // 
-            // bindingNavigatorSeparator2
-            // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // patientMastBindingNavigatorSaveItem
-            // 
-            this.patientMastBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.patientMastBindingNavigatorSaveItem.Image = ((System.Drawing.Image)(resources.GetObject("patientMastBindingNavigatorSaveItem.Image")));
-            this.patientMastBindingNavigatorSaveItem.Name = "patientMastBindingNavigatorSaveItem";
-            this.patientMastBindingNavigatorSaveItem.Size = new System.Drawing.Size(23, 22);
-            this.patientMastBindingNavigatorSaveItem.Text = "Save Data";
-            this.patientMastBindingNavigatorSaveItem.Click += new System.EventHandler(this.patientMastBindingNavigatorSaveItem_Click);
-            // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.buttonDel);
+            this.panel1.Controls.Add(this.buttonSave);
+            this.panel1.Controls.Add(label1);
+            this.panel1.Controls.Add(this.comboBoxReligion);
             this.panel1.Controls.Add(patPINLabel);
             this.panel1.Controls.Add(this.patPINTextBox);
             this.panel1.Controls.Add(patCityLabel);
@@ -385,42 +259,78 @@
             this.panel1.Controls.Add(idLabel);
             this.panel1.Controls.Add(this.idTextBox);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 25);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(830, 219);
+            this.panel1.Size = new System.Drawing.Size(681, 266);
             this.panel1.TabIndex = 2;
+            // 
+            // buttonDel
+            // 
+            this.buttonDel.Location = new System.Drawing.Point(382, 13);
+            this.buttonDel.Name = "buttonDel";
+            this.buttonDel.Size = new System.Drawing.Size(75, 23);
+            this.buttonDel.TabIndex = 110;
+            this.buttonDel.Text = "Delete";
+            this.buttonDel.UseVisualStyleBackColor = true;
+            this.buttonDel.Click += new System.EventHandler(this.buttonDel_Click);
+            // 
+            // buttonSave
+            // 
+            this.buttonSave.Location = new System.Drawing.Point(177, 13);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.TabIndex = 109;
+            this.buttonSave.Text = "Save";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            // 
+            // comboBoxReligion
+            // 
+            this.comboBoxReligion.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.patientMastBindingSource, "PatReligion", true));
+            this.comboBoxReligion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxReligion.FormattingEnabled = true;
+            this.comboBoxReligion.Items.AddRange(new object[] {
+            "Hinduism",
+            "Islam",
+            "Christianity",
+            "Buddhism",
+            "Jainism"});
+            this.comboBoxReligion.Location = new System.Drawing.Point(93, 157);
+            this.comboBoxReligion.Name = "comboBoxReligion";
+            this.comboBoxReligion.Size = new System.Drawing.Size(203, 21);
+            this.comboBoxReligion.TabIndex = 25;
             // 
             // patPINTextBox
             // 
             this.patPINTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.patientMastBindingSource, "PatPIN", true));
-            this.patPINTextBox.Location = new System.Drawing.Point(434, 171);
+            this.patPINTextBox.Location = new System.Drawing.Point(444, 211);
             this.patPINTextBox.Name = "patPINTextBox";
             this.patPINTextBox.Size = new System.Drawing.Size(203, 20);
-            this.patPINTextBox.TabIndex = 25;
+            this.patPINTextBox.TabIndex = 12;
             // 
             // patCityTextBox
             // 
             this.patCityTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.patientMastBindingSource, "PatCity", true));
-            this.patCityTextBox.Location = new System.Drawing.Point(434, 145);
+            this.patCityTextBox.Location = new System.Drawing.Point(444, 185);
             this.patCityTextBox.Name = "patCityTextBox";
             this.patCityTextBox.Size = new System.Drawing.Size(203, 20);
-            this.patCityTextBox.TabIndex = 23;
+            this.patCityTextBox.TabIndex = 11;
             // 
             // patAddress2TextBox
             // 
             this.patAddress2TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.patientMastBindingSource, "PatAddress2", true));
-            this.patAddress2TextBox.Location = new System.Drawing.Point(83, 171);
+            this.patAddress2TextBox.Location = new System.Drawing.Point(93, 211);
             this.patAddress2TextBox.Name = "patAddress2TextBox";
             this.patAddress2TextBox.Size = new System.Drawing.Size(203, 20);
-            this.patAddress2TextBox.TabIndex = 21;
+            this.patAddress2TextBox.TabIndex = 10;
             // 
             // patAddress1TextBox
             // 
             this.patAddress1TextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.patientMastBindingSource, "PatAddress1", true));
-            this.patAddress1TextBox.Location = new System.Drawing.Point(83, 145);
+            this.patAddress1TextBox.Location = new System.Drawing.Point(93, 185);
             this.patAddress1TextBox.Name = "patAddress1TextBox";
             this.patAddress1TextBox.Size = new System.Drawing.Size(203, 20);
-            this.patAddress1TextBox.TabIndex = 19;
+            this.patAddress1TextBox.TabIndex = 9;
             // 
             // patGenderComboBox
             // 
@@ -431,10 +341,10 @@
             "Male",
             "Female",
             "Other"});
-            this.patGenderComboBox.Location = new System.Drawing.Point(434, 118);
+            this.patGenderComboBox.Location = new System.Drawing.Point(444, 158);
             this.patGenderComboBox.Name = "patGenderComboBox";
             this.patGenderComboBox.Size = new System.Drawing.Size(203, 21);
-            this.patGenderComboBox.TabIndex = 17;
+            this.patGenderComboBox.TabIndex = 8;
             // 
             // patBloodGroupComboBox
             // 
@@ -444,10 +354,10 @@
             this.patBloodGroupComboBox.DisplayMember = "BloodGroup";
             this.patBloodGroupComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.patBloodGroupComboBox.FormattingEnabled = true;
-            this.patBloodGroupComboBox.Location = new System.Drawing.Point(434, 91);
+            this.patBloodGroupComboBox.Location = new System.Drawing.Point(444, 131);
             this.patBloodGroupComboBox.Name = "patBloodGroupComboBox";
             this.patBloodGroupComboBox.Size = new System.Drawing.Size(203, 21);
-            this.patBloodGroupComboBox.TabIndex = 15;
+            this.patBloodGroupComboBox.TabIndex = 7;
             this.patBloodGroupComboBox.ValueMember = "BloodGroup";
             // 
             // bloodGroupMastBindingSource
@@ -458,58 +368,59 @@
             // patDOBDateTimePicker
             // 
             this.patDOBDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.patientMastBindingSource, "PatDOB", true));
-            this.patDOBDateTimePicker.Location = new System.Drawing.Point(434, 65);
+            this.patDOBDateTimePicker.Location = new System.Drawing.Point(444, 105);
             this.patDOBDateTimePicker.Name = "patDOBDateTimePicker";
             this.patDOBDateTimePicker.Size = new System.Drawing.Size(203, 20);
-            this.patDOBDateTimePicker.TabIndex = 13;
+            this.patDOBDateTimePicker.TabIndex = 6;
             // 
             // patEmailTextBox
             // 
             this.patEmailTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.patientMastBindingSource, "PatEmail", true));
-            this.patEmailTextBox.Location = new System.Drawing.Point(434, 39);
+            this.patEmailTextBox.Location = new System.Drawing.Point(444, 79);
             this.patEmailTextBox.Name = "patEmailTextBox";
             this.patEmailTextBox.Size = new System.Drawing.Size(203, 20);
-            this.patEmailTextBox.TabIndex = 11;
+            this.patEmailTextBox.TabIndex = 5;
             // 
             // patPhoneTextBox
             // 
             this.patPhoneTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.patientMastBindingSource, "PatPhone", true));
-            this.patPhoneTextBox.Location = new System.Drawing.Point(434, 13);
+            this.patPhoneTextBox.Location = new System.Drawing.Point(444, 53);
             this.patPhoneTextBox.Name = "patPhoneTextBox";
             this.patPhoneTextBox.Size = new System.Drawing.Size(203, 20);
-            this.patPhoneTextBox.TabIndex = 9;
+            this.patPhoneTextBox.TabIndex = 4;
             // 
             // patRefferedByTextBox
             // 
             this.patRefferedByTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.patientMastBindingSource, "PatRefferedBy", true));
-            this.patRefferedByTextBox.Location = new System.Drawing.Point(83, 91);
+            this.patRefferedByTextBox.Location = new System.Drawing.Point(93, 131);
             this.patRefferedByTextBox.Name = "patRefferedByTextBox";
             this.patRefferedByTextBox.Size = new System.Drawing.Size(203, 20);
-            this.patRefferedByTextBox.TabIndex = 7;
+            this.patRefferedByTextBox.TabIndex = 3;
             // 
             // patQualificationTextBox
             // 
             this.patQualificationTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.patientMastBindingSource, "PatQualification", true));
-            this.patQualificationTextBox.Location = new System.Drawing.Point(83, 65);
+            this.patQualificationTextBox.Location = new System.Drawing.Point(93, 105);
             this.patQualificationTextBox.Name = "patQualificationTextBox";
             this.patQualificationTextBox.Size = new System.Drawing.Size(203, 20);
-            this.patQualificationTextBox.TabIndex = 5;
+            this.patQualificationTextBox.TabIndex = 2;
             // 
             // patNameTextBox
             // 
             this.patNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.patientMastBindingSource, "PatName", true));
-            this.patNameTextBox.Location = new System.Drawing.Point(83, 39);
+            this.patNameTextBox.Location = new System.Drawing.Point(93, 79);
             this.patNameTextBox.Name = "patNameTextBox";
             this.patNameTextBox.Size = new System.Drawing.Size(203, 20);
-            this.patNameTextBox.TabIndex = 3;
+            this.patNameTextBox.TabIndex = 1;
             // 
             // idTextBox
             // 
             this.idTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.patientMastBindingSource, "Id", true));
-            this.idTextBox.Location = new System.Drawing.Point(83, 13);
+            this.idTextBox.Location = new System.Drawing.Point(93, 53);
             this.idTextBox.Name = "idTextBox";
+            this.idTextBox.ReadOnly = true;
             this.idTextBox.Size = new System.Drawing.Size(203, 20);
-            this.idTextBox.TabIndex = 1;
+            this.idTextBox.TabIndex = 0;
             // 
             // patientMastTableAdapter
             // 
@@ -523,16 +434,27 @@
             this.tableAdapterManager.BedNumberMastTableAdapter = null;
             this.tableAdapterManager.BedTypeMastTableAdapter = null;
             this.tableAdapterManager.BloodGroupMastTableAdapter = null;
+            this.tableAdapterManager.DischargeLinTableAdapter = null;
             this.tableAdapterManager.DischargeTableAdapter = null;
+            this.tableAdapterManager.DisposableIssHdrTableAdapter = null;
+            this.tableAdapterManager.DisposableIssLinTableAdapter = null;
             this.tableAdapterManager.DoctorDepartmentMastTableAdapter = null;
             this.tableAdapterManager.DoctorMastTableAdapter = null;
+            this.tableAdapterManager.FinalBillHdrTableAdapter = null;
+            this.tableAdapterManager.FinalBillOtherAmountTableAdapter = null;
+            this.tableAdapterManager.GRNHdrTableAdapter = null;
+            this.tableAdapterManager.GRNLinTableAdapter = null;
             this.tableAdapterManager.IPDTableAdapter = null;
+            this.tableAdapterManager.ItCatMastTableAdapter = null;
+            this.tableAdapterManager.ItMastTableAdapter = null;
             this.tableAdapterManager.OPDTableAdapter = null;
             this.tableAdapterManager.PatientMastTableAdapter = this.patientMastTableAdapter;
             this.tableAdapterManager.PrescriptionTableAdapter = null;
             this.tableAdapterManager.PresMedTableAdapter = null;
+            this.tableAdapterManager.SuppMastTableAdapter = null;
             this.tableAdapterManager.TaxMastTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = HMS.HMSDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            this.tableAdapterManager.UsersTableAdapter = null;
             // 
             // doctorMastBindingSource
             // 
@@ -549,130 +471,97 @@
             // 
             // patientMastDataGridView
             // 
-            this.patientMastDataGridView.AutoGenerateColumns = false;
             this.patientMastDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.patientMastDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8,
-            this.dataGridViewTextBoxColumn9,
-            this.dataGridViewTextBoxColumn10,
-            this.dataGridViewTextBoxColumn11,
-            this.dataGridViewTextBoxColumn12,
-            this.dataGridViewTextBoxColumn13,
-            this.dataGridViewTextBoxColumn14});
-            this.patientMastDataGridView.DataSource = this.patientMastBindingSource;
+            this.Id,
+            this.PatName,
+            this.PatPhone,
+            this.PatBalAmt,
+            this.PatDOB,
+            this.PatBloodGroup,
+            this.PatGender,
+            this.PatCity,
+            this.PatUnderDr,
+            this.PatRefferedBy});
             this.patientMastDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.patientMastDataGridView.Location = new System.Drawing.Point(0, 244);
+            this.patientMastDataGridView.Location = new System.Drawing.Point(0, 266);
             this.patientMastDataGridView.Name = "patientMastDataGridView";
-            this.patientMastDataGridView.Size = new System.Drawing.Size(830, 342);
+            this.patientMastDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.patientMastDataGridView.Size = new System.Drawing.Size(681, 320);
             this.patientMastDataGridView.TabIndex = 2;
+            this.patientMastDataGridView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.patientMastDataGridView_MouseDoubleClick);
             // 
-            // dataGridViewTextBoxColumn1
+            // Id
             // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "PatName";
-            this.dataGridViewTextBoxColumn1.HeaderText = "PatName";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn2
+            // PatName
             // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "PatQualification";
-            this.dataGridViewTextBoxColumn2.HeaderText = "PatQualification";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.PatName.FillWeight = 200F;
+            this.PatName.HeaderText = "PatName";
+            this.PatName.Name = "PatName";
+            this.PatName.Width = 200;
             // 
-            // dataGridViewTextBoxColumn3
+            // PatPhone
             // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "PatPhone";
-            this.dataGridViewTextBoxColumn3.HeaderText = "PatPhone";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.PatPhone.FillWeight = 150F;
+            this.PatPhone.HeaderText = "PatPhone";
+            this.PatPhone.Name = "PatPhone";
+            this.PatPhone.Width = 150;
             // 
-            // dataGridViewTextBoxColumn4
+            // PatBalAmt
             // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "PatEmail";
-            this.dataGridViewTextBoxColumn4.HeaderText = "PatEmail";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.PatBalAmt.HeaderText = "PatBalAmt";
+            this.PatBalAmt.Name = "PatBalAmt";
             // 
-            // dataGridViewTextBoxColumn5
+            // PatDOB
             // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "PatDOB";
-            this.dataGridViewTextBoxColumn5.HeaderText = "PatDOB";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.PatDOB.HeaderText = "PatDOB";
+            this.PatDOB.Name = "PatDOB";
             // 
-            // dataGridViewTextBoxColumn6
+            // PatBloodGroup
             // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "PatBloodGroup";
-            this.dataGridViewTextBoxColumn6.HeaderText = "PatBloodGroup";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.PatBloodGroup.HeaderText = "PatBloodGroup";
+            this.PatBloodGroup.Name = "PatBloodGroup";
             // 
-            // dataGridViewTextBoxColumn7
+            // PatGender
             // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "PatGender";
-            this.dataGridViewTextBoxColumn7.HeaderText = "PatGender";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.PatGender.HeaderText = "PatGender";
+            this.PatGender.Name = "PatGender";
             // 
-            // dataGridViewTextBoxColumn8
+            // PatCity
             // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "PatAddress1";
-            this.dataGridViewTextBoxColumn8.HeaderText = "PatAddress1";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.PatCity.HeaderText = "PatCity";
+            this.PatCity.Name = "PatCity";
             // 
-            // dataGridViewTextBoxColumn9
+            // PatUnderDr
             // 
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "PatAddress2";
-            this.dataGridViewTextBoxColumn9.HeaderText = "PatAddress2";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.PatUnderDr.HeaderText = "PatUnderDr";
+            this.PatUnderDr.Name = "PatUnderDr";
             // 
-            // dataGridViewTextBoxColumn10
+            // PatRefferedBy
             // 
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "PatCity";
-            this.dataGridViewTextBoxColumn10.HeaderText = "PatCity";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.DataPropertyName = "PatPIN";
-            this.dataGridViewTextBoxColumn11.HeaderText = "PatPIN";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.DataPropertyName = "PatRefferedBy";
-            this.dataGridViewTextBoxColumn12.HeaderText = "PatRefferedBy";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.DataPropertyName = "Id";
-            this.dataGridViewTextBoxColumn13.HeaderText = "Id";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.DataPropertyName = "PatAdvAmt";
-            this.dataGridViewTextBoxColumn14.HeaderText = "PatAdvAmt";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            this.PatRefferedBy.HeaderText = "PatRefferedBy";
+            this.PatRefferedBy.Name = "PatRefferedBy";
             // 
             // PatientMastFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(830, 586);
+            this.ClientSize = new System.Drawing.Size(681, 586);
             this.Controls.Add(this.patientMastDataGridView);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.patientMastBindingNavigator);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "PatientMastFrm";
             this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Patient Master";
             this.Load += new System.EventHandler(this.PatientMastFrm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.patientMastBindingNavigator)).EndInit();
-            this.patientMastBindingNavigator.ResumeLayout(false);
-            this.patientMastBindingNavigator.PerformLayout();
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PatientMastFrm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.patientMastBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hMSDataSet)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -681,7 +570,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.doctorMastBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.patientMastDataGridView)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -691,19 +579,6 @@
         private System.Windows.Forms.BindingSource patientMastBindingSource;
         private HMSDataSetTableAdapters.PatientMastTableAdapter patientMastTableAdapter;
         private HMSDataSetTableAdapters.TableAdapterManager tableAdapterManager;
-        private System.Windows.Forms.BindingNavigator patientMastBindingNavigator;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
-        private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
-        private System.Windows.Forms.ToolStripTextBox bindingNavigatorPositionItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator1;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
-        private System.Windows.Forms.ToolStripButton patientMastBindingNavigatorSaveItem;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox patQualificationTextBox;
         private System.Windows.Forms.TextBox patNameTextBox;
@@ -722,20 +597,20 @@
         private System.Windows.Forms.TextBox patCityTextBox;
         private System.Windows.Forms.TextBox patAddress2TextBox;
         private System.Windows.Forms.TextBox patAddress1TextBox;
-        private System.Windows.Forms.DataGridView patientMastDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+        private System.Windows.Forms.ComboBox comboBoxReligion;
+        private System.Windows.Forms.DataGridView patientMastDataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PatName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PatPhone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PatBalAmt;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PatDOB;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PatBloodGroup;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PatGender;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PatCity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PatUnderDr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PatRefferedBy;
+        private System.Windows.Forms.Button buttonDel;
+        private System.Windows.Forms.Button buttonSave;
     }
 }

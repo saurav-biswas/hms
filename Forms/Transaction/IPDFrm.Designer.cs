@@ -51,26 +51,43 @@
             System.Windows.Forms.Label heightLabel;
             System.Windows.Forms.Label ageLabel;
             System.Windows.Forms.Label idLabel;
+            System.Windows.Forms.Label label2;
+            System.Windows.Forms.Label label3;
+            System.Windows.Forms.Label label4;
+            System.Windows.Forms.Label label5;
+            System.Windows.Forms.Label label6;
+            System.Windows.Forms.Label label7;
+            System.Windows.Forms.Label label8;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IPDFrm));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBoxPS = new System.Windows.Forms.TextBox();
+            this.textBoxPO = new System.Windows.Forms.TextBox();
+            this.listViewPatDetails = new System.Windows.Forms.ListView();
+            this.textBoxCountry = new System.Windows.Forms.TextBox();
+            this.buttonDel = new System.Windows.Forms.Button();
+            this.comboBoxGender = new System.Windows.Forms.ComboBox();
+            this.dateTimePickerDOB = new System.Windows.Forms.DateTimePicker();
+            this.comboBoxReligion = new System.Windows.Forms.ComboBox();
+            this.radioButtonOldPat = new System.Windows.Forms.RadioButton();
+            this.radioButtonNewPat = new System.Windows.Forms.RadioButton();
+            this.buttonPatMast = new System.Windows.Forms.Button();
             this.RefferedBytextBox = new System.Windows.Forms.TextBox();
-            this.GendertextBox = new System.Windows.Forms.TextBox();
             this.AddressPINtextBox = new System.Windows.Forms.TextBox();
             this.AddressCitytextBox = new System.Windows.Forms.TextBox();
             this.Address2textBox = new System.Windows.Forms.TextBox();
             this.Address1textBox = new System.Windows.Forms.TextBox();
             this.Printbutton = new System.Windows.Forms.Button();
             this.Savebutton = new System.Windows.Forms.Button();
-            this.Updatebutton = new System.Windows.Forms.Button();
-            this.Cancelbutton = new System.Windows.Forms.Button();
-            this.Addbutton = new System.Windows.Forms.Button();
-            this.Findbutton = new System.Windows.Forms.Button();
             this.PatNametextBox = new System.Windows.Forms.TextBox();
             this.PatidTextBox = new System.Windows.Forms.TextBox();
             this.admissionDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.GardiantabPage = new System.Windows.Forms.TabPage();
+            this.comboBoxgarRelation = new System.Windows.Forms.ComboBox();
+            this.textBoxGarCountry = new System.Windows.Forms.TextBox();
+            this.textBoxGarPS = new System.Windows.Forms.TextBox();
             this.garNameTextBox = new System.Windows.Forms.TextBox();
-            this.garRelationTextBox = new System.Windows.Forms.TextBox();
+            this.textBoxGarPO = new System.Windows.Forms.TextBox();
             this.garPINTextBox = new System.Windows.Forms.TextBox();
             this.garPhoneTextBox = new System.Windows.Forms.TextBox();
             this.garCityTextBox = new System.Windows.Forms.TextBox();
@@ -109,8 +126,11 @@
             this.garPhoneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.garAddress1DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GarAddress2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GarPO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GarPS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.garCityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.garPINDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GarCountry = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.admitNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.admitRelationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AdmitPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -146,6 +166,13 @@
             heightLabel = new System.Windows.Forms.Label();
             ageLabel = new System.Windows.Forms.Label();
             idLabel = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            label4 = new System.Windows.Forms.Label();
+            label5 = new System.Windows.Forms.Label();
+            label6 = new System.Windows.Forms.Label();
+            label7 = new System.Windows.Forms.Label();
+            label8 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.GardiantabPage.SuspendLayout();
@@ -160,7 +187,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(349, 67);
+            label1.Location = new System.Drawing.Point(352, 119);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(74, 13);
             label1.TabIndex = 40;
@@ -169,7 +196,7 @@
             // PatidLabel
             // 
             PatidLabel.AutoSize = true;
-            PatidLabel.Location = new System.Drawing.Point(47, 67);
+            PatidLabel.Location = new System.Drawing.Point(371, 93);
             PatidLabel.Name = "PatidLabel";
             PatidLabel.Size = new System.Drawing.Size(55, 13);
             PatidLabel.TabIndex = 37;
@@ -178,7 +205,7 @@
             // admissionDateLabel
             // 
             admissionDateLabel.AutoSize = true;
-            admissionDateLabel.Location = new System.Drawing.Point(349, 119);
+            admissionDateLabel.Location = new System.Drawing.Point(346, 68);
             admissionDateLabel.Name = "admissionDateLabel";
             admissionDateLabel.Size = new System.Drawing.Size(83, 13);
             admissionDateLabel.TabIndex = 36;
@@ -187,56 +214,56 @@
             // garNameLabel
             // 
             garNameLabel.AutoSize = true;
-            garNameLabel.Location = new System.Drawing.Point(29, 8);
+            garNameLabel.Location = new System.Drawing.Point(23, 8);
             garNameLabel.Name = "garNameLabel";
-            garNameLabel.Size = new System.Drawing.Size(78, 13);
+            garNameLabel.Size = new System.Drawing.Size(84, 13);
             garNameLabel.TabIndex = 20;
-            garNameLabel.Text = "Gardian Name:";
+            garNameLabel.Text = "Guardian Name:";
             // 
             // garPINLabel
             // 
             garPINLabel.AutoSize = true;
-            garPINLabel.Location = new System.Drawing.Point(39, 164);
+            garPINLabel.Location = new System.Drawing.Point(43, 216);
             garPINLabel.Name = "garPINLabel";
-            garPINLabel.Size = new System.Drawing.Size(68, 13);
+            garPINLabel.Size = new System.Drawing.Size(64, 13);
             garPINLabel.TabIndex = 32;
-            garPINLabel.Text = "Gardian PIN:";
+            garPINLabel.Text = "Patient PIN:";
             // 
             // garRelationLabel
             // 
             garRelationLabel.AutoSize = true;
-            garRelationLabel.Location = new System.Drawing.Point(18, 34);
+            garRelationLabel.Location = new System.Drawing.Point(12, 34);
             garRelationLabel.Name = "garRelationLabel";
-            garRelationLabel.Size = new System.Drawing.Size(89, 13);
+            garRelationLabel.Size = new System.Drawing.Size(95, 13);
             garRelationLabel.TabIndex = 22;
-            garRelationLabel.Text = "Gardian Relation:";
+            garRelationLabel.Text = "Guardian Relation:";
             // 
             // garCityLabel
             // 
             garCityLabel.AutoSize = true;
-            garCityLabel.Location = new System.Drawing.Point(40, 138);
+            garCityLabel.Location = new System.Drawing.Point(44, 190);
             garCityLabel.Name = "garCityLabel";
-            garCityLabel.Size = new System.Drawing.Size(67, 13);
+            garCityLabel.Size = new System.Drawing.Size(63, 13);
             garCityLabel.TabIndex = 30;
-            garCityLabel.Text = "Gardian City:";
+            garCityLabel.Text = "Patient City:";
             // 
             // garPhoneLabel
             // 
             garPhoneLabel.AutoSize = true;
-            garPhoneLabel.Location = new System.Drawing.Point(26, 60);
+            garPhoneLabel.Location = new System.Drawing.Point(30, 60);
             garPhoneLabel.Name = "garPhoneLabel";
-            garPhoneLabel.Size = new System.Drawing.Size(81, 13);
+            garPhoneLabel.Size = new System.Drawing.Size(77, 13);
             garPhoneLabel.TabIndex = 24;
-            garPhoneLabel.Text = "Gardian Phone:";
+            garPhoneLabel.Text = "Patient Phone:";
             // 
             // garAddress1Label
             // 
             garAddress1Label.AutoSize = true;
-            garAddress1Label.Location = new System.Drawing.Point(19, 86);
+            garAddress1Label.Location = new System.Drawing.Point(23, 86);
             garAddress1Label.Name = "garAddress1Label";
-            garAddress1Label.Size = new System.Drawing.Size(88, 13);
+            garAddress1Label.Size = new System.Drawing.Size(84, 13);
             garAddress1Label.TabIndex = 26;
-            garAddress1Label.Text = "Gardian Address:";
+            garAddress1Label.Text = "Patient Address:";
             // 
             // admitPINLabel
             // 
@@ -295,7 +322,7 @@
             // symptomsLabel
             // 
             symptomsLabel.AutoSize = true;
-            symptomsLabel.Location = new System.Drawing.Point(374, 148);
+            symptomsLabel.Location = new System.Drawing.Point(371, 196);
             symptomsLabel.Name = "symptomsLabel";
             symptomsLabel.Size = new System.Drawing.Size(58, 13);
             symptomsLabel.TabIndex = 18;
@@ -304,16 +331,16 @@
             // precheckedByLabel1
             // 
             precheckedByLabel1.AutoSize = true;
-            precheckedByLabel1.Location = new System.Drawing.Point(349, 92);
+            precheckedByLabel1.Location = new System.Drawing.Point(387, 144);
             precheckedByLabel1.Name = "precheckedByLabel1";
-            precheckedByLabel1.Size = new System.Drawing.Size(83, 13);
+            precheckedByLabel1.Size = new System.Drawing.Size(39, 13);
             precheckedByLabel1.TabIndex = 14;
-            precheckedByLabel1.Text = "Prechecked By:";
+            precheckedByLabel1.Text = "Under:";
             // 
             // bloodPressureLabel
             // 
             bloodPressureLabel.AutoSize = true;
-            bloodPressureLabel.Location = new System.Drawing.Point(21, 171);
+            bloodPressureLabel.Location = new System.Drawing.Point(21, 222);
             bloodPressureLabel.Name = "bloodPressureLabel";
             bloodPressureLabel.Size = new System.Drawing.Size(81, 13);
             bloodPressureLabel.TabIndex = 10;
@@ -322,7 +349,7 @@
             // weightLabel
             // 
             weightLabel.AutoSize = true;
-            weightLabel.Location = new System.Drawing.Point(58, 145);
+            weightLabel.Location = new System.Drawing.Point(58, 196);
             weightLabel.Name = "weightLabel";
             weightLabel.Size = new System.Drawing.Size(44, 13);
             weightLabel.TabIndex = 8;
@@ -331,7 +358,7 @@
             // heightLabel
             // 
             heightLabel.AutoSize = true;
-            heightLabel.Location = new System.Drawing.Point(61, 119);
+            heightLabel.Location = new System.Drawing.Point(61, 170);
             heightLabel.Name = "heightLabel";
             heightLabel.Size = new System.Drawing.Size(41, 13);
             heightLabel.TabIndex = 6;
@@ -349,26 +376,99 @@
             // idLabel
             // 
             idLabel.AutoSize = true;
-            idLabel.Location = new System.Drawing.Point(73, 41);
+            idLabel.Location = new System.Drawing.Point(73, 67);
             idLabel.Name = "idLabel";
             idLabel.Size = new System.Drawing.Size(28, 13);
             idLabel.TabIndex = 0;
             idLabel.Text = "IPD:";
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(56, 118);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(45, 13);
+            label2.TabIndex = 57;
+            label2.Text = "Gender:";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(360, 222);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(66, 13);
+            label3.TabIndex = 58;
+            label3.Text = "Reffered By:";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(53, 144);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(48, 13);
+            label4.TabIndex = 59;
+            label4.Text = "Religion:";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(387, 174);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(33, 13);
+            label5.TabIndex = 62;
+            label5.Text = "DOB:";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(25, 242);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(82, 13);
+            label6.TabIndex = 34;
+            label6.Text = "Patient Country:";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new System.Drawing.Point(46, 138);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(61, 13);
+            label7.TabIndex = 36;
+            label7.Text = "Patient PO:";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new System.Drawing.Point(47, 164);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(60, 13);
+            label8.TabIndex = 38;
+            label8.Text = "Patient PS:";
+            // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.textBoxPS);
+            this.panel1.Controls.Add(this.textBoxPO);
+            this.panel1.Controls.Add(this.listViewPatDetails);
+            this.panel1.Controls.Add(this.textBoxCountry);
+            this.panel1.Controls.Add(this.buttonDel);
+            this.panel1.Controls.Add(this.comboBoxGender);
+            this.panel1.Controls.Add(label5);
+            this.panel1.Controls.Add(this.dateTimePickerDOB);
+            this.panel1.Controls.Add(this.comboBoxReligion);
+            this.panel1.Controls.Add(label4);
+            this.panel1.Controls.Add(label3);
+            this.panel1.Controls.Add(label2);
+            this.panel1.Controls.Add(this.radioButtonOldPat);
+            this.panel1.Controls.Add(this.radioButtonNewPat);
+            this.panel1.Controls.Add(this.buttonPatMast);
             this.panel1.Controls.Add(this.RefferedBytextBox);
-            this.panel1.Controls.Add(this.GendertextBox);
             this.panel1.Controls.Add(this.AddressPINtextBox);
             this.panel1.Controls.Add(this.AddressCitytextBox);
             this.panel1.Controls.Add(this.Address2textBox);
             this.panel1.Controls.Add(this.Address1textBox);
             this.panel1.Controls.Add(this.Printbutton);
             this.panel1.Controls.Add(this.Savebutton);
-            this.panel1.Controls.Add(this.Updatebutton);
-            this.panel1.Controls.Add(this.Cancelbutton);
-            this.panel1.Controls.Add(this.Addbutton);
-            this.panel1.Controls.Add(this.Findbutton);
             this.panel1.Controls.Add(label1);
             this.panel1.Controls.Add(this.PatNametextBox);
             this.panel1.Controls.Add(PatidLabel);
@@ -393,28 +493,136 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1007, 268);
+            this.panel1.Size = new System.Drawing.Size(1007, 330);
             this.panel1.TabIndex = 4;
+            // 
+            // textBoxPS
+            // 
+            this.textBoxPS.Location = new System.Drawing.Point(120, 285);
+            this.textBoxPS.Name = "textBoxPS";
+            this.textBoxPS.Size = new System.Drawing.Size(100, 20);
+            this.textBoxPS.TabIndex = 68;
+            this.textBoxPS.Visible = false;
+            // 
+            // textBoxPO
+            // 
+            this.textBoxPO.Location = new System.Drawing.Point(12, 285);
+            this.textBoxPO.Name = "textBoxPO";
+            this.textBoxPO.Size = new System.Drawing.Size(100, 20);
+            this.textBoxPO.TabIndex = 67;
+            this.textBoxPO.Visible = false;
+            // 
+            // listViewPatDetails
+            // 
+            this.listViewPatDetails.BackColor = System.Drawing.SystemColors.Info;
+            this.listViewPatDetails.HideSelection = false;
+            this.listViewPatDetails.Location = new System.Drawing.Point(458, 136);
+            this.listViewPatDetails.Name = "listViewPatDetails";
+            this.listViewPatDetails.Size = new System.Drawing.Size(236, 147);
+            this.listViewPatDetails.TabIndex = 64;
+            this.listViewPatDetails.UseCompatibleStateImageBehavior = false;
+            this.listViewPatDetails.View = System.Windows.Forms.View.List;
+            this.listViewPatDetails.Visible = false;
+            this.listViewPatDetails.SelectedIndexChanged += new System.EventHandler(this.listViewPatDetails_SelectedIndexChanged);
+            // 
+            // textBoxCountry
+            // 
+            this.textBoxCountry.Location = new System.Drawing.Point(438, 256);
+            this.textBoxCountry.Name = "textBoxCountry";
+            this.textBoxCountry.Size = new System.Drawing.Size(100, 20);
+            this.textBoxCountry.TabIndex = 66;
+            this.textBoxCountry.Visible = false;
+            // 
+            // buttonDel
+            // 
+            this.buttonDel.Location = new System.Drawing.Point(413, 12);
+            this.buttonDel.Name = "buttonDel";
+            this.buttonDel.Size = new System.Drawing.Size(75, 23);
+            this.buttonDel.TabIndex = 65;
+            this.buttonDel.Text = "Delete";
+            this.buttonDel.UseVisualStyleBackColor = true;
+            this.buttonDel.Click += new System.EventHandler(this.buttonDel_Click);
+            // 
+            // comboBoxGender
+            // 
+            this.comboBoxGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxGender.FormattingEnabled = true;
+            this.comboBoxGender.Items.AddRange(new object[] {
+            "Male",
+            "Female",
+            "Other"});
+            this.comboBoxGender.Location = new System.Drawing.Point(107, 115);
+            this.comboBoxGender.Name = "comboBoxGender";
+            this.comboBoxGender.Size = new System.Drawing.Size(204, 21);
+            this.comboBoxGender.TabIndex = 4;
+            // 
+            // dateTimePickerDOB
+            // 
+            this.dateTimePickerDOB.Location = new System.Drawing.Point(434, 170);
+            this.dateTimePickerDOB.Name = "dateTimePickerDOB";
+            this.dateTimePickerDOB.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePickerDOB.TabIndex = 13;
+            this.dateTimePickerDOB.ValueChanged += new System.EventHandler(this.dateTimePickerDOB_ValueChanged);
+            // 
+            // comboBoxReligion
+            // 
+            this.comboBoxReligion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxReligion.FormattingEnabled = true;
+            this.comboBoxReligion.Items.AddRange(new object[] {
+            "Hinduism",
+            "Islam",
+            "Christianity",
+            "Buddhism",
+            "Jainism"});
+            this.comboBoxReligion.Location = new System.Drawing.Point(107, 140);
+            this.comboBoxReligion.Name = "comboBoxReligion";
+            this.comboBoxReligion.Size = new System.Drawing.Size(204, 21);
+            this.comboBoxReligion.TabIndex = 5;
+            // 
+            // radioButtonOldPat
+            // 
+            this.radioButtonOldPat.AutoSize = true;
+            this.radioButtonOldPat.Location = new System.Drawing.Point(199, 41);
+            this.radioButtonOldPat.Name = "radioButtonOldPat";
+            this.radioButtonOldPat.Size = new System.Drawing.Size(77, 17);
+            this.radioButtonOldPat.TabIndex = 1;
+            this.radioButtonOldPat.Text = "Old Patient";
+            this.radioButtonOldPat.UseVisualStyleBackColor = true;
+            this.radioButtonOldPat.CheckedChanged += new System.EventHandler(this.radioButtonOldPat_CheckedChanged);
+            // 
+            // radioButtonNewPat
+            // 
+            this.radioButtonNewPat.AutoSize = true;
+            this.radioButtonNewPat.Checked = true;
+            this.radioButtonNewPat.Location = new System.Drawing.Point(108, 41);
+            this.radioButtonNewPat.Name = "radioButtonNewPat";
+            this.radioButtonNewPat.Size = new System.Drawing.Size(83, 17);
+            this.radioButtonNewPat.TabIndex = 0;
+            this.radioButtonNewPat.TabStop = true;
+            this.radioButtonNewPat.Text = "New Patient";
+            this.radioButtonNewPat.UseVisualStyleBackColor = true;
+            this.radioButtonNewPat.CheckedChanged += new System.EventHandler(this.radioButtonNewPat_CheckedChanged);
+            // 
+            // buttonPatMast
+            // 
+            this.buttonPatMast.Location = new System.Drawing.Point(882, 12);
+            this.buttonPatMast.Name = "buttonPatMast";
+            this.buttonPatMast.Size = new System.Drawing.Size(113, 23);
+            this.buttonPatMast.TabIndex = 19;
+            this.buttonPatMast.Text = "Patient Master";
+            this.buttonPatMast.UseVisualStyleBackColor = true;
+            this.buttonPatMast.Click += new System.EventHandler(this.buttonPatMast_Click);
             // 
             // RefferedBytextBox
             // 
-            this.RefferedBytextBox.Location = new System.Drawing.Point(541, 207);
+            this.RefferedBytextBox.Location = new System.Drawing.Point(435, 219);
             this.RefferedBytextBox.Name = "RefferedBytextBox";
-            this.RefferedBytextBox.Size = new System.Drawing.Size(100, 20);
-            this.RefferedBytextBox.TabIndex = 52;
-            this.RefferedBytextBox.Visible = false;
-            // 
-            // GendertextBox
-            // 
-            this.GendertextBox.Location = new System.Drawing.Point(435, 207);
-            this.GendertextBox.Name = "GendertextBox";
-            this.GendertextBox.Size = new System.Drawing.Size(100, 20);
-            this.GendertextBox.TabIndex = 51;
-            this.GendertextBox.Visible = false;
+            this.RefferedBytextBox.Size = new System.Drawing.Size(203, 20);
+            this.RefferedBytextBox.TabIndex = 15;
             // 
             // AddressPINtextBox
             // 
-            this.AddressPINtextBox.Location = new System.Drawing.Point(329, 207);
+            this.AddressPINtextBox.Location = new System.Drawing.Point(332, 256);
             this.AddressPINtextBox.Name = "AddressPINtextBox";
             this.AddressPINtextBox.Size = new System.Drawing.Size(100, 20);
             this.AddressPINtextBox.TabIndex = 50;
@@ -422,7 +630,7 @@
             // 
             // AddressCitytextBox
             // 
-            this.AddressCitytextBox.Location = new System.Drawing.Point(223, 207);
+            this.AddressCitytextBox.Location = new System.Drawing.Point(226, 256);
             this.AddressCitytextBox.Name = "AddressCitytextBox";
             this.AddressCitytextBox.Size = new System.Drawing.Size(100, 20);
             this.AddressCitytextBox.TabIndex = 49;
@@ -430,7 +638,7 @@
             // 
             // Address2textBox
             // 
-            this.Address2textBox.Location = new System.Drawing.Point(117, 207);
+            this.Address2textBox.Location = new System.Drawing.Point(120, 256);
             this.Address2textBox.Name = "Address2textBox";
             this.Address2textBox.Size = new System.Drawing.Size(100, 20);
             this.Address2textBox.TabIndex = 48;
@@ -438,7 +646,7 @@
             // 
             // Address1textBox
             // 
-            this.Address1textBox.Location = new System.Drawing.Point(9, 207);
+            this.Address1textBox.Location = new System.Drawing.Point(12, 256);
             this.Address1textBox.Name = "Address1textBox";
             this.Address1textBox.Size = new System.Drawing.Size(100, 20);
             this.Address1textBox.TabIndex = 47;
@@ -446,10 +654,10 @@
             // 
             // Printbutton
             // 
-            this.Printbutton.Location = new System.Drawing.Point(438, 12);
+            this.Printbutton.Location = new System.Drawing.Point(274, 12);
             this.Printbutton.Name = "Printbutton";
             this.Printbutton.Size = new System.Drawing.Size(75, 23);
-            this.Printbutton.TabIndex = 46;
+            this.Printbutton.TabIndex = 18;
             this.Printbutton.Text = "Print";
             this.Printbutton.UseVisualStyleBackColor = true;
             this.Printbutton.Click += new System.EventHandler(this.Printbutton_Click);
@@ -459,74 +667,35 @@
             this.Savebutton.Location = new System.Drawing.Point(147, 12);
             this.Savebutton.Name = "Savebutton";
             this.Savebutton.Size = new System.Drawing.Size(75, 23);
-            this.Savebutton.TabIndex = 45;
+            this.Savebutton.TabIndex = 17;
             this.Savebutton.Text = "Save";
             this.Savebutton.UseVisualStyleBackColor = true;
             this.Savebutton.Click += new System.EventHandler(this.Savebutton_Click);
             // 
-            // Updatebutton
-            // 
-            this.Updatebutton.Location = new System.Drawing.Point(245, 12);
-            this.Updatebutton.Name = "Updatebutton";
-            this.Updatebutton.Size = new System.Drawing.Size(75, 23);
-            this.Updatebutton.TabIndex = 44;
-            this.Updatebutton.Text = "Update";
-            this.Updatebutton.UseVisualStyleBackColor = true;
-            this.Updatebutton.Click += new System.EventHandler(this.Updatebutton_Click);
-            // 
-            // Cancelbutton
-            // 
-            this.Cancelbutton.Location = new System.Drawing.Point(340, 12);
-            this.Cancelbutton.Name = "Cancelbutton";
-            this.Cancelbutton.Size = new System.Drawing.Size(75, 23);
-            this.Cancelbutton.TabIndex = 43;
-            this.Cancelbutton.Text = "Cancel";
-            this.Cancelbutton.UseVisualStyleBackColor = true;
-            this.Cancelbutton.Click += new System.EventHandler(this.Cancelbutton_Click);
-            // 
-            // Addbutton
-            // 
-            this.Addbutton.Location = new System.Drawing.Point(40, 12);
-            this.Addbutton.Name = "Addbutton";
-            this.Addbutton.Size = new System.Drawing.Size(75, 23);
-            this.Addbutton.TabIndex = 42;
-            this.Addbutton.Text = "Add";
-            this.Addbutton.UseVisualStyleBackColor = true;
-            this.Addbutton.Click += new System.EventHandler(this.Addbutton_Click);
-            // 
-            // Findbutton
-            // 
-            this.Findbutton.Location = new System.Drawing.Point(290, 64);
-            this.Findbutton.Name = "Findbutton";
-            this.Findbutton.Size = new System.Drawing.Size(20, 23);
-            this.Findbutton.TabIndex = 41;
-            this.Findbutton.Text = "🔎";
-            this.Findbutton.UseVisualStyleBackColor = true;
-            this.Findbutton.Click += new System.EventHandler(this.Findbutton_Click);
-            // 
             // PatNametextBox
             // 
-            this.PatNametextBox.Location = new System.Drawing.Point(438, 64);
+            this.PatNametextBox.Location = new System.Drawing.Point(435, 116);
             this.PatNametextBox.Name = "PatNametextBox";
-            this.PatNametextBox.ReadOnly = true;
             this.PatNametextBox.Size = new System.Drawing.Size(203, 20);
-            this.PatNametextBox.TabIndex = 39;
+            this.PatNametextBox.TabIndex = 11;
+            this.PatNametextBox.TextChanged += new System.EventHandler(this.PatNametextBox_TextChanged);
             // 
             // PatidTextBox
             // 
-            this.PatidTextBox.Location = new System.Drawing.Point(108, 64);
+            this.PatidTextBox.Location = new System.Drawing.Point(435, 90);
             this.PatidTextBox.Name = "PatidTextBox";
-            this.PatidTextBox.Size = new System.Drawing.Size(176, 20);
-            this.PatidTextBox.TabIndex = 38;
+            this.PatidTextBox.ReadOnly = true;
+            this.PatidTextBox.Size = new System.Drawing.Size(203, 20);
+            this.PatidTextBox.TabIndex = 10;
             // 
             // admissionDateDateTimePicker
             // 
             this.admissionDateDateTimePicker.CustomFormat = " ";
             this.admissionDateDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.admissionDateDateTimePicker.Location = new System.Drawing.Point(438, 115);
+            this.admissionDateDateTimePicker.Location = new System.Drawing.Point(435, 64);
             this.admissionDateDateTimePicker.Name = "admissionDateDateTimePicker";
             this.admissionDateDateTimePicker.Size = new System.Drawing.Size(203, 20);
-            this.admissionDateDateTimePicker.TabIndex = 37;
+            this.admissionDateDateTimePicker.TabIndex = 9;
             this.admissionDateDateTimePicker.ValueChanged += new System.EventHandler(this.admissionDateDateTimePicker_ValueChanged);
             // 
             // tabControl1
@@ -536,16 +705,22 @@
             this.tabControl1.Location = new System.Drawing.Point(662, 28);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(340, 236);
-            this.tabControl1.TabIndex = 35;
+            this.tabControl1.Size = new System.Drawing.Size(340, 296);
+            this.tabControl1.TabIndex = 16;
             // 
             // GardiantabPage
             // 
             this.GardiantabPage.BackColor = System.Drawing.Color.Honeydew;
+            this.GardiantabPage.Controls.Add(this.comboBoxgarRelation);
+            this.GardiantabPage.Controls.Add(label8);
+            this.GardiantabPage.Controls.Add(label6);
+            this.GardiantabPage.Controls.Add(this.textBoxGarCountry);
+            this.GardiantabPage.Controls.Add(this.textBoxGarPS);
             this.GardiantabPage.Controls.Add(garNameLabel);
             this.GardiantabPage.Controls.Add(this.garNameTextBox);
-            this.GardiantabPage.Controls.Add(this.garRelationTextBox);
+            this.GardiantabPage.Controls.Add(label7);
             this.GardiantabPage.Controls.Add(garPINLabel);
+            this.GardiantabPage.Controls.Add(this.textBoxGarPO);
             this.GardiantabPage.Controls.Add(garRelationLabel);
             this.GardiantabPage.Controls.Add(this.garPINTextBox);
             this.GardiantabPage.Controls.Add(this.garPhoneTextBox);
@@ -558,58 +733,115 @@
             this.GardiantabPage.Location = new System.Drawing.Point(4, 22);
             this.GardiantabPage.Name = "GardiantabPage";
             this.GardiantabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.GardiantabPage.Size = new System.Drawing.Size(332, 210);
+            this.GardiantabPage.Size = new System.Drawing.Size(332, 270);
             this.GardiantabPage.TabIndex = 0;
-            this.GardiantabPage.Text = "Gardian Details";
+            this.GardiantabPage.Text = "Guardian Details";
+            // 
+            // comboBoxgarRelation
+            // 
+            this.comboBoxgarRelation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxgarRelation.FormattingEnabled = true;
+            this.comboBoxgarRelation.Items.AddRange(new object[] {
+            "Aunty",
+            "Brother",
+            "Brother-in-law",
+            "Cousin",
+            "Daughter",
+            "Daughter-in-law",
+            "Father",
+            "Father-in-law",
+            "Friend",
+            "Grand Daughter",
+            "Grand Son",
+            "Grandfather",
+            "Grandmother",
+            "Hasband",
+            "Mother",
+            "Mother-in-law",
+            "Relative",
+            "Sister",
+            "Sister-in-law",
+            "Son",
+            "Son-in-law",
+            "Uncle",
+            "Wife",
+            "Nephew",
+            "Niece "});
+            this.comboBoxgarRelation.Location = new System.Drawing.Point(113, 31);
+            this.comboBoxgarRelation.Name = "comboBoxgarRelation";
+            this.comboBoxgarRelation.Size = new System.Drawing.Size(203, 21);
+            this.comboBoxgarRelation.TabIndex = 69;
+            // 
+            // textBoxGarCountry
+            // 
+            this.textBoxGarCountry.Location = new System.Drawing.Point(113, 239);
+            this.textBoxGarCountry.Name = "textBoxGarCountry";
+            this.textBoxGarCountry.Size = new System.Drawing.Size(203, 20);
+            this.textBoxGarCountry.TabIndex = 33;
+            this.textBoxGarCountry.Text = "India";
+            this.textBoxGarCountry.TextChanged += new System.EventHandler(this.textBoxGarCountry_TextChanged);
+            // 
+            // textBoxGarPS
+            // 
+            this.textBoxGarPS.Location = new System.Drawing.Point(113, 161);
+            this.textBoxGarPS.Name = "textBoxGarPS";
+            this.textBoxGarPS.Size = new System.Drawing.Size(203, 20);
+            this.textBoxGarPS.TabIndex = 37;
+            this.textBoxGarPS.TextChanged += new System.EventHandler(this.textBoxGarPS_TextChanged);
             // 
             // garNameTextBox
             // 
             this.garNameTextBox.Location = new System.Drawing.Point(113, 5);
             this.garNameTextBox.Name = "garNameTextBox";
             this.garNameTextBox.Size = new System.Drawing.Size(203, 20);
-            this.garNameTextBox.TabIndex = 21;
+            this.garNameTextBox.TabIndex = 0;
             // 
-            // garRelationTextBox
+            // textBoxGarPO
             // 
-            this.garRelationTextBox.Location = new System.Drawing.Point(113, 31);
-            this.garRelationTextBox.Name = "garRelationTextBox";
-            this.garRelationTextBox.Size = new System.Drawing.Size(203, 20);
-            this.garRelationTextBox.TabIndex = 23;
+            this.textBoxGarPO.Location = new System.Drawing.Point(113, 135);
+            this.textBoxGarPO.Name = "textBoxGarPO";
+            this.textBoxGarPO.Size = new System.Drawing.Size(203, 20);
+            this.textBoxGarPO.TabIndex = 35;
+            this.textBoxGarPO.TextChanged += new System.EventHandler(this.textBoxGarPO_TextChanged);
             // 
             // garPINTextBox
             // 
-            this.garPINTextBox.Location = new System.Drawing.Point(113, 161);
+            this.garPINTextBox.Location = new System.Drawing.Point(113, 213);
             this.garPINTextBox.Name = "garPINTextBox";
             this.garPINTextBox.Size = new System.Drawing.Size(203, 20);
-            this.garPINTextBox.TabIndex = 33;
+            this.garPINTextBox.TabIndex = 6;
+            this.garPINTextBox.TextChanged += new System.EventHandler(this.garPINTextBox_TextChanged);
             // 
             // garPhoneTextBox
             // 
             this.garPhoneTextBox.Location = new System.Drawing.Point(113, 57);
             this.garPhoneTextBox.Name = "garPhoneTextBox";
             this.garPhoneTextBox.Size = new System.Drawing.Size(203, 20);
-            this.garPhoneTextBox.TabIndex = 25;
+            this.garPhoneTextBox.TabIndex = 2;
             // 
             // garCityTextBox
             // 
-            this.garCityTextBox.Location = new System.Drawing.Point(113, 135);
+            this.garCityTextBox.Location = new System.Drawing.Point(113, 187);
             this.garCityTextBox.Name = "garCityTextBox";
             this.garCityTextBox.Size = new System.Drawing.Size(203, 20);
-            this.garCityTextBox.TabIndex = 31;
+            this.garCityTextBox.TabIndex = 5;
+            this.garCityTextBox.TextChanged += new System.EventHandler(this.garCityTextBox_TextChanged);
             // 
             // garAddress1TextBox
             // 
             this.garAddress1TextBox.Location = new System.Drawing.Point(113, 83);
             this.garAddress1TextBox.Name = "garAddress1TextBox";
             this.garAddress1TextBox.Size = new System.Drawing.Size(203, 20);
-            this.garAddress1TextBox.TabIndex = 27;
+            this.garAddress1TextBox.TabIndex = 3;
+            this.garAddress1TextBox.TextChanged += new System.EventHandler(this.garAddress1TextBox_TextChanged);
             // 
             // garAddress2TextBox
             // 
             this.garAddress2TextBox.Location = new System.Drawing.Point(113, 109);
             this.garAddress2TextBox.Name = "garAddress2TextBox";
             this.garAddress2TextBox.Size = new System.Drawing.Size(203, 20);
-            this.garAddress2TextBox.TabIndex = 29;
+            this.garAddress2TextBox.TabIndex = 4;
+            this.garAddress2TextBox.TextChanged += new System.EventHandler(this.garAddress2TextBox_TextChanged);
             // 
             // AdmittedBytabPage
             // 
@@ -631,7 +863,7 @@
             this.AdmittedBytabPage.Location = new System.Drawing.Point(4, 22);
             this.AdmittedBytabPage.Name = "AdmittedBytabPage";
             this.AdmittedBytabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.AdmittedBytabPage.Size = new System.Drawing.Size(332, 210);
+            this.AdmittedBytabPage.Size = new System.Drawing.Size(332, 270);
             this.AdmittedBytabPage.TabIndex = 1;
             this.AdmittedBytabPage.Text = "Admitted By";
             // 
@@ -686,10 +918,10 @@
             // 
             // symptomsTextBox
             // 
-            this.symptomsTextBox.Location = new System.Drawing.Point(438, 145);
+            this.symptomsTextBox.Location = new System.Drawing.Point(435, 193);
             this.symptomsTextBox.Name = "symptomsTextBox";
             this.symptomsTextBox.Size = new System.Drawing.Size(203, 20);
-            this.symptomsTextBox.TabIndex = 19;
+            this.symptomsTextBox.TabIndex = 14;
             // 
             // precheckedByComboBox
             // 
@@ -697,10 +929,10 @@
             this.precheckedByComboBox.DisplayMember = "DocName";
             this.precheckedByComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.precheckedByComboBox.FormattingEnabled = true;
-            this.precheckedByComboBox.Location = new System.Drawing.Point(438, 89);
+            this.precheckedByComboBox.Location = new System.Drawing.Point(435, 141);
             this.precheckedByComboBox.Name = "precheckedByComboBox";
             this.precheckedByComboBox.Size = new System.Drawing.Size(203, 21);
-            this.precheckedByComboBox.TabIndex = 15;
+            this.precheckedByComboBox.TabIndex = 12;
             this.precheckedByComboBox.ValueMember = "DocName";
             this.precheckedByComboBox.SelectedIndexChanged += new System.EventHandler(this.precheckedByComboBox_SelectedIndexChanged);
             // 
@@ -716,38 +948,39 @@
             // 
             // bloodPressureTextBox
             // 
-            this.bloodPressureTextBox.Location = new System.Drawing.Point(108, 168);
+            this.bloodPressureTextBox.Location = new System.Drawing.Point(108, 219);
             this.bloodPressureTextBox.Name = "bloodPressureTextBox";
             this.bloodPressureTextBox.Size = new System.Drawing.Size(203, 20);
-            this.bloodPressureTextBox.TabIndex = 11;
+            this.bloodPressureTextBox.TabIndex = 8;
             // 
             // weightTextBox
             // 
-            this.weightTextBox.Location = new System.Drawing.Point(108, 142);
+            this.weightTextBox.Location = new System.Drawing.Point(108, 193);
             this.weightTextBox.Name = "weightTextBox";
             this.weightTextBox.Size = new System.Drawing.Size(203, 20);
-            this.weightTextBox.TabIndex = 9;
+            this.weightTextBox.TabIndex = 7;
             // 
             // heightTextBox
             // 
-            this.heightTextBox.Location = new System.Drawing.Point(108, 116);
+            this.heightTextBox.Location = new System.Drawing.Point(108, 167);
             this.heightTextBox.Name = "heightTextBox";
             this.heightTextBox.Size = new System.Drawing.Size(203, 20);
-            this.heightTextBox.TabIndex = 7;
+            this.heightTextBox.TabIndex = 6;
             // 
             // ageTextBox
             // 
             this.ageTextBox.Location = new System.Drawing.Point(108, 90);
             this.ageTextBox.Name = "ageTextBox";
             this.ageTextBox.Size = new System.Drawing.Size(203, 20);
-            this.ageTextBox.TabIndex = 5;
+            this.ageTextBox.TabIndex = 3;
             // 
             // idTextBox
             // 
-            this.idTextBox.Location = new System.Drawing.Point(108, 38);
+            this.idTextBox.Location = new System.Drawing.Point(108, 64);
             this.idTextBox.Name = "idTextBox";
             this.idTextBox.Size = new System.Drawing.Size(203, 20);
-            this.idTextBox.TabIndex = 1;
+            this.idTextBox.TabIndex = 2;
+            this.idTextBox.Text = "RNH/";
             // 
             // IPDdataGridView
             // 
@@ -770,8 +1003,11 @@
             this.garPhoneDataGridViewTextBoxColumn,
             this.garAddress1DataGridViewTextBoxColumn,
             this.GarAddress2,
+            this.GarPO,
+            this.GarPS,
             this.garCityDataGridViewTextBoxColumn,
             this.garPINDataGridViewTextBoxColumn,
+            this.GarCountry,
             this.admitNameDataGridViewTextBoxColumn,
             this.admitRelationDataGridViewTextBoxColumn,
             this.AdmitPhone,
@@ -780,11 +1016,11 @@
             this.admitCityDataGridViewTextBoxColumn,
             this.admitPINDataGridViewTextBoxColumn});
             this.IPDdataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.IPDdataGridView.Location = new System.Drawing.Point(0, 268);
+            this.IPDdataGridView.Location = new System.Drawing.Point(0, 330);
             this.IPDdataGridView.Name = "IPDdataGridView";
             this.IPDdataGridView.ReadOnly = true;
             this.IPDdataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.IPDdataGridView.Size = new System.Drawing.Size(1007, 384);
+            this.IPDdataGridView.Size = new System.Drawing.Size(1007, 322);
             this.IPDdataGridView.TabIndex = 5;
             this.IPDdataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.IPDdataGridView_CellContentClick);
             this.IPDdataGridView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.IPDdataGridView_MouseClick);
@@ -880,6 +1116,18 @@
             this.GarAddress2.Name = "GarAddress2";
             this.GarAddress2.ReadOnly = true;
             // 
+            // GarPO
+            // 
+            this.GarPO.HeaderText = "GarPO";
+            this.GarPO.Name = "GarPO";
+            this.GarPO.ReadOnly = true;
+            // 
+            // GarPS
+            // 
+            this.GarPS.HeaderText = "GarPS";
+            this.GarPS.Name = "GarPS";
+            this.GarPS.ReadOnly = true;
+            // 
             // garCityDataGridViewTextBoxColumn
             // 
             this.garCityDataGridViewTextBoxColumn.HeaderText = "GarCity";
@@ -891,6 +1139,12 @@
             this.garPINDataGridViewTextBoxColumn.HeaderText = "GarPIN";
             this.garPINDataGridViewTextBoxColumn.Name = "garPINDataGridViewTextBoxColumn";
             this.garPINDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // GarCountry
+            // 
+            this.GarCountry.HeaderText = "GarCountry";
+            this.GarCountry.Name = "GarCountry";
+            this.GarCountry.ReadOnly = true;
             // 
             // admitNameDataGridViewTextBoxColumn
             // 
@@ -964,18 +1218,28 @@
             this.tableAdapterManager.BedNumberMastTableAdapter = null;
             this.tableAdapterManager.BedTypeMastTableAdapter = null;
             this.tableAdapterManager.BloodGroupMastTableAdapter = null;
+            this.tableAdapterManager.DischargeLinTableAdapter = null;
             this.tableAdapterManager.DischargeTableAdapter = this.dischargeTableAdapter;
+            this.tableAdapterManager.DisposableIssHdrTableAdapter = null;
+            this.tableAdapterManager.DisposableIssLinTableAdapter = null;
             this.tableAdapterManager.DoctorDepartmentMastTableAdapter = null;
             this.tableAdapterManager.DoctorMastTableAdapter = this.doctorMastTableAdapter;
+            this.tableAdapterManager.FinalBillDrTableAdapter = null;
             this.tableAdapterManager.FinalBillHdrTableAdapter = null;
             this.tableAdapterManager.FinalBillOtherAmountTableAdapter = null;
+            this.tableAdapterManager.GRNHdrTableAdapter = null;
+            this.tableAdapterManager.GRNLinTableAdapter = null;
             this.tableAdapterManager.IPDTableAdapter = this.iPDTableAdapter;
+            this.tableAdapterManager.ItCatMastTableAdapter = null;
+            this.tableAdapterManager.ItMastTableAdapter = null;
             this.tableAdapterManager.OPDTableAdapter = null;
             this.tableAdapterManager.PatientMastTableAdapter = null;
             this.tableAdapterManager.PrescriptionTableAdapter = null;
             this.tableAdapterManager.PresMedTableAdapter = null;
+            this.tableAdapterManager.SuppMastTableAdapter = null;
             this.tableAdapterManager.TaxMastTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = HMS.HMSDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            this.tableAdapterManager.UsersTableAdapter = null;
             // 
             // IPDFrm
             // 
@@ -984,11 +1248,15 @@
             this.ClientSize = new System.Drawing.Size(1007, 652);
             this.Controls.Add(this.IPDdataGridView);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "IPDFrm";
             this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "IPDFrm";
+            this.Text = "Admission";
             this.Load += new System.EventHandler(this.IPDFrm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IPDFrm_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -1008,16 +1276,12 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button Cancelbutton;
-        private System.Windows.Forms.Button Addbutton;
-        private System.Windows.Forms.Button Findbutton;
         private System.Windows.Forms.TextBox PatNametextBox;
         private System.Windows.Forms.TextBox PatidTextBox;
         private System.Windows.Forms.DateTimePicker admissionDateDateTimePicker;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage GardiantabPage;
         private System.Windows.Forms.TextBox garNameTextBox;
-        private System.Windows.Forms.TextBox garRelationTextBox;
         private System.Windows.Forms.TextBox garPINTextBox;
         private System.Windows.Forms.TextBox garPhoneTextBox;
         private System.Windows.Forms.TextBox garCityTextBox;
@@ -1042,7 +1306,6 @@
         private HMSDataSet hMSDataSet;
         private System.Windows.Forms.BindingSource iPDBindingSource;
         private HMSDataSetTableAdapters.IPDTableAdapter iPDTableAdapter;
-        private System.Windows.Forms.Button Updatebutton;
         private System.Windows.Forms.Button Savebutton;
         private System.Windows.Forms.Button Printbutton;
         private System.Windows.Forms.BindingSource dischargeBindingSource;
@@ -1050,6 +1313,26 @@
         private System.Windows.Forms.BindingSource doctorMastBindingSource;
         private HMSDataSetTableAdapters.DoctorMastTableAdapter doctorMastTableAdapter;
         private HMSDataSetTableAdapters.TableAdapterManager tableAdapterManager;
+        private System.Windows.Forms.TextBox Address1textBox;
+        private System.Windows.Forms.TextBox AddressPINtextBox;
+        private System.Windows.Forms.TextBox AddressCitytextBox;
+        private System.Windows.Forms.TextBox Address2textBox;
+        private System.Windows.Forms.TextBox RefferedBytextBox;
+        private System.Windows.Forms.Button buttonPatMast;
+        private System.Windows.Forms.RadioButton radioButtonOldPat;
+        private System.Windows.Forms.RadioButton radioButtonNewPat;
+        private System.Windows.Forms.ComboBox comboBoxReligion;
+        private System.Windows.Forms.DateTimePicker dateTimePickerDOB;
+        private System.Windows.Forms.ComboBox comboBoxGender;
+        private System.Windows.Forms.ListView listViewPatDetails;
+        private System.Windows.Forms.Button buttonDel;
+        private System.Windows.Forms.TextBox textBoxGarCountry;
+        private System.Windows.Forms.TextBox textBoxCountry;
+        private System.Windows.Forms.TextBox textBoxGarPS;
+        private System.Windows.Forms.TextBox textBoxGarPO;
+        private System.Windows.Forms.TextBox textBoxPS;
+        private System.Windows.Forms.TextBox textBoxPO;
+        private System.Windows.Forms.ComboBox comboBoxgarRelation;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn AdmissionDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn PatientID;
@@ -1065,8 +1348,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn garPhoneDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn garAddress1DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn GarAddress2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GarPO;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GarPS;
         private System.Windows.Forms.DataGridViewTextBoxColumn garCityDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn garPINDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GarCountry;
         private System.Windows.Forms.DataGridViewTextBoxColumn admitNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn admitRelationDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn AdmitPhone;
@@ -1074,11 +1360,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn admitAddress2DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn admitCityDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn admitPINDataGridViewTextBoxColumn;
-        private System.Windows.Forms.TextBox Address1textBox;
-        private System.Windows.Forms.TextBox AddressPINtextBox;
-        private System.Windows.Forms.TextBox AddressCitytextBox;
-        private System.Windows.Forms.TextBox Address2textBox;
-        private System.Windows.Forms.TextBox GendertextBox;
-        private System.Windows.Forms.TextBox RefferedBytextBox;
     }
 }

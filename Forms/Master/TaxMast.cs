@@ -41,5 +41,13 @@ namespace HMS.Forms.Master
                 MessageBox.Show("Update failed");
             }
         }
+
+        private void TaxMast_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                SendKeys.Send("{TAB}");
+            }
+        }
     }
 }

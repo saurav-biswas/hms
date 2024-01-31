@@ -105,18 +105,27 @@
             this.tableAdapterManager.BedNumberMastTableAdapter = null;
             this.tableAdapterManager.BedTypeMastTableAdapter = null;
             this.tableAdapterManager.BloodGroupMastTableAdapter = null;
+            this.tableAdapterManager.DischargeLinTableAdapter = null;
             this.tableAdapterManager.DischargeTableAdapter = null;
+            this.tableAdapterManager.DisposableIssHdrTableAdapter = null;
+            this.tableAdapterManager.DisposableIssLinTableAdapter = null;
             this.tableAdapterManager.DoctorDepartmentMastTableAdapter = this.doctorDepartmentMastTableAdapter;
             this.tableAdapterManager.DoctorMastTableAdapter = null;
             this.tableAdapterManager.FinalBillHdrTableAdapter = null;
             this.tableAdapterManager.FinalBillOtherAmountTableAdapter = null;
+            this.tableAdapterManager.GRNHdrTableAdapter = null;
+            this.tableAdapterManager.GRNLinTableAdapter = null;
             this.tableAdapterManager.IPDTableAdapter = null;
+            this.tableAdapterManager.ItCatMastTableAdapter = null;
+            this.tableAdapterManager.ItMastTableAdapter = null;
             this.tableAdapterManager.OPDTableAdapter = null;
             this.tableAdapterManager.PatientMastTableAdapter = null;
             this.tableAdapterManager.PrescriptionTableAdapter = null;
             this.tableAdapterManager.PresMedTableAdapter = null;
+            this.tableAdapterManager.SuppMastTableAdapter = null;
             this.tableAdapterManager.TaxMastTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = HMS.HMSDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            this.tableAdapterManager.UsersTableAdapter = null;
             // 
             // doctorDepartmentMastBindingNavigator
             // 
@@ -251,7 +260,7 @@
             this.departmentNameTextBox.Location = new System.Drawing.Point(109, 32);
             this.departmentNameTextBox.Name = "departmentNameTextBox";
             this.departmentNameTextBox.Size = new System.Drawing.Size(257, 20);
-            this.departmentNameTextBox.TabIndex = 6;
+            this.departmentNameTextBox.TabIndex = 1;
             // 
             // panel1
             // 
@@ -271,7 +280,7 @@
             this.idTextBox.Location = new System.Drawing.Point(109, 6);
             this.idTextBox.Name = "idTextBox";
             this.idTextBox.Size = new System.Drawing.Size(100, 20);
-            this.idTextBox.TabIndex = 7;
+            this.idTextBox.TabIndex = 0;
             // 
             // dataGridView1
             // 
@@ -316,9 +325,14 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.doctorDepartmentMastBindingNavigator);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "DoctorDepartmentFrm";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Doctor Department";
             this.Load += new System.EventHandler(this.DoctorDepartmentFrm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DoctorDepartmentFrm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.hMSDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.doctorDepartmentMastBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.doctorDepartmentMastBindingNavigator)).EndInit();

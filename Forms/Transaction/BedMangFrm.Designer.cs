@@ -44,10 +44,8 @@ namespace HMS.Forms.Transaction
             System.Windows.Forms.Label label1;
             System.Windows.Forms.Label label2;
             System.Windows.Forms.Label label3;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BedMangFrm));
             this.Savebutton = new System.Windows.Forms.Button();
-            this.Updatebutton = new System.Windows.Forms.Button();
-            this.Cancelbutton = new System.Windows.Forms.Button();
-            this.Addbutton = new System.Windows.Forms.Button();
             this.IPDSearchtextBox = new System.Windows.Forms.TextBox();
             this.AdmissiondateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.dischargeBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -62,6 +60,8 @@ namespace HMS.Forms.Transaction
             this.tableAdapterManager = new HMS.HMSDataSetTableAdapters.TableAdapterManager();
             this.patientMastTableAdapter = new HMS.HMSDataSetTableAdapters.PatientMastTableAdapter();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonIPD = new System.Windows.Forms.Button();
+            this.buttonDel = new System.Windows.Forms.Button();
             this.DoctorNameComboBox = new System.Windows.Forms.ComboBox();
             this.doctorMastBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.DaystextBox = new System.Windows.Forms.TextBox();
@@ -89,7 +89,6 @@ namespace HMS.Forms.Transaction
             this.Rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BedAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bedManagementBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.bedManagementTableAdapter = new HMS.HMSDataSetTableAdapters.BedManagementTableAdapter();
             this.doctorDepartmentMastBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.doctorDepartmentMastTableAdapter = new HMS.HMSDataSetTableAdapters.DoctorDepartmentMastTableAdapter();
             this.doctorMastTableAdapter = new HMS.HMSDataSetTableAdapters.DoctorMastTableAdapter();
@@ -194,7 +193,7 @@ namespace HMS.Forms.Transaction
             // bedRateLabel
             // 
             bedRateLabel.AutoSize = true;
-            bedRateLabel.Location = new System.Drawing.Point(768, 118);
+            bedRateLabel.Location = new System.Drawing.Point(671, 116);
             bedRateLabel.Name = "bedRateLabel";
             bedRateLabel.Size = new System.Drawing.Size(55, 13);
             bedRateLabel.TabIndex = 95;
@@ -212,7 +211,7 @@ namespace HMS.Forms.Transaction
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(741, 68);
+            label1.Location = new System.Drawing.Point(644, 66);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(82, 13);
             label1.TabIndex = 101;
@@ -221,7 +220,7 @@ namespace HMS.Forms.Transaction
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(789, 93);
+            label2.Location = new System.Drawing.Point(692, 91);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(34, 13);
             label2.TabIndex = 103;
@@ -230,7 +229,7 @@ namespace HMS.Forms.Transaction
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(768, 143);
+            label3.Location = new System.Drawing.Point(671, 141);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(46, 13);
             label3.TabIndex = 104;
@@ -241,47 +240,17 @@ namespace HMS.Forms.Transaction
             this.Savebutton.Location = new System.Drawing.Point(148, 17);
             this.Savebutton.Name = "Savebutton";
             this.Savebutton.Size = new System.Drawing.Size(75, 23);
-            this.Savebutton.TabIndex = 90;
+            this.Savebutton.TabIndex = 8;
             this.Savebutton.Text = "Save";
             this.Savebutton.UseVisualStyleBackColor = true;
             this.Savebutton.Click += new System.EventHandler(this.Savebutton_Click);
-            // 
-            // Updatebutton
-            // 
-            this.Updatebutton.Location = new System.Drawing.Point(246, 17);
-            this.Updatebutton.Name = "Updatebutton";
-            this.Updatebutton.Size = new System.Drawing.Size(75, 23);
-            this.Updatebutton.TabIndex = 89;
-            this.Updatebutton.Text = "Update";
-            this.Updatebutton.UseVisualStyleBackColor = true;
-            this.Updatebutton.Click += new System.EventHandler(this.Updatebutton_Click);
-            // 
-            // Cancelbutton
-            // 
-            this.Cancelbutton.Location = new System.Drawing.Point(341, 17);
-            this.Cancelbutton.Name = "Cancelbutton";
-            this.Cancelbutton.Size = new System.Drawing.Size(75, 23);
-            this.Cancelbutton.TabIndex = 88;
-            this.Cancelbutton.Text = "Cancel";
-            this.Cancelbutton.UseVisualStyleBackColor = true;
-            this.Cancelbutton.Click += new System.EventHandler(this.Cancelbutton_Click);
-            // 
-            // Addbutton
-            // 
-            this.Addbutton.Location = new System.Drawing.Point(55, 17);
-            this.Addbutton.Name = "Addbutton";
-            this.Addbutton.Size = new System.Drawing.Size(75, 23);
-            this.Addbutton.TabIndex = 87;
-            this.Addbutton.Text = "Add";
-            this.Addbutton.UseVisualStyleBackColor = true;
-            this.Addbutton.Click += new System.EventHandler(this.Addbutton_Click);
             // 
             // IPDSearchtextBox
             // 
             this.IPDSearchtextBox.Location = new System.Drawing.Point(99, 87);
             this.IPDSearchtextBox.Name = "IPDSearchtextBox";
             this.IPDSearchtextBox.Size = new System.Drawing.Size(203, 20);
-            this.IPDSearchtextBox.TabIndex = 85;
+            this.IPDSearchtextBox.TabIndex = 1;
             this.IPDSearchtextBox.TextChanged += new System.EventHandler(this.IPDSearchtextBox_TextChanged);
             // 
             // AdmissiondateTimePicker
@@ -291,7 +260,7 @@ namespace HMS.Forms.Transaction
             this.AdmissiondateTimePicker.Location = new System.Drawing.Point(99, 194);
             this.AdmissiondateTimePicker.Name = "AdmissiondateTimePicker";
             this.AdmissiondateTimePicker.Size = new System.Drawing.Size(203, 20);
-            this.AdmissiondateTimePicker.TabIndex = 63;
+            this.AdmissiondateTimePicker.TabIndex = 3;
             // 
             // dischargeBindingSource
             // 
@@ -337,10 +306,11 @@ namespace HMS.Forms.Transaction
             // 
             this.FromDtDateTimePicker.CustomFormat = " ";
             this.FromDtDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.dischargeBindingSource, "DischargeDate", true));
+            this.FromDtDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.FromDtDateTimePicker.Location = new System.Drawing.Point(479, 62);
             this.FromDtDateTimePicker.Name = "FromDtDateTimePicker";
-            this.FromDtDateTimePicker.Size = new System.Drawing.Size(203, 20);
-            this.FromDtDateTimePicker.TabIndex = 12;
+            this.FromDtDateTimePicker.Size = new System.Drawing.Size(114, 20);
+            this.FromDtDateTimePicker.TabIndex = 4;
             // 
             // dischargeTableAdapter
             // 
@@ -354,18 +324,27 @@ namespace HMS.Forms.Transaction
             this.tableAdapterManager.BedNumberMastTableAdapter = null;
             this.tableAdapterManager.BedTypeMastTableAdapter = null;
             this.tableAdapterManager.BloodGroupMastTableAdapter = null;
+            this.tableAdapterManager.DischargeLinTableAdapter = null;
             this.tableAdapterManager.DischargeTableAdapter = this.dischargeTableAdapter;
+            this.tableAdapterManager.DisposableIssHdrTableAdapter = null;
+            this.tableAdapterManager.DisposableIssLinTableAdapter = null;
             this.tableAdapterManager.DoctorDepartmentMastTableAdapter = null;
             this.tableAdapterManager.DoctorMastTableAdapter = null;
             this.tableAdapterManager.FinalBillHdrTableAdapter = null;
             this.tableAdapterManager.FinalBillOtherAmountTableAdapter = null;
+            this.tableAdapterManager.GRNHdrTableAdapter = null;
+            this.tableAdapterManager.GRNLinTableAdapter = null;
             this.tableAdapterManager.IPDTableAdapter = null;
+            this.tableAdapterManager.ItCatMastTableAdapter = null;
+            this.tableAdapterManager.ItMastTableAdapter = null;
             this.tableAdapterManager.OPDTableAdapter = null;
             this.tableAdapterManager.PatientMastTableAdapter = this.patientMastTableAdapter;
             this.tableAdapterManager.PrescriptionTableAdapter = null;
             this.tableAdapterManager.PresMedTableAdapter = null;
+            this.tableAdapterManager.SuppMastTableAdapter = null;
             this.tableAdapterManager.TaxMastTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = HMS.HMSDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            this.tableAdapterManager.UsersTableAdapter = null;
             // 
             // patientMastTableAdapter
             // 
@@ -373,6 +352,8 @@ namespace HMS.Forms.Transaction
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.buttonIPD);
+            this.panel1.Controls.Add(this.buttonDel);
             this.panel1.Controls.Add(this.DoctorNameComboBox);
             this.panel1.Controls.Add(label3);
             this.panel1.Controls.Add(label2);
@@ -392,9 +373,6 @@ namespace HMS.Forms.Transaction
             this.panel1.Controls.Add(label8);
             this.panel1.Controls.Add(this.PatientNametextBox);
             this.panel1.Controls.Add(this.Savebutton);
-            this.panel1.Controls.Add(this.Updatebutton);
-            this.panel1.Controls.Add(this.Cancelbutton);
-            this.panel1.Controls.Add(this.Addbutton);
             this.panel1.Controls.Add(this.IPDSearchtextBox);
             this.panel1.Controls.Add(label5);
             this.panel1.Controls.Add(this.AdmissiondateTimePicker);
@@ -407,9 +385,29 @@ namespace HMS.Forms.Transaction
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1055, 253);
+            this.panel1.Size = new System.Drawing.Size(874, 253);
             this.panel1.TabIndex = 4;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // buttonIPD
+            // 
+            this.buttonIPD.Location = new System.Drawing.Point(773, 12);
+            this.buttonIPD.Name = "buttonIPD";
+            this.buttonIPD.Size = new System.Drawing.Size(75, 23);
+            this.buttonIPD.TabIndex = 106;
+            this.buttonIPD.Text = "IPD";
+            this.buttonIPD.UseVisualStyleBackColor = true;
+            this.buttonIPD.Click += new System.EventHandler(this.buttonIPD_Click);
+            // 
+            // buttonDel
+            // 
+            this.buttonDel.Location = new System.Drawing.Point(343, 17);
+            this.buttonDel.Name = "buttonDel";
+            this.buttonDel.Size = new System.Drawing.Size(75, 23);
+            this.buttonDel.TabIndex = 105;
+            this.buttonDel.Text = "Delete";
+            this.buttonDel.UseVisualStyleBackColor = true;
+            this.buttonDel.Click += new System.EventHandler(this.buttonDel_Click);
             // 
             // DoctorNameComboBox
             // 
@@ -420,7 +418,7 @@ namespace HMS.Forms.Transaction
             this.DoctorNameComboBox.Location = new System.Drawing.Point(99, 164);
             this.DoctorNameComboBox.Name = "DoctorNameComboBox";
             this.DoctorNameComboBox.Size = new System.Drawing.Size(203, 21);
-            this.DoctorNameComboBox.TabIndex = 105;
+            this.DoctorNameComboBox.TabIndex = 2;
             this.DoctorNameComboBox.ValueMember = "DocName";
             // 
             // doctorMastBindingSource
@@ -430,46 +428,54 @@ namespace HMS.Forms.Transaction
             // 
             // DaystextBox
             // 
-            this.DaystextBox.Location = new System.Drawing.Point(830, 90);
+            this.DaystextBox.Location = new System.Drawing.Point(733, 88);
             this.DaystextBox.Name = "DaystextBox";
             this.DaystextBox.ReadOnly = true;
-            this.DaystextBox.Size = new System.Drawing.Size(203, 20);
+            this.DaystextBox.Size = new System.Drawing.Size(115, 20);
             this.DaystextBox.TabIndex = 102;
+            this.DaystextBox.Text = "0";
+            this.DaystextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.DaystextBox.TextChanged += new System.EventHandler(this.DaystextBox_TextChanged);
             // 
             // ToDtdateTimePicker
             // 
-            this.ToDtdateTimePicker.CustomFormat = " ";
+            this.ToDtdateTimePicker.CustomFormat = "";
             this.ToDtdateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.dischargeBindingSource, "DischargeDate", true));
-            this.ToDtdateTimePicker.Location = new System.Drawing.Point(830, 64);
+            this.ToDtdateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.ToDtdateTimePicker.Location = new System.Drawing.Point(733, 62);
             this.ToDtdateTimePicker.Name = "ToDtdateTimePicker";
-            this.ToDtdateTimePicker.Size = new System.Drawing.Size(203, 20);
-            this.ToDtdateTimePicker.TabIndex = 100;
+            this.ToDtdateTimePicker.Size = new System.Drawing.Size(115, 20);
+            this.ToDtdateTimePicker.TabIndex = 7;
             this.ToDtdateTimePicker.ValueChanged += new System.EventHandler(this.ToDtdateTimePicker_ValueChanged);
             // 
             // BedAmounttextBox
             // 
-            this.BedAmounttextBox.Location = new System.Drawing.Point(830, 140);
+            this.BedAmounttextBox.Location = new System.Drawing.Point(733, 138);
             this.BedAmounttextBox.Name = "BedAmounttextBox";
             this.BedAmounttextBox.ReadOnly = true;
-            this.BedAmounttextBox.Size = new System.Drawing.Size(203, 20);
+            this.BedAmounttextBox.Size = new System.Drawing.Size(115, 20);
             this.BedAmounttextBox.TabIndex = 99;
+            this.BedAmounttextBox.Text = "0";
+            this.BedAmounttextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // idTextBox
             // 
             this.idTextBox.Location = new System.Drawing.Point(99, 61);
             this.idTextBox.Name = "idTextBox";
+            this.idTextBox.ReadOnly = true;
             this.idTextBox.Size = new System.Drawing.Size(203, 20);
-            this.idTextBox.TabIndex = 98;
+            this.idTextBox.TabIndex = 0;
             // 
             // BedRateTextBox
             // 
             this.BedRateTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bedNumberMastBindingSource, "BedRate", true));
-            this.BedRateTextBox.Location = new System.Drawing.Point(830, 115);
+            this.BedRateTextBox.Location = new System.Drawing.Point(733, 113);
             this.BedRateTextBox.Name = "BedRateTextBox";
             this.BedRateTextBox.ReadOnly = true;
-            this.BedRateTextBox.Size = new System.Drawing.Size(203, 20);
+            this.BedRateTextBox.Size = new System.Drawing.Size(115, 20);
             this.BedRateTextBox.TabIndex = 96;
+            this.BedRateTextBox.Text = "0";
+            this.BedRateTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.BedRateTextBox.TextChanged += new System.EventHandler(this.BedRateTextBox_TextChanged);
             // 
             // bedNumberMastBindingSource
@@ -479,29 +485,27 @@ namespace HMS.Forms.Transaction
             // 
             // bedNoComboBox
             // 
-            this.bedNoComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bedNumberMastBindingSource, "BedNumber", true));
             this.bedNoComboBox.DataSource = this.bedNumberMastBindingSource;
             this.bedNoComboBox.DisplayMember = "BedNumber";
             this.bedNoComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.bedNoComboBox.FormattingEnabled = true;
             this.bedNoComboBox.Location = new System.Drawing.Point(479, 114);
             this.bedNoComboBox.Name = "bedNoComboBox";
-            this.bedNoComboBox.Size = new System.Drawing.Size(203, 21);
-            this.bedNoComboBox.TabIndex = 95;
+            this.bedNoComboBox.Size = new System.Drawing.Size(114, 21);
+            this.bedNoComboBox.TabIndex = 6;
             this.bedNoComboBox.ValueMember = "BedNumber";
             this.bedNoComboBox.SelectedIndexChanged += new System.EventHandler(this.bedNoComboBox_SelectedIndexChanged);
             // 
             // bedTypeComboBox
             // 
-            this.bedTypeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bedTypeMastBindingSource, "BedType", true));
             this.bedTypeComboBox.DataSource = this.bedTypeMastBindingSource;
             this.bedTypeComboBox.DisplayMember = "BedType";
             this.bedTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.bedTypeComboBox.FormattingEnabled = true;
             this.bedTypeComboBox.Location = new System.Drawing.Point(479, 87);
             this.bedTypeComboBox.Name = "bedTypeComboBox";
-            this.bedTypeComboBox.Size = new System.Drawing.Size(203, 21);
-            this.bedTypeComboBox.TabIndex = 94;
+            this.bedTypeComboBox.Size = new System.Drawing.Size(114, 21);
+            this.bedTypeComboBox.TabIndex = 5;
             this.bedTypeComboBox.ValueMember = "BedType";
             this.bedTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.bedTypeComboBox_SelectedIndexChanged);
             // 
@@ -517,7 +521,7 @@ namespace HMS.Forms.Transaction
             this.PatientNametextBox.Name = "PatientNametextBox";
             this.PatientNametextBox.ReadOnly = true;
             this.PatientNametextBox.Size = new System.Drawing.Size(203, 20);
-            this.PatientNametextBox.TabIndex = 92;
+            this.PatientNametextBox.TabIndex = 2;
             // 
             // bedTypeMastTableAdapter
             // 
@@ -530,7 +534,6 @@ namespace HMS.Forms.Transaction
             // BedManagedataGridView
             // 
             this.BedManagedataGridView.AllowUserToAddRows = false;
-            this.BedManagedataGridView.AllowUserToDeleteRows = false;
             this.BedManagedataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.BedManagedataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
@@ -549,7 +552,7 @@ namespace HMS.Forms.Transaction
             this.BedManagedataGridView.Name = "BedManagedataGridView";
             this.BedManagedataGridView.ReadOnly = true;
             this.BedManagedataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.BedManagedataGridView.Size = new System.Drawing.Size(1055, 197);
+            this.BedManagedataGridView.Size = new System.Drawing.Size(874, 228);
             this.BedManagedataGridView.TabIndex = 5;
             this.BedManagedataGridView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.BedManagedataGridView_MouseDoubleClick);
             // 
@@ -624,10 +627,6 @@ namespace HMS.Forms.Transaction
             this.bedManagementBindingSource.DataMember = "BedManagement";
             this.bedManagementBindingSource.DataSource = this.hMSDataSet;
             // 
-            // bedManagementTableAdapter
-            // 
-            this.bedManagementTableAdapter.ClearBeforeFill = true;
-            // 
             // doctorDepartmentMastBindingSource
             // 
             this.doctorDepartmentMastBindingSource.DataMember = "DoctorDepartmentMast";
@@ -645,14 +644,18 @@ namespace HMS.Forms.Transaction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1055, 450);
+            this.ClientSize = new System.Drawing.Size(874, 481);
             this.Controls.Add(this.BedManagedataGridView);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "BedMangFrm";
             this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bed Management";
             this.Load += new System.EventHandler(this.BedMangFrm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BedMangFrm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dischargeBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hMSDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.patientMastBindingSource)).EndInit();
@@ -674,9 +677,6 @@ namespace HMS.Forms.Transaction
         #endregion
 
         private System.Windows.Forms.Button Savebutton;
-        private System.Windows.Forms.Button Updatebutton;
-        private System.Windows.Forms.Button Cancelbutton;
-        private System.Windows.Forms.Button Addbutton;
         private System.Windows.Forms.TextBox IPDSearchtextBox;
         private System.Windows.Forms.DateTimePicker AdmissiondateTimePicker;
         private System.Windows.Forms.BindingSource dischargeBindingSource;
@@ -705,7 +705,6 @@ namespace HMS.Forms.Transaction
         private System.Windows.Forms.TextBox DaystextBox;
         private System.Windows.Forms.DataGridView BedManagedataGridView;
         private System.Windows.Forms.BindingSource bedManagementBindingSource;
-        private HMSDataSetTableAdapters.BedManagementTableAdapter bedManagementTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn billPrintTextDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn IPD;
@@ -723,5 +722,7 @@ namespace HMS.Forms.Transaction
         private HMSDataSetTableAdapters.DoctorDepartmentMastTableAdapter doctorDepartmentMastTableAdapter;
         private System.Windows.Forms.BindingSource doctorMastBindingSource;
         private HMSDataSetTableAdapters.DoctorMastTableAdapter doctorMastTableAdapter;
+        private System.Windows.Forms.Button buttonIPD;
+        private System.Windows.Forms.Button buttonDel;
     }
 }

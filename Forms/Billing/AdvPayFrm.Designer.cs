@@ -36,15 +36,12 @@
             System.Windows.Forms.Label label1;
             System.Windows.Forms.Label PatidLabel;
             System.Windows.Forms.Label patIDLabel1;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdvPayFrm));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.patIDComboBox = new System.Windows.Forms.ComboBox();
-            this.iPDBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.hMSDataSet = new HMS.HMSDataSet();
+            this.buttonDel = new System.Windows.Forms.Button();
+            this.buttonIPD = new System.Windows.Forms.Button();
+            this.textBoxIPD = new System.Windows.Forms.TextBox();
             this.Savebutton = new System.Windows.Forms.Button();
-            this.Updatebutton = new System.Windows.Forms.Button();
-            this.Cancelbutton = new System.Windows.Forms.Button();
-            this.Addbutton = new System.Windows.Forms.Button();
-            this.Findbutton = new System.Windows.Forms.Button();
             this.PatNametextBox = new System.Windows.Forms.TextBox();
             this.PatientidTextBox = new System.Windows.Forms.TextBox();
             this.advAmtTextBox = new System.Windows.Forms.TextBox();
@@ -52,14 +49,13 @@
             this.printbutton = new System.Windows.Forms.Button();
             this.payModeComboBox = new System.Windows.Forms.ComboBox();
             this.idTextBox = new System.Windows.Forms.TextBox();
+            this.iPDBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.hMSDataSet = new HMS.HMSDataSet();
             this.iPDBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.patientMastBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.advanceBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.advanceTableAdapter = new HMS.HMSDataSetTableAdapters.AdvanceTableAdapter();
             this.tableAdapterManager = new HMS.HMSDataSetTableAdapters.TableAdapterManager();
             this.patientMastBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.patientMastTableAdapter = new HMS.HMSDataSetTableAdapters.PatientMastTableAdapter();
-            this.iPDTableAdapter = new HMS.HMSDataSetTableAdapters.IPDTableAdapter();
             this.advanceDataGridView = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PayDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,7 +63,7 @@
             this.Patient = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AdvAmt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PayMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PatID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IPD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             idLabel = new System.Windows.Forms.Label();
             payModeLabel = new System.Windows.Forms.Label();
             payDateLabel = new System.Windows.Forms.Label();
@@ -124,7 +120,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(17, 131);
+            label1.Location = new System.Drawing.Point(324, 131);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(74, 13);
             label1.TabIndex = 45;
@@ -133,7 +129,7 @@
             // PatidLabel
             // 
             PatidLabel.AutoSize = true;
-            PatidLabel.Location = new System.Drawing.Point(46, 102);
+            PatidLabel.Location = new System.Drawing.Point(353, 102);
             PatidLabel.Name = "PatidLabel";
             PatidLabel.Size = new System.Drawing.Size(55, 13);
             PatidLabel.TabIndex = 42;
@@ -142,7 +138,7 @@
             // patIDLabel1
             // 
             patIDLabel1.AutoSize = true;
-            patIDLabel1.Location = new System.Drawing.Point(368, 105);
+            patIDLabel1.Location = new System.Drawing.Point(61, 102);
             patIDLabel1.Name = "patIDLabel1";
             patIDLabel1.Size = new System.Drawing.Size(28, 13);
             patIDLabel1.TabIndex = 46;
@@ -150,13 +146,11 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.patIDComboBox);
+            this.panel1.Controls.Add(this.buttonDel);
+            this.panel1.Controls.Add(this.buttonIPD);
+            this.panel1.Controls.Add(this.textBoxIPD);
             this.panel1.Controls.Add(this.Savebutton);
-            this.panel1.Controls.Add(this.Updatebutton);
-            this.panel1.Controls.Add(this.Cancelbutton);
-            this.panel1.Controls.Add(this.Addbutton);
             this.panel1.Controls.Add(patIDLabel1);
-            this.panel1.Controls.Add(this.Findbutton);
             this.panel1.Controls.Add(label1);
             this.panel1.Controls.Add(this.PatNametextBox);
             this.panel1.Controls.Add(PatidLabel);
@@ -175,29 +169,35 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(838, 168);
             this.panel1.TabIndex = 1;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // patIDComboBox
+            // buttonDel
             // 
-            this.patIDComboBox.DataSource = this.iPDBindingSource1;
-            this.patIDComboBox.DisplayMember = "Id";
-            this.patIDComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.patIDComboBox.FormattingEnabled = true;
-            this.patIDComboBox.Location = new System.Drawing.Point(414, 101);
-            this.patIDComboBox.Name = "patIDComboBox";
-            this.patIDComboBox.Size = new System.Drawing.Size(203, 21);
-            this.patIDComboBox.TabIndex = 52;
-            this.patIDComboBox.ValueMember = "Id";
-            this.patIDComboBox.SelectedIndexChanged += new System.EventHandler(this.patIDComboBox_SelectedIndexChanged);
+            this.buttonDel.Location = new System.Drawing.Point(387, 14);
+            this.buttonDel.Name = "buttonDel";
+            this.buttonDel.Size = new System.Drawing.Size(75, 23);
+            this.buttonDel.TabIndex = 55;
+            this.buttonDel.Text = "Delete";
+            this.buttonDel.UseVisualStyleBackColor = true;
+            this.buttonDel.Click += new System.EventHandler(this.buttonDel_Click);
             // 
-            // iPDBindingSource1
+            // buttonIPD
             // 
-            this.iPDBindingSource1.DataMember = "IPD";
-            this.iPDBindingSource1.DataSource = this.hMSDataSet;
+            this.buttonIPD.Location = new System.Drawing.Point(751, 14);
+            this.buttonIPD.Name = "buttonIPD";
+            this.buttonIPD.Size = new System.Drawing.Size(75, 23);
+            this.buttonIPD.TabIndex = 54;
+            this.buttonIPD.Text = "IPD";
+            this.buttonIPD.UseVisualStyleBackColor = true;
+            this.buttonIPD.Click += new System.EventHandler(this.buttonIPD_Click);
             // 
-            // hMSDataSet
+            // textBoxIPD
             // 
-            this.hMSDataSet.DataSetName = "HMSDataSet";
-            this.hMSDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.textBoxIPD.Location = new System.Drawing.Point(107, 99);
+            this.textBoxIPD.Name = "textBoxIPD";
+            this.textBoxIPD.Size = new System.Drawing.Size(203, 20);
+            this.textBoxIPD.TabIndex = 53;
+            this.textBoxIPD.TextChanged += new System.EventHandler(this.textBoxIPD_TextChanged);
             // 
             // Savebutton
             // 
@@ -209,49 +209,9 @@
             this.Savebutton.UseVisualStyleBackColor = true;
             this.Savebutton.Click += new System.EventHandler(this.Savebutton_Click);
             // 
-            // Updatebutton
-            // 
-            this.Updatebutton.Location = new System.Drawing.Point(238, 14);
-            this.Updatebutton.Name = "Updatebutton";
-            this.Updatebutton.Size = new System.Drawing.Size(75, 23);
-            this.Updatebutton.TabIndex = 50;
-            this.Updatebutton.Text = "Update";
-            this.Updatebutton.UseVisualStyleBackColor = true;
-            this.Updatebutton.Click += new System.EventHandler(this.Updatebutton_Click);
-            // 
-            // Cancelbutton
-            // 
-            this.Cancelbutton.Location = new System.Drawing.Point(333, 14);
-            this.Cancelbutton.Name = "Cancelbutton";
-            this.Cancelbutton.Size = new System.Drawing.Size(75, 23);
-            this.Cancelbutton.TabIndex = 49;
-            this.Cancelbutton.Text = "Cancel";
-            this.Cancelbutton.UseVisualStyleBackColor = true;
-            this.Cancelbutton.Click += new System.EventHandler(this.Cancelbutton_Click);
-            // 
-            // Addbutton
-            // 
-            this.Addbutton.Location = new System.Drawing.Point(33, 14);
-            this.Addbutton.Name = "Addbutton";
-            this.Addbutton.Size = new System.Drawing.Size(75, 23);
-            this.Addbutton.TabIndex = 48;
-            this.Addbutton.Text = "Add";
-            this.Addbutton.UseVisualStyleBackColor = true;
-            this.Addbutton.Click += new System.EventHandler(this.Addbutton_Click);
-            // 
-            // Findbutton
-            // 
-            this.Findbutton.Location = new System.Drawing.Point(289, 99);
-            this.Findbutton.Name = "Findbutton";
-            this.Findbutton.Size = new System.Drawing.Size(20, 23);
-            this.Findbutton.TabIndex = 46;
-            this.Findbutton.Text = "🔎";
-            this.Findbutton.UseVisualStyleBackColor = true;
-            this.Findbutton.Click += new System.EventHandler(this.Findbutton_Click);
-            // 
             // PatNametextBox
             // 
-            this.PatNametextBox.Location = new System.Drawing.Point(106, 128);
+            this.PatNametextBox.Location = new System.Drawing.Point(413, 128);
             this.PatNametextBox.Name = "PatNametextBox";
             this.PatNametextBox.ReadOnly = true;
             this.PatNametextBox.Size = new System.Drawing.Size(203, 20);
@@ -259,9 +219,10 @@
             // 
             // PatientidTextBox
             // 
-            this.PatientidTextBox.Location = new System.Drawing.Point(107, 99);
+            this.PatientidTextBox.Location = new System.Drawing.Point(414, 99);
             this.PatientidTextBox.Name = "PatientidTextBox";
-            this.PatientidTextBox.Size = new System.Drawing.Size(176, 20);
+            this.PatientidTextBox.ReadOnly = true;
+            this.PatientidTextBox.Size = new System.Drawing.Size(202, 20);
             this.PatientidTextBox.TabIndex = 43;
             // 
             // advAmtTextBox
@@ -283,7 +244,7 @@
             // 
             // printbutton
             // 
-            this.printbutton.Location = new System.Drawing.Point(438, 14);
+            this.printbutton.Location = new System.Drawing.Point(267, 14);
             this.printbutton.Name = "printbutton";
             this.printbutton.Size = new System.Drawing.Size(75, 23);
             this.printbutton.TabIndex = 9;
@@ -296,11 +257,11 @@
             this.payModeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.payModeComboBox.FormattingEnabled = true;
             this.payModeComboBox.Items.AddRange(new object[] {
-            "-SELECT-",
             "UPI",
             "Cash",
             "Card",
-            "Bank Transfer"});
+            "Bank Transfer",
+            "Cheque"});
             this.payModeComboBox.Location = new System.Drawing.Point(414, 72);
             this.payModeComboBox.Name = "payModeComboBox";
             this.payModeComboBox.Size = new System.Drawing.Size(203, 21);
@@ -314,6 +275,16 @@
             this.idTextBox.Size = new System.Drawing.Size(203, 20);
             this.idTextBox.TabIndex = 1;
             // 
+            // iPDBindingSource1
+            // 
+            this.iPDBindingSource1.DataMember = "IPD";
+            this.iPDBindingSource1.DataSource = this.hMSDataSet;
+            // 
+            // hMSDataSet
+            // 
+            this.hMSDataSet.DataSetName = "HMSDataSet";
+            this.hMSDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // iPDBindingSource
             // 
             this.iPDBindingSource.DataMember = "IPD";
@@ -324,45 +295,41 @@
             this.advanceBindingSource.DataMember = "Advance";
             this.advanceBindingSource.DataSource = this.hMSDataSet;
             // 
-            // advanceTableAdapter
-            // 
-            this.advanceTableAdapter.ClearBeforeFill = true;
-            // 
             // tableAdapterManager
             // 
-            this.tableAdapterManager.AdvanceTableAdapter = this.advanceTableAdapter;
+            this.tableAdapterManager.AdvanceTableAdapter = null;
             this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
             this.tableAdapterManager.BedManagementTableAdapter = null;
             this.tableAdapterManager.BedNumberMastTableAdapter = null;
             this.tableAdapterManager.BedTypeMastTableAdapter = null;
             this.tableAdapterManager.BloodGroupMastTableAdapter = null;
+            this.tableAdapterManager.Connection = null;
+            this.tableAdapterManager.DischargeLinTableAdapter = null;
             this.tableAdapterManager.DischargeTableAdapter = null;
+            this.tableAdapterManager.DisposableIssHdrTableAdapter = null;
+            this.tableAdapterManager.DisposableIssLinTableAdapter = null;
             this.tableAdapterManager.DoctorDepartmentMastTableAdapter = null;
             this.tableAdapterManager.DoctorMastTableAdapter = null;
-//            this.tableAdapterManager.FinalBillBedTableAdapter = null;
             this.tableAdapterManager.FinalBillHdrTableAdapter = null;
-//            this.tableAdapterManager.FinalBillOtherAmountTableAdapter = null;
-//            this.tableAdapterManager.FinalBillTableAdapter = null;
+            this.tableAdapterManager.FinalBillOtherAmountTableAdapter = null;
+            this.tableAdapterManager.GRNHdrTableAdapter = null;
+            this.tableAdapterManager.GRNLinTableAdapter = null;
             this.tableAdapterManager.IPDTableAdapter = null;
+            this.tableAdapterManager.ItCatMastTableAdapter = null;
+            this.tableAdapterManager.ItMastTableAdapter = null;
             this.tableAdapterManager.OPDTableAdapter = null;
             this.tableAdapterManager.PatientMastTableAdapter = null;
             this.tableAdapterManager.PrescriptionTableAdapter = null;
             this.tableAdapterManager.PresMedTableAdapter = null;
+            this.tableAdapterManager.SuppMastTableAdapter = null;
             this.tableAdapterManager.TaxMastTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = HMS.HMSDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            this.tableAdapterManager.UsersTableAdapter = null;
             // 
             // patientMastBindingSource1
             // 
             this.patientMastBindingSource1.DataMember = "PatientMast";
             this.patientMastBindingSource1.DataSource = this.hMSDataSet;
-            // 
-            // patientMastTableAdapter
-            // 
-            this.patientMastTableAdapter.ClearBeforeFill = true;
-            // 
-            // iPDTableAdapter
-            // 
-            this.iPDTableAdapter.ClearBeforeFill = true;
             // 
             // advanceDataGridView
             // 
@@ -377,7 +344,7 @@
             this.Patient,
             this.AdvAmt,
             this.PayMode,
-            this.PatID});
+            this.IPD});
             this.advanceDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.advanceDataGridView.Location = new System.Drawing.Point(0, 168);
             this.advanceDataGridView.Name = "advanceDataGridView";
@@ -424,11 +391,11 @@
             this.PayMode.Name = "PayMode";
             this.PayMode.ReadOnly = true;
             // 
-            // PatID
+            // IPD
             // 
-            this.PatID.HeaderText = "PatID";
-            this.PatID.Name = "PatID";
-            this.PatID.ReadOnly = true;
+            this.IPD.HeaderText = "IPD";
+            this.IPD.Name = "IPD";
+            this.IPD.ReadOnly = true;
             // 
             // AdvPayFrm
             // 
@@ -437,8 +404,10 @@
             this.ClientSize = new System.Drawing.Size(838, 467);
             this.Controls.Add(this.advanceDataGridView);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AdvPayFrm";
             this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Advance Payment";
             this.Load += new System.EventHandler(this.AdvPayFrm_Load);
@@ -459,35 +428,30 @@
 
         private HMSDataSet hMSDataSet;
         private System.Windows.Forms.BindingSource advanceBindingSource;
-        private HMSDataSetTableAdapters.AdvanceTableAdapter advanceTableAdapter;
         private HMSDataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox idTextBox;
         private System.Windows.Forms.ComboBox payModeComboBox;
         private System.Windows.Forms.BindingSource patientMastBindingSource;
-        private HMSDataSetTableAdapters.PatientMastTableAdapter patientMastTableAdapter;
         private System.Windows.Forms.DateTimePicker AdvpayDateDateTimePicker;
         private System.Windows.Forms.BindingSource patientMastBindingSource1;
         private System.Windows.Forms.TextBox advAmtTextBox;
         private System.Windows.Forms.BindingSource iPDBindingSource;
-        private HMSDataSetTableAdapters.IPDTableAdapter iPDTableAdapter;
-        private System.Windows.Forms.Button Findbutton;
         private System.Windows.Forms.TextBox PatNametextBox;
         private System.Windows.Forms.TextBox PatientidTextBox;
         private System.Windows.Forms.Button Savebutton;
-        private System.Windows.Forms.Button Updatebutton;
-        private System.Windows.Forms.Button Cancelbutton;
-        private System.Windows.Forms.Button Addbutton;
         private System.Windows.Forms.Button printbutton;
-        private System.Windows.Forms.ComboBox patIDComboBox;
         private System.Windows.Forms.DataGridView advanceDataGridView;
+        private System.Windows.Forms.BindingSource iPDBindingSource1;
+        private System.Windows.Forms.TextBox textBoxIPD;
+        private System.Windows.Forms.Button buttonIPD;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn PayDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn PatientID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Patient;
         private System.Windows.Forms.DataGridViewTextBoxColumn AdvAmt;
         private System.Windows.Forms.DataGridViewTextBoxColumn PayMode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PatID;
-        private System.Windows.Forms.BindingSource iPDBindingSource1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IPD;
+        private System.Windows.Forms.Button buttonDel;
     }
 }

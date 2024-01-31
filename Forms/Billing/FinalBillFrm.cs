@@ -16,6 +16,10 @@ using HMS.Reports;
 using System.Configuration;
 using CrystalDecisions.Windows.Forms;
 using GridMvc;
+using System.Web.UI.WebControls;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Collections;
+using HMS.Forms.Transaction.IPD;
 
 namespace HMS.Forms.Billing
 {
@@ -25,7 +29,6 @@ namespace HMS.Forms.Billing
 
         string connectionString = ConfigurationManager.ConnectionStrings["HMS.Properties.Settings.HMSConnectionString"].ConnectionString;
 
-       // SqlConnection con = new SqlConnection(@"Data Source=.;Initial Catalog=HMS;Integrated Security=True");
         private DataTable dt = new DataTable();
         public CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer1;
 
@@ -36,50 +39,54 @@ namespace HMS.Forms.Billing
            
         }      
 
-        private void Findbutton_Click(object sender, EventArgs e)
-        {
-            using (SqlConnection con = new SqlConnection(connectionString))
-            //using (SqlConnection connection = new SqlConnection("Data Source=.;Initial Catalog=HMS;Integrated Security=True"))
-            {
-
-                con.Open();
-
-                string PID = PatientidTextBox.Text;
-                string patName = PatNametextBox.Text;
-
-                string query = "SELECT PatName FROM PatientMast WHERE id  = " + PID;
-                SqlCommand cmd = new SqlCommand(query, con);
-
-                var reader = cmd.ExecuteReader();
-
-                if (reader.Read())
-                {
-                    PatNametextBox.Text = reader["PatName"].ToString();
-                }
-                else
-                    MessageBox.Show("No Patient Found");
-
-
-                con.Close();
-
-
-            }  
-        }
+        
 
         private void FinalBillFrm_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'hMSDataSet.BedManagement' table. You can move, or remove it, as needed.
             this.bedManagementTableAdapter.Fill(this.hMSDataSet.BedManagement);
             // TODO: This line of code loads data into the 'hMSDataSet.TaxMast' table. You can move, or remove it, as needed.
-            this.taxMastTableAdapter.Fill(this.hMSDataSet.TaxMast);
+            //this.taxMastTableAdapter.Fill(this.hMSDataSet.TaxMast);
             // TODO: This line of code loads data into the 'hMSDataSet.TaxMast' table. You can move, or remove it, as needed.
-         //   this.taxMastTableAdapter.Fill(this.hMSDataSet.TaxMast);
+            //   this.taxMastTableAdapter.Fill(this.hMSDataSet.TaxMast);
             // TODO: This line of code loads data into the 'hMSDataSet.IPD' table. You can move, or remove it, as needed.
-            this.iPDTableAdapter.Fill(this.hMSDataSet.IPD);
+            // this.iPDTableAdapter.Fill(this.hMSDataSet.IPD);
+            // Display TaxName data in the taxNameComboBox
+            DisplayTaxNames();
             Display();
 
         }
 
+        private void DisplayTaxNames()
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // Assuming TaxMast table has a column named TaxName
+                    string query = "SELECT TaxName FROM TaxMast";
+
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        SqlDataReader reader = cmd.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            string taxName = reader["TaxName"].ToString();
+                            taxNameComboBox.Items.Add(taxName);
+                        }
+
+                        reader.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
 
 
         private void bedManagementDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -90,63 +97,81 @@ namespace HMS.Forms.Billing
         private void IPDSearchtextBox_TextChanged(object sender, EventArgs e)
         {
             
-                string searchText = IPDSearchtextBox.Text;
+            string searchText = IPDSearchtextBox.Text;
 
             using (SqlConnection con = new SqlConnection(connectionString))
-            //using (SqlConnection connection = new SqlConnection("Data Source=.;Initial Catalog=HMS;Integrated Security=True"))
+            
             {
-                string query = @"SELECT PatientMast.PatGender, IPD.Age, IPD.GarName, PatientMast.PatAddress1, 
-                         PatientMast.PatAddress2, PatientMast.PatCity, PatientMast.PatPIN, 
-                         PatientMast.PatUnderDr, PatientMast.PatRefferedBy, IPD.AdmissionDate, 
-                         Discharge.DischargeDate
-                         FROM IPD
-                         INNER JOIN PatientMast ON IPD.PatID = PatientMast.Id
-                         LEFT JOIN Discharge ON IPD.Id = Discharge.IPD
-                         WHERE IPD.Id = @searchText";
+                string query = @"SELECT PatientMast.Id as PatientId, PatientMast.PatGender, IPD.Age, IPD.GarName, PatientMast.PatAddress1, 
+                 PatientMast.PatAddress2, PatientMast.PatCity, PatientMast.PatPIN, 
+                 PatientMast.PatUnderDr, PatientMast.PatRefferedBy, IPD.AdmissionDate, 
+                 Discharge.DischargeDate, PatientMast.PatBalAmt, IPD.Patient, IPD.DispTotal
+                 FROM IPD
+                 INNER JOIN PatientMast ON IPD.PatID = PatientMast.Id
+                 LEFT JOIN Discharge ON IPD.Id = Discharge.IPD
+                 WHERE IPD.Id = @searchText";
 
-                    using (SqlCommand command = new SqlCommand(query, con))
+                
+
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@searchText", searchText);
+
+                    try
                     {
-                        command.Parameters.AddWithValue("@searchText", searchText);
+                        con.Open();
 
-                        try
+                        SqlDataReader reader = command.ExecuteReader();
+
+                        if (reader.Read())
                         {
-                            con.Open();
+                            PatGendertextBox.Text = reader["PatGender"].ToString();
+                            PatAgetextBox.Text = reader["Age"].ToString();
+                            GarNametextBox.Text = reader["GarName"].ToString();
+                            Address1textBox.Text = reader["PatAddress1"].ToString();
+                            Address2textBox.Text = reader["PatAddress2"].ToString();
+                            CitytextBox.Text = reader["PatCity"].ToString();
+                            PINtextBox.Text = reader["PatPIN"].ToString();
+                            UnderDrtextBox.Text = reader["PatUnderDr"].ToString();
+                            RefDrtextBox.Text = reader["PatRefferedBy"].ToString();
+                            AdvanceAmttextBox.Text = reader["PatBalAmt"].ToString();
+                            PatNametextBox.Text = reader["Patient"].ToString();
+                            PatientidTextBox.Text = reader["PatientId"].ToString();
+                            textBoxDissposableAmt.Text = reader["DispTotal"].ToString();
 
-                            SqlDataReader reader = command.ExecuteReader();
 
-                            if (reader.Read())
+                        if (reader["AdmissionDate"] != DBNull.Value)
                             {
-                                PatGendertextBox.Text = reader["PatGender"].ToString();
-                                PatAgetextBox.Text = reader["Age"].ToString();
-                                GarNametextBox.Text = reader["GarName"].ToString();
-                                Address1textBox.Text = reader["PatAddress1"].ToString();
-                                Address2textBox.Text = reader["PatAddress2"].ToString();
-                                CitytextBox.Text = reader["PatCity"].ToString();
-                                PINtextBox.Text = reader["PatPIN"].ToString();
-                                UnderDrtextBox.Text = reader["PatUnderDr"].ToString();
-                                RefDrtextBox.Text = reader["PatRefferedBy"].ToString();
-
-                                if (reader["AdmissionDate"] != DBNull.Value)
-                                {
-                                    AdmissiondateTimePicker.Value = Convert.ToDateTime(reader["AdmissionDate"]);
-                                }
-
-                                if (reader["DischargeDate"] != DBNull.Value)
-                                {
-                                    DischargedateTimePicker.Value = Convert.ToDateTime(reader["DischargeDate"]);
-                                }
-                                else
-                                {
-                                    DischargedateTimePicker.Value = DateTime.MinValue;
-                                }
+                                AdmissiondateTimePicker.Value = Convert.ToDateTime(reader["AdmissionDate"]);
                             }
 
-                            reader.Close();
+                            if (reader["DischargeDate"] != DBNull.Value)
+                            {
+                                DischargedateTimePicker.Value = Convert.ToDateTime(reader["DischargeDate"]);
+                            }
+                            else
+                            {
+                                DischargedateTimePicker.Value = DateTime.Now;
+                            }
+                        }
 
-                            // Now, let's update the BedManagementDataGridView
+                        reader.Close();
 
-                            string bedManagementQuery = $"SELECT * FROM BedManagement WHERE IPD = '{searchText}'";
-                            SqlDataAdapter adapter = new SqlDataAdapter(bedManagementQuery, con);
+                        
+
+
+                        string ipdSearchValue = IPDSearchtextBox.Text;
+
+                        // Use parameterized query to prevent SQL injection
+                        string bedManagementQuery = "SELECT * FROM BedManagement WHERE IPD = @ipdSearchValue";
+                        
+
+                        // Use using statement for IDisposable objects like SqlDataAdapter
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(bedManagementQuery, con))
+                        {
+                            // Use SqlParameter to avoid SQL injection and improve security
+                            adapter.SelectCommand.Parameters.AddWithValue("@ipdSearchValue", ipdSearchValue);
+
                             DataTable dataTable = new DataTable();
                             adapter.Fill(dataTable);
 
@@ -164,21 +189,50 @@ namespace HMS.Forms.Billing
                             }
 
                             BedAmtTextBox.Text = totalBedAmount.ToString(); // Assuming BedAmount is a currency field
+                            
                         }
-                        catch (Exception ex)
+
+                        // Fetch Advance Ids from Advance table based on PatID
+                        string advanceQuery = "SELECT Id FROM Advance WHERE PatID = @patId";
+                        using (SqlCommand advanceCommand = new SqlCommand(advanceQuery, con))
                         {
-                            MessageBox.Show("Error: " + ex.Message);
+                            advanceCommand.Parameters.AddWithValue("@patId", ipdSearchValue);
+
+                            SqlDataReader advanceReader = advanceCommand.ExecuteReader();
+
+                            List<string> advanceIdsList = new List<string>();
+
+                            while (advanceReader.Read())
+                            {
+                                advanceIdsList.Add(advanceReader["Id"].ToString());
+                            }
+
+                            advanceReader.Close();
+
+                            // Concatenate Advance Ids with comma separator
+                            string advanceIdsString = string.Join(", ", advanceIdsList);
+
+                            // Display the result in textBoxAdvIds
+                            textBoxAdvIds.Text = advanceIdsString;
                         }
+
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message);
                     }
                 }
 
-
+                
+            }
 
         }
 
+
         private void BedAmtTextBox_TextChanged(object sender, EventArgs e)
         {
-            //UpdateTotalAmount();
+            UpdateDTotalAmount();
         }
 
         private void bedManagementDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
@@ -193,23 +247,85 @@ namespace HMS.Forms.Billing
 
         private void OtherItemsdataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            // UpdateTotalAmount();
-            if (OtherItemsdataGridView.Columns["Amount"] != null && e.ColumnIndex == OtherItemsdataGridView.Columns["Amount"].Index)
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0) // Ensure the cell changed is within the grid
             {
-                CalculateTotalAmount();
+                if (OtherItemsdataGridView.Columns[e.ColumnIndex].Name == "FBOItemsAmt")
+                {
+                    decimal total = 0;
+
+                    foreach (DataGridViewRow row in OtherItemsdataGridView.Rows)
+                    {
+                        if (row.Cells["FBOItemsAmt"].Value != null && !string.IsNullOrEmpty(row.Cells["FBOItemsAmt"].Value.ToString()))
+                        {
+                            decimal value = 0;
+                            if (decimal.TryParse(row.Cells["FBOItemsAmt"].Value.ToString(), out value))
+                            {
+                                total += value;
+                            }
+                        }
+                    }
+
+                    OtherAmttextBox.Text = total.ToString();
+
+                    // Assuming idTextBox is a TextBox control on your form
+                    string billNoValue = idTextBox.Text;
+
+                    // Assuming dataGridViewDocChrg is the name of your DataGridView
+                    if (!string.IsNullOrEmpty(billNoValue) && dataGridViewDocChrg.Columns["FBOItemsTID"] != null)
+                    {
+                        // Choose the row index you want to update
+                        int targetRowIndex = 0; // Change this to the desired row index
+
+                        // Check if the target row index is within the valid range
+                        if (targetRowIndex >= 0 && targetRowIndex < dataGridViewDocChrg.Rows.Count)
+                        {
+                            // Set the value of "FBOItemsTID" column in the specified row
+                            dataGridViewDocChrg.Rows[targetRowIndex].Cells["FBOItemsTID"].Value = billNoValue;
+                        }
+                        else
+                        {
+                            // Handle the case where the target row index is out of range
+                            MessageBox.Show("Invalid row index in dataGridViewDocChrg.");
+                        }
+                    }
+
+                }
             }
         }
+
+
+
 
 
 
         private void OtherItemsdataGridView_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
             UpdateTotalAmt();
+            UpdateReceivablesAmt();
         }
 
         private void OtherAmttextBox_TextChanged(object sender, EventArgs e)
         {
             UpdateTotalAmt();
+            UpdateReceivablesAmt();
+            UpdateDTotalAmount();
+        }
+
+        private void UpdateDTotalAmount()
+        {
+            // Parse values from BedAmtTextBox and OtherAmttextBox
+            if (decimal.TryParse(BedAmtTextBox.Text, out decimal bedAmount) &&
+                decimal.TryParse(OtherAmttextBox.Text, out decimal otherAmount))
+            {
+                // Calculate the sum and display it in DetailTotalAmttextBox
+                decimal totalAmount = bedAmount + otherAmount;
+                DetailTotalAmttextBox.Text = totalAmount.ToString(); // Assuming the amounts are in currency format
+            }
+            else
+            {
+                // Handle the case where parsing fails or one of the values is not a valid decimal
+                DetailTotalAmttextBox.Text = "0";
+            }
         }
 
         private void UpdateTotalAmt()
@@ -227,7 +343,7 @@ namespace HMS.Forms.Billing
             else
             {
                 // Handle invalid input if needed
-                DetailTotalAmttextBox.Text = "Invalid input";
+                DetailTotalAmttextBox.Text = "0";
             }
         }
 
@@ -261,13 +377,13 @@ namespace HMS.Forms.Billing
                 else
                 {
                     // Handle invalid total amount if needed
-                    TaxAmttextBox.Text = "Invalid total amount";
+                    TaxAmttextBox.Text = "0";
                 }
             }
             else
             {
                 // Handle invalid percentage rate if needed
-                TaxAmttextBox.Text = "Invalid percentage rate";
+                TaxAmttextBox.Text = "0";
             }
 
         }
@@ -289,14 +405,14 @@ namespace HMS.Forms.Billing
             else
             {
                 // Handle invalid input if needed
-                TotAmttextBox.Text = "Invalid input";
+                TotAmttextBox.Text = "0";
             }
         }
 
         private void TotAmttextBox_TextChanged(object sender, EventArgs e)
         {
             UpdateTotAmt();
-            //   UpdateReceivablesAmt();
+            UpdateReceivablesAmt();
         }
 
         private void ConcessionAmttextBox_TextChanged(object sender, EventArgs e)
@@ -331,10 +447,11 @@ namespace HMS.Forms.Billing
             if (decimal.TryParse(DocFeesAmttextBox.Text, out decimal docFeesAmount) &&
                 decimal.TryParse(MedicinesAmttextBox.Text, out decimal medicinesAmount) &&
                 decimal.TryParse(BloodAmttextBox.Text, out decimal bloodAmount) &&
-                decimal.TryParse(OthrChrgAmtstextBox.Text, out decimal otherChargesAmount))
+                decimal.TryParse(OthrChrgAmtstextBox.Text, out decimal otherChargesAmount) &&
+                decimal.TryParse(textBoxDissposableAmt.Text, out decimal DissposableAmount))
             {
                 // Calculate chargeable amount by summing all charges
-                decimal chargeableAmount = docFeesAmount + medicinesAmount + bloodAmount + otherChargesAmount;
+                decimal chargeableAmount = docFeesAmount + medicinesAmount + bloodAmount + otherChargesAmount + DissposableAmount;
 
                 // Display the chargeable amount in ChargeableAmttextBox
                 ChargeableAmttextBox.Text = chargeableAmount.ToString();
@@ -342,55 +459,10 @@ namespace HMS.Forms.Billing
             else
             {
                 // Handle invalid input if needed
-                ChargeableAmttextBox.Text = "Invalid input";
+                ChargeableAmttextBox.Text = "0";
             }
         }
-
-        private void UpdateAdvanceAmount(string patID)
-        {
-            // Perform database operations to retrieve the sum of AdvAmt for the specified PatID
-            if (!string.IsNullOrEmpty(patID))
-            {
-                // Assuming conn is your SqlConnection object
-                using (SqlConnection con = new SqlConnection(connectionString))
-                //using (SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=HMS;Integrated Security=True"))
-                {
-                    string query = "SELECT SUM(AdvAmt) FROM Advance WHERE PatID = @PatID";
-
-                    using (SqlCommand cmd = new SqlCommand(query, con))
-                    {
-                        cmd.Parameters.AddWithValue("@PatID", patID);
-
-                        try
-                        {
-                            con.Open();
-                            object result = cmd.ExecuteScalar();
-                            if (result != DBNull.Value)
-                            {
-                                decimal advanceAmount = Convert.ToDecimal(result);
-
-                                // Display the sum of AdvAmt in AdvanceAmttextBox
-                                AdvanceAmttextBox.Text = advanceAmount.ToString();
-                            }
-                            else
-                            {
-                                // Handle case where no records are found for the provided PatID
-                                AdvanceAmttextBox.Text = "No advance found";
-                            }
-                        }
-                        catch (SqlException ex)
-                        {
-                            // Handle any SQL exceptions here
-                            AdvanceAmttextBox.Text = "SQL Error: " + ex.Message;
-                        }
-                        finally
-                        {
-                            con.Close();
-                        }
-                    }
-                }
-            }
-        }
+       
 
         private void ChargeableAmttextBox_TextChanged(object sender, EventArgs e)
         {
@@ -418,15 +490,15 @@ namespace HMS.Forms.Billing
             else
             {
                 // Handle invalid input if needed
-                ReceivablesAmttextBox.Text = "Invalid input";
+                ReceivablesAmttextBox.Text = "0";
             }
         }
 
         private void Savebutton_Click(object sender, EventArgs e)
         {
-
+            idTextBox.ReadOnly = false;
             using (SqlConnection con = new SqlConnection(connectionString))
-            //using (SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=HMS;Integrated Security=True"))
+           
             {
                 try
                 {
@@ -448,7 +520,7 @@ namespace HMS.Forms.Billing
                                                     "Blood = @Blood, OtherCharges = @OtherCharges, AdvanceReceived = @AdvanceReceived, " +
                                                     "TotalReceivable = @TotalReceivable, PatientID = @PatientID, PatientName = @PatientName, " +
                                                     "PayMode = @PayMode, BedTAmt = @BedTAmt, OtherTAmt = @OtherTAmt, TaxName = @TaxName, " +
-                                                    "DtlTAmt = @DtlTAmt, TotalAmt = @TotalAmt, ChargableAmt = @ChargableAmt " +
+                                                    "DtlTAmt = @DtlTAmt, TotalAmt = @TotalAmt, ChargableAmt = @ChargableAmt, DissposableAmt = @DissposableAmt " +
                                                     "WHERE Id = @Id";
 
                             using (SqlCommand updateCmd = new SqlCommand(updateQuerya, con))
@@ -475,6 +547,7 @@ namespace HMS.Forms.Billing
                                 updateCmd.Parameters.AddWithValue("@DtlTAmt", DetailTotalAmttextBox.Text);
                                 updateCmd.Parameters.AddWithValue("@TotalAmt", TotAmttextBox.Text);
                                 updateCmd.Parameters.AddWithValue("@ChargableAmt", ChargeableAmttextBox.Text);
+                                updateCmd.Parameters.AddWithValue("@DissposableAmt", textBoxDissposableAmt.Text);
                                 // Add other parameters...
 
                                 updateCmd.ExecuteNonQuery();
@@ -483,8 +556,8 @@ namespace HMS.Forms.Billing
                         else
                         {
                             // Insert a new record
-                            using (SqlCommand cmdHeader = new SqlCommand("INSERT INTO FinalBillHdr (Id, IPD, BillDate, TaxRate, TaxAmt, Concession, DrFees, Medicine, Blood, OtherCharges, AdvanceReceived, TotalReceivable, PatientID, PatientName, PayMode, BedTAmt, OtherTAmt, TaxName, DtlTAmt, TotalAmt, ChargableAmt) " +
-                                "VALUES (@Id, @IPD, @BillDate, @TaxRate, @TaxAmt, @Concession, @DrFees, @Medicine, @Blood, @OtherCharges, @AdvanceReceived, @TotalReceivable, @PatientID, @PatientName, @PayMode, @BedTAmt, @OtherTAmt, @TaxName, @DtlTAmt, @TotalAmt, @ChargableAmt)", con))
+                            using (SqlCommand cmdHeader = new SqlCommand("INSERT INTO FinalBillHdr (Id, IPD, BillDate, TaxRate, TaxAmt, Concession, DrFees, Medicine, Blood, OtherCharges, AdvanceReceived, TotalReceivable, PatientID, PatientName, PayMode, BedTAmt, OtherTAmt, TaxName, DtlTAmt, TotalAmt, ChargableAmt, DissposableAmt) " +
+                                "VALUES (@Id, @IPD, @BillDate, @TaxRate, @TaxAmt, @Concession, @DrFees, @Medicine, @Blood, @OtherCharges, @AdvanceReceived, @TotalReceivable, @PatientID, @PatientName, @PayMode, @BedTAmt, @OtherTAmt, @TaxName, @DtlTAmt, @TotalAmt, @ChargableAmt, DissposableAmt)", con))
                             {
                                 // Add parameters with appropriate types
                                 cmdHeader.Parameters.AddWithValue("@Id", idTextBox.Text);
@@ -508,6 +581,7 @@ namespace HMS.Forms.Billing
                                 cmdHeader.Parameters.AddWithValue("@DtlTAmt", DetailTotalAmttextBox.Text);
                                 cmdHeader.Parameters.AddWithValue("@TotalAmt", TotAmttextBox.Text);
                                 cmdHeader.Parameters.AddWithValue("@ChargableAmt", ChargeableAmttextBox.Text);
+                                cmdHeader.Parameters.AddWithValue("@DissposableAmt", textBoxDissposableAmt.Text);
                                 // Add other parameters...
 
                                 cmdHeader.ExecuteNonQuery();
@@ -515,18 +589,20 @@ namespace HMS.Forms.Billing
                         }
                     }
 
-                    // Your existing code to insert data into FinalBillOtherAmount table...
-
-                    // Your existing code to update PatientMast table...
-
-                    // Your code for updating FinalBillOtherAmount table
                     string clearQuery = "DELETE FROM FinalBillOtherAmount WHERE FBOItemsTID = @idTextBox";
-
                     using (SqlCommand clearCmd = new SqlCommand(clearQuery, con))
                     {
                         clearCmd.Parameters.AddWithValue("@idTextBox", idTextBox.Text);
                         clearCmd.ExecuteNonQuery();
                     }
+
+                    string clearQueryA = "DELETE FROM FinalBillDr WHERE FBDBILLNO = @idTextBox";
+                    using (SqlCommand clearCmd = new SqlCommand(clearQueryA, con))
+                    {
+                        clearCmd.Parameters.AddWithValue("@idTextBox", idTextBox.Text);
+                        clearCmd.ExecuteNonQuery();
+                    }
+
                     // Your existing loop to insert data into FinalBillOtherAmount table
                     foreach (DataGridViewRow row in OtherItemsdataGridView.Rows)
                     {
@@ -534,8 +610,8 @@ namespace HMS.Forms.Billing
                         {
 
                             
-                            string oiParticulars = Convert.ToString(row.Cells["Particulars"].Value);
-                            string oiAmountStr = Convert.ToString(row.Cells["Amount"].Value);
+                            string oiParticulars = Convert.ToString(row.Cells["FBOItemsPerticulars"].Value);
+                            string oiAmountStr = Convert.ToString(row.Cells["FBOItemsAmt"].Value);
 
                             if (!string.IsNullOrWhiteSpace(oiParticulars) && !string.IsNullOrWhiteSpace(oiAmountStr))
                             {
@@ -576,6 +652,40 @@ namespace HMS.Forms.Billing
 
 
                     }
+
+                    // Save data from dataGridViewDocChrg to FinalBillDr table
+                    foreach (DataGridViewRow row in dataGridViewDocChrg.Rows)
+                    {
+                        if (!row.IsNewRow)
+                        {
+                            string billNo = Convert.ToString(row.Cells["BillNo"].Value);
+                            string DrDate = Convert.ToString(row.Cells["DrDate"].Value);
+                            string doctor = Convert.ToString(row.Cells["Doctor"].Value);
+                            string docAmountStr = Convert.ToString(row.Cells["DocAmount"].Value);
+
+                            if (!string.IsNullOrWhiteSpace(doctor) && !string.IsNullOrWhiteSpace(docAmountStr))
+                            {
+                                decimal docAmount = Convert.ToDecimal(docAmountStr);
+
+                                // Assuming idTextBox contains the BillNo value
+                                string billNoValue = idTextBox.Text;
+
+                                // Insert data into FinalBillDr table
+                                string insertDrQuery = "INSERT INTO FinalBillDr (FBDBILLNO, FBDDRDT, FBDDR, FBDAMT) " +
+                                                        "VALUES (@BillNo, @DrDate, @Doctor, @DocAmount)";
+
+                                using (SqlCommand cmdDr = new SqlCommand(insertDrQuery, con))
+                                {
+                                    cmdDr.Parameters.AddWithValue("@BillNo", billNoValue);
+                                    cmdDr.Parameters.AddWithValue("@DrDate", DrDate);
+                                    cmdDr.Parameters.AddWithValue("@Doctor", doctor);
+                                    cmdDr.Parameters.AddWithValue("@DocAmount", docAmount);
+
+                                    cmdDr.ExecuteNonQuery();
+                                }
+                            }
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -586,9 +696,44 @@ namespace HMS.Forms.Billing
                     con.Close();
                 }
 
+                idTextBox.Text = "";
+                IPDSearchtextBox.Text = "RNH/";
+                FinalpayDateDateTimePicker.Value = DateTime.Now;
+                percentageTextBox.Text = "";
+                TaxAmttextBox.Text = "0.00";
+                ConcessionAmttextBox.Text = "0.00";
+                DocFeesAmttextBox.Text = "0.00";
+                MedicinesAmttextBox.Text = "0.00";
+                BloodAmttextBox.Text = "0.00";
+                OthrChrgAmtstextBox.Text = "0.00";
+                AdvanceAmttextBox.Text = "0.00";
+                ReceivablesAmttextBox.Text = "0.00";
+                PatientidTextBox.Text = "";
+                PatNametextBox.Text = "";
+                payModeComboBox.SelectedIndex = -1;
+                BedAmtTextBox.Text = "0.00";
+                OtherAmttextBox.Text = "0.00";
+                taxNameComboBox.SelectedIndex = -1;
+                DetailTotalAmttextBox.Text = "0.00";
+                TotAmttextBox.Text = "0.00";
+                ChargeableAmttextBox.Text = "0.00";
+                textBoxDissposableAmt.Text = "0.00";
+                percentageTextBox.Text = "";
+                PatGendertextBox.Text = "";
+                PatAgetextBox.Text = "";
+                GarNametextBox.Text = "";
+                Address1textBox.Text = "";
+                Address2textBox.Text = "";
+                CitytextBox.Text = "";
+                PINtextBox.Text = "";
+                UnderDrtextBox.Text = "";
+                AdmissiondateTimePicker.Value = DateTime.Now;
+                DischargedateTimePicker.Value = DateTime.Now;
+                idTextBox.Focus();
                 Display(); // Assuming Display() method refreshes the form or display data
             }
-            
+            OtherItemsdataGridView.Rows.Clear();
+            dataGridViewDocChrg.Rows.Clear();
         }
 
         private void ReceivablesAmttextBox_TextChanged(object sender, EventArgs e)
@@ -631,6 +776,7 @@ namespace HMS.Forms.Billing
                     FinalBillListdataGridView.Rows[n].Cells[18].Value = item["ChargableAmt"].ToString();//
                     FinalBillListdataGridView.Rows[n].Cells[19].Value = item["AdvanceReceived"].ToString();//
                     FinalBillListdataGridView.Rows[n].Cells[20].Value = item["TotalReceivable"].ToString();//
+                    FinalBillListdataGridView.Rows[n].Cells[21].Value = item["DissposableAmt"].ToString();
 
 
 
@@ -642,219 +788,100 @@ namespace HMS.Forms.Billing
 
         
 
-        private void Addbutton_Click(object sender, EventArgs e)
-        {
-            idTextBox.Text = "";
-            IPDSearchtextBox.Text = "";
-            FinalpayDateDateTimePicker.Text = "";
-            percentageTextBox.Text = "15";
-            TaxAmttextBox.Text = "";
-            ConcessionAmttextBox.Text = "";
-            DocFeesAmttextBox.Text = "";
-            MedicinesAmttextBox.Text = "";
-            BloodAmttextBox.Text = "";
-            OthrChrgAmtstextBox.Text = "";
-            AdvanceAmttextBox.Text = "";
-            ReceivablesAmttextBox.Text = "";
-            PatientidTextBox.Text = "";
-            PatNametextBox.Text = "";
-            payModeComboBox.SelectedIndex = -1;
-            BedAmtTextBox.Text = "";
-            OtherAmttextBox.Text = "";
-            taxNameComboBox.SelectedIndex = -1;
-            DetailTotalAmttextBox.Text = "";
-            TotAmttextBox.Text = "";
-            ChargeableAmttextBox.Text = "";
-            idTextBox.Focus();
-            Display();
-
-        }
-
-        private void Cancelbutton_Click(object sender, EventArgs e)
-        {
-            idTextBox.Text = "";
-            IPDSearchtextBox.Text = "";
-            FinalpayDateDateTimePicker.Text = "";
-            percentageTextBox.Text = "15";
-            TaxAmttextBox.Text = "";
-            ConcessionAmttextBox.Text = "";
-            DocFeesAmttextBox.Text = "";
-            MedicinesAmttextBox.Text = "";
-            BloodAmttextBox.Text = "";
-            OthrChrgAmtstextBox.Text = "";
-            AdvanceAmttextBox.Text = "";
-            ReceivablesAmttextBox.Text = "";
-            PatientidTextBox.Text = "";
-            PatNametextBox.Text = "";
-            payModeComboBox.SelectedIndex = -1;
-            BedAmtTextBox.Text = "";
-            OtherAmttextBox.Text = "";
-            taxNameComboBox.SelectedIndex = -1;
-            DetailTotalAmttextBox.Text = "";
-            TotAmttextBox.Text = "";
-            ChargeableAmttextBox.Text = "";
-            idTextBox.Focus();
-            Display();
-        }
+        
 
         private void printbutton_Click(object sender, EventArgs e)
         {
             ReportDocument report = new ReportDocument();
             report.Load("Reports/FinalBillRep.rpt"); // Load your Crystal Report
 
-         //   string connectionString = "Your_Connection_String"; // Replace with your connection string
-
-            string query = @"
-        SELECT
-                BedManagement.Id AS BedId,
-            BedManagement.Patient AS BedPatient,
-            BedManagement.BedType,
-            BedManagement.BedNo,
-            BedManagement.FromDate AS BedFromDate,
-            BedManagement.BedAmount,
-            BedManagement.IPD AS BedIPD,
-            BedManagement.Todate AS BedToDate,
-            BedManagement.Days AS BedDays,
-            BedManagement.Rate AS BedRate,
-            BedManagement.DrName AS BedDrName,
-    
-            FinalBillHdr.Id AS BillId,
-            FinalBillHdr.IPD AS BillIPD,
-            FinalBillHdr.BillDate,
-            FinalBillHdr.TaxRate,
-            FinalBillHdr.TaxAmt,
-            FinalBillHdr.Concession,
-            FinalBillHdr.DrFees,
-            FinalBillHdr.Medicine,
-            FinalBillHdr.Blood,
-            FinalBillHdr.OtherCharges,
-            FinalBillHdr.AdvanceReceived,
-            FinalBillHdr.TotalReceivable,
-            FinalBillHdr.PatientID AS BillPatientID,
-            FinalBillHdr.PatientName AS BillPatientName,
-            FinalBillHdr.PayMode,
-            FinalBillHdr.BedTAmt,
-            FinalBillHdr.OtherTAmt,
-            FinalBillHdr.TaxName,
-            FinalBillHdr.DtlTAmt,
-            FinalBillHdr.TotalAmt,
-            FinalBillHdr.ChargableAmt,
-    
-            IPD.Id AS IPDId,
-            IPD.Patient AS IPDPatient,
-            IPD.Age,
-            IPD.Height,
-            IPD.Weight,
-            IPD.BloodPressure,
-            IPD.PrecheckedBy,
-            IPD.AdmissionDate,
-            IPD.Symptoms,
-            IPD.GarName,
-            IPD.GarRelation,
-            IPD.GarPhone,
-            IPD.GarAddress1,
-            IPD.GarAddress2,
-            IPD.GarCity,
-            IPD.GarPIN,
-            IPD.AdmitName,
-            IPD.AdmitRelation,
-            IPD.AdmitPhone,
-            IPD.AdmitAddress1,
-            IPD.AdmitAddress2,
-            IPD.AdmitCity,
-            IPD.AdmitPIN,
-            IPD.PatID,
-    
-            FinalBillOtherAmount.FBOItemsId,
-            FinalBillOtherAmount.FBOItemsPerticulars,
-            FinalBillOtherAmount.FBOItemsAmt,
-            FinalBillOtherAmount.FBOItemsTID
-            FROM
-                BedManagement
-            INNER JOIN
-                IPD ON BedManagement.IPD = IPD.Id
-            INNER JOIN
-                FinalBillHdr ON FinalBillHdr.IPD = IPD.Id
-            INNER JOIN
-                FinalBillOtherAmount ON FinalBillOtherAmount.FBOItemsTID = FinalBillHdr.Id
-            WHERE
-            FinalBillHdr.Id = @BillId";
-
-
-
-            using (SqlConnection connection = new SqlConnection(connectionString)) 
+            DataTable dt = new DataTable();
+            foreach (DataGridViewColumn col in OtherItemsdataGridView.Columns)
             {
-                SqlCommand cmd = new SqlCommand(query, connection);
-                cmd.Parameters.AddWithValue("@BillId", idTextBox.Text); // Ensure the parameter name matches the SQL query
-
-                // Create a SQL Data Adapter
-                using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
-                {
-                    // Create a DataSet to hold the data
-                    HMSDataSet dataSet = new HMSDataSet();
-
-                    connection.Open();
-                    // Fill the DataSet with the data from the query
-                    adapter.Fill(dataSet, "HMSDataSet");
-                    connection.Close();
-
-                    // Set the data source for the report
-                    report.SetDataSource(dataSet);
-
-                    // Set the Crystal Report Viewer's report source to the loaded report
-                    //crystalReportViewer1.ReportSource = report;
-                }
+                dt.Columns.Add(col.Name);
             }
 
-            // Rest of your code for setting parameters and displaying the report seems fine
-            // ...
+            foreach (DataGridViewRow row in OtherItemsdataGridView.Rows)
+            {
+                DataRow dRow = dt.NewRow();
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    dRow[cell.ColumnIndex] = cell.Value;
+                }
+                dt.Rows.Add(dRow);
+            }
+
+            
+
+            report.Subreports[0].DataSourceConnections.Clear();
+            report.Subreports[0].SetDataSource(bedManagementDataGridView.DataSource);
+
+            report.Subreports[1].DataSourceConnections.Clear();
+            report.Subreports[1].SetDataSource(dt);
 
             FinalBillRep fbr = new FinalBillRep();
 
 
-            // fbr.SetDataSource(ds);
-            //  FinalBillReportViewer.getfrm.Show();
-            // FinalBillReportViewer.getfrm.crystalReportViewer1.ReportSource = fbr;
+            
 
             FinalBillReportViewer view = new FinalBillReportViewer();
-            fbr.SetParameterValue("FB_BILLNO", idTextBox.Text);
-            fbr.SetParameterValue("FB_BILLDATE", FinalpayDateDateTimePicker.Text);
-            fbr.SetParameterValue("FB_TAXAMT", TaxAmttextBox.Text);
-            fbr.SetParameterValue("FB_CONCESSION", ConcessionAmttextBox.Text);
-            fbr.SetParameterValue("FB_DRAMT", DocFeesAmttextBox.Text);
-            fbr.SetParameterValue("FB_MEDAMT", MedicinesAmttextBox.Text);
-            fbr.SetParameterValue("FB_BLOODAMT", BloodAmttextBox.Text);
-            fbr.SetParameterValue("FB_OTHAMT", OthrChrgAmtstextBox.Text);
-            fbr.SetParameterValue("FB_ADVREVAMT", AdvanceAmttextBox.Text);
-            fbr.SetParameterValue("FB_PAYABLEAMT", ReceivablesAmttextBox.Text);
-            fbr.SetParameterValue("FB_PATID", PatientidTextBox.Text);
-            fbr.SetParameterValue("FB_PATNAME", PatNametextBox.Text);
-            fbr.SetParameterValue("FB_TAXNAME", taxNameComboBox.Text);
-            fbr.SetParameterValue("FB_DTLAMT", DetailTotalAmttextBox.Text);
-            fbr.SetParameterValue("FB_TOTAMT", TotAmttextBox.Text);
-            fbr.SetParameterValue("FB_CHARGEAMT", ChargeableAmttextBox.Text);
-            fbr.SetParameterValue("FB_GENDER", PatGendertextBox.Text);
-            fbr.SetParameterValue("FB_AGE", PatAgetextBox.Text);
-            fbr.SetParameterValue("FB_GARNAME", GarNametextBox.Text);
-            fbr.SetParameterValue("FB_ADDRESS1", Address1textBox.Text);
-            fbr.SetParameterValue("FB_ADDRESS2", Address2textBox.Text);
-            fbr.SetParameterValue("FB_CITY", CitytextBox.Text);
-            fbr.SetParameterValue("FB_PIN", PINtextBox.Text);
-            fbr.SetParameterValue("FB_ADMISSIONDT", AdmissiondateTimePicker.Text);
-            fbr.SetParameterValue("FB_DISCHARGEDT", DischargedateTimePicker.Text);
-            fbr.SetParameterValue("FB_UNDERDR", UnderDrtextBox.Text);
-            fbr.SetParameterValue("FB_REFDR", RefDrtextBox.Text);
+            report.SetParameterValue("FB_BILLNO", idTextBox.Text);
+            report.SetParameterValue("FB_BILLDATE", FinalpayDateDateTimePicker.Text);
+            report.SetParameterValue("FB_TAXAMT", TaxAmttextBox.Text);
+            report.SetParameterValue("FB_CONCESSION", ConcessionAmttextBox.Text);
+            report.SetParameterValue("FB_DRAMT", DocFeesAmttextBox.Text);
+            report.SetParameterValue("FB_MEDAMT", MedicinesAmttextBox.Text);
+            report.SetParameterValue("FB_BLOODAMT", BloodAmttextBox.Text);
+            report.SetParameterValue("FB_OTHAMT", OthrChrgAmtstextBox.Text);
+            report.SetParameterValue("FB_ADVREVAMT", AdvanceAmttextBox.Text);
+            report.SetParameterValue("FB_PAYABLEAMT", ReceivablesAmttextBox.Text);
+            report.SetParameterValue("FB_PATID", PatientidTextBox.Text);
+            report.SetParameterValue("FB_PATNAME", PatNametextBox.Text);
+            report.SetParameterValue("FB_TAXNAME", taxNameComboBox.Text);
+            report.SetParameterValue("FB_DTLAMT", DetailTotalAmttextBox.Text);
+            report.SetParameterValue("FB_TOTAMT", TotAmttextBox.Text);
+            report.SetParameterValue("FB_CHARGEAMT", ChargeableAmttextBox.Text);
+            report.SetParameterValue("FB_GENDER", PatGendertextBox.Text);
+            report.SetParameterValue("FB_AGE", PatAgetextBox.Text);
+            report.SetParameterValue("FB_GARNAME", GarNametextBox.Text);
+            report.SetParameterValue("FB_ADDRESS1", Address1textBox.Text);
+            report.SetParameterValue("FB_ADDRESS2", Address2textBox.Text);
+            report.SetParameterValue("FB_CITY", CitytextBox.Text);
+            report.SetParameterValue("FB_PIN", PINtextBox.Text);
+            report.SetParameterValue("FB_ADMISSIONDT", AdmissiondateTimePicker.Text);
+            report.SetParameterValue("FB_DISCHARGEDT", DischargedateTimePicker.Text);
+            report.SetParameterValue("FB_UNDERDR", UnderDrtextBox.Text);
+            report.SetParameterValue("FB_REFDR", RefDrtextBox.Text);
+            report.SetParameterValue("FB_DISPAMT", textBoxDissposableAmt.Text);
+            report.SetParameterValue("FB_PO", textBoxPO.Text);
+            report.SetParameterValue("FB_PS", textBoxPS.Text);
+            report.SetParameterValue("FB_COUNTRY", textBoxCountry.Text);
+            report.SetParameterValue("FB_ADVIDS", textBoxAdvIds.Text);
 
 
 
-            view.crystalReportViewer1.ReportSource = fbr;
+
+            // Check if the ConcessionAmttextBox value is 0 or null
+            decimal concessionAmount = 0;
+            if (!string.IsNullOrEmpty(ConcessionAmttextBox.Text))
+            {
+                decimal.TryParse(ConcessionAmttextBox.Text, out concessionAmount);
+            }
+
+            // Set the visibility of Crystal Report fields based on the concession amount
+            report.ReportDefinition.ReportObjects["Text27"].ObjectFormat.EnableSuppress = (concessionAmount == 0);
+            report.ReportDefinition.ReportObjects["FBCONCESSION1"].ObjectFormat.EnableSuppress = (concessionAmount == 0);
+
+
+
+            view.crystalReportViewer1.ReportSource = report;
             view.Show();
         }
 
 
         private void FinalBillListdataGridView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            
+            idTextBox.ReadOnly = true;
 
             idTextBox.Text                      = FinalBillListdataGridView.SelectedRows[0].Cells[0].Value.ToString();
             FinalpayDateDateTimePicker.Text     = FinalBillListdataGridView.SelectedRows[0].Cells[1].Value.ToString();
@@ -862,7 +889,7 @@ namespace HMS.Forms.Billing
             PatNametextBox.Text                 = FinalBillListdataGridView.SelectedRows[0].Cells[3].Value.ToString();
             payModeComboBox.Text                = FinalBillListdataGridView.SelectedRows[0].Cells[4].Value.ToString();
             IPDSearchtextBox.Text               = FinalBillListdataGridView.SelectedRows[0].Cells[5].Value.ToString();
-            BedAmtTextBox.Text                  = FinalBillListdataGridView.SelectedRows[0].Cells[6].Value.ToString();
+          //  BedAmtTextBox.Text                  = FinalBillListdataGridView.SelectedRows[0].Cells[6].Value.ToString();
             OtherAmttextBox.Text                = FinalBillListdataGridView.SelectedRows[0].Cells[7].Value.ToString();
             DetailTotalAmttextBox.Text          = FinalBillListdataGridView.SelectedRows[0].Cells[8].Value.ToString();
             taxNameComboBox.Text                = FinalBillListdataGridView.SelectedRows[0].Cells[9].Value.ToString();
@@ -877,15 +904,83 @@ namespace HMS.Forms.Billing
             ChargeableAmttextBox.Text           = FinalBillListdataGridView.SelectedRows[0].Cells[18].Value.ToString();
             AdvanceAmttextBox.Text              = FinalBillListdataGridView.SelectedRows[0].Cells[19].Value.ToString();
             ReceivablesAmttextBox.Text          = FinalBillListdataGridView.SelectedRows[0].Cells[20].Value.ToString();
+            textBoxDissposableAmt.Text          = FinalBillListdataGridView.SelectedRows[0].Cells[21].Value.ToString();
+
+            // Fetch data from FinalBillOtherAmount based on idTextBox
+            string query = "SELECT FBOItemsTID, FBOItemsId, FBOItemsPerticulars, FBOItemsAmt " +
+                           "FROM FinalBillOtherAmount " +
+                           "WHERE FBOItemsTID = @FBOItemsTID";
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@FBOItemsTID", idTextBox.Text);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        // Clear existing rows in OtherItemsdataGridView
+                        OtherItemsdataGridView.Rows.Clear();
+
+                        // Populate OtherItemsdataGridView with data from the database
+                        while (reader.Read())
+                        {
+                            OtherItemsdataGridView.Rows.Add(
+                                reader["FBOItemsTID"].ToString(),
+                                reader["FBOItemsId"].ToString(),
+                                reader["FBOItemsPerticulars"].ToString(),
+                                reader["FBOItemsAmt"].ToString()
+                            );
+                        }
+                    }
+                }
+            }
 
 
 
+            // Fetch data from dataGridViewDocChrg based on idTextBox
+            string querya = "SELECT FBDBILLNO, FBDDRDT, FBDDR, FBDAMT " +
+                           "FROM FinalBillDr " +
+                           "WHERE FBDBILLNO = @FBDBILLNO";
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+
+                using (SqlCommand command = new SqlCommand(querya, con))
+                {
+                    command.Parameters.AddWithValue("@FBDBILLNO", idTextBox.Text);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        // Clear existing rows in dataGridViewDocChrg
+                        dataGridViewDocChrg.Rows.Clear();
+
+                        // Populate dataGridViewDocChrg with data from the database
+                        while (reader.Read())
+                        {
+                            dataGridViewDocChrg.Rows.Add(
+                                reader["FBDBILLNO"].ToString(),
+                                reader["FBDDRDT"].ToString(),
+                                reader["FBDDR"].ToString(),
+                                reader["FBDAMT"].ToString()
+                            );
+                        }
+                    }
+                }
+            }
 
         }
 
+        // Method to fetch data from the FinalBillOtherAmount table based on ID
+        
+
+
         private void FinalpayDateDateTimePicker_ValueChanged_1(object sender, EventArgs e)
         {
-           
+            FinalpayDateDateTimePicker.CustomFormat = "dd-MM-yyyy HH:mm:ss";
         }
 
         private void FinalBillListdataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -895,7 +990,7 @@ namespace HMS.Forms.Billing
 
         private void DischargedateTimePicker_ValueChanged(object sender, EventArgs e)
         {
-
+            DischargedateTimePicker.CustomFormat = "dd-MM-yyyy HH:mm:ss";
         }
 
         private void idTextBox_TextChanged(object sender, EventArgs e)
@@ -937,7 +1032,8 @@ namespace HMS.Forms.Billing
         {
             foreach (DataGridViewRow row in OtherItemsdataGridView.Rows)
             {
-                row.Cells["SlNo"].Value = currentSlNo++;
+                row.Cells["FBOItemsId"].Value = currentSlNo++;
+                row.Cells["FBOItemsTID"].Value = idTextBox.Text;
             }
         }
 
@@ -987,9 +1083,362 @@ namespace HMS.Forms.Billing
             }
         }
 
-       
+        private void PatientidTextBox_TextChanged(object sender, EventArgs e)
+        {
+            // Assuming you have a SqlConnection named "sqlConnection"
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                // Replace "YourTableName" with the actual table name
+                string query = "SELECT PatPO, PatPS, PatCountry FROM PatientMast WHERE Id = @PatientId";
+
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    con.Open();
+
+                    // Assuming "Id" is an integer. If it's a different data type, adjust accordingly.
+                    if (int.TryParse(PatientidTextBox.Text, out int patientId))
+                    {
+                        command.Parameters.AddWithValue("@PatientId", patientId);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                // Replace "YourColumnNames" with the actual column names
+                                textBoxPO.Text = reader["PatPO"].ToString();
+                                textBoxPS.Text = reader["PatPS"].ToString();
+                                textBoxCountry.Text = reader["PatCountry"].ToString();
+                            }
+                            else
+                            {
+                                // Handle the case when no matching record is found
+                                textBoxPO.Text = string.Empty;
+                                textBoxPS.Text = string.Empty;
+                                textBoxCountry.Text = string.Empty;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // Handle the case when the entered text is not a valid integer
+                        textBoxPO.Text = string.Empty;
+                        textBoxPS.Text = string.Empty;
+                        textBoxCountry.Text = string.Empty;
+                    }
+                }
+            }
+        }
+
+
+        private void buttonEstimation_Click(object sender, EventArgs e)
+        {
+            ReportDocument report = new ReportDocument();
+            report.Load("Reports/EstimationRpt.rpt"); // Load your Crystal Report
+
+            DataTable dt = new DataTable();
+            foreach (DataGridViewColumn col in OtherItemsdataGridView.Columns)
+            {
+                dt.Columns.Add(col.Name);
+            }
+
+            foreach (DataGridViewRow row in OtherItemsdataGridView.Rows)
+            {
+                DataRow dRow = dt.NewRow();
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    dRow[cell.ColumnIndex] = cell.Value;
+                }
+                dt.Rows.Add(dRow);
+            }
+
+
+
+            report.Subreports[0].DataSourceConnections.Clear();
+            report.Subreports[0].SetDataSource(bedManagementDataGridView.DataSource);
+
+            report.Subreports[1].DataSourceConnections.Clear();
+            report.Subreports[1].SetDataSource(dt);
+
+            EstimationRpt fbr = new EstimationRpt();
+
+
+
+
+            EstimationViewer view = new EstimationViewer();
+            report.SetParameterValue("FB_BILLNO", idTextBox.Text);
+            report.SetParameterValue("FB_BILLDATE", FinalpayDateDateTimePicker.Text);
+            report.SetParameterValue("FB_TAXAMT", TaxAmttextBox.Text);
+            report.SetParameterValue("FB_CONCESSION", ConcessionAmttextBox.Text);
+            report.SetParameterValue("FB_DRAMT", DocFeesAmttextBox.Text);
+            report.SetParameterValue("FB_MEDAMT", MedicinesAmttextBox.Text);
+            report.SetParameterValue("FB_BLOODAMT", BloodAmttextBox.Text);
+            report.SetParameterValue("FB_OTHAMT", OthrChrgAmtstextBox.Text);
+            report.SetParameterValue("FB_ADVREVAMT", AdvanceAmttextBox.Text);
+            report.SetParameterValue("FB_PAYABLEAMT", ReceivablesAmttextBox.Text);
+            report.SetParameterValue("FB_PATID", PatientidTextBox.Text);
+            report.SetParameterValue("FB_PATNAME", PatNametextBox.Text);
+            report.SetParameterValue("FB_TAXNAME", taxNameComboBox.Text);
+            report.SetParameterValue("FB_DTLAMT", DetailTotalAmttextBox.Text);
+            report.SetParameterValue("FB_TOTAMT", TotAmttextBox.Text);
+            report.SetParameterValue("FB_CHARGEAMT", ChargeableAmttextBox.Text);
+            report.SetParameterValue("FB_GENDER", PatGendertextBox.Text);
+            report.SetParameterValue("FB_AGE", PatAgetextBox.Text);
+            report.SetParameterValue("FB_GARNAME", GarNametextBox.Text);
+            report.SetParameterValue("FB_ADDRESS1", Address1textBox.Text);
+            report.SetParameterValue("FB_ADDRESS2", Address2textBox.Text);
+            report.SetParameterValue("FB_CITY", CitytextBox.Text);
+            report.SetParameterValue("FB_PIN", PINtextBox.Text);
+            report.SetParameterValue("FB_ADMISSIONDT", AdmissiondateTimePicker.Text);
+            report.SetParameterValue("FB_DISCHARGEDT", DischargedateTimePicker.Text);
+            report.SetParameterValue("FB_UNDERDR", UnderDrtextBox.Text);
+            report.SetParameterValue("FB_REFDR", RefDrtextBox.Text);
+            report.SetParameterValue("FB_DISPAMT", textBoxDissposableAmt.Text);
+            report.SetParameterValue("FB_PO", textBoxPO.Text);
+            report.SetParameterValue("FB_PS", textBoxPS.Text);
+            report.SetParameterValue("FB_COUNTRY", textBoxCountry.Text);
+            report.SetParameterValue("FB_ADVIDS", textBoxAdvIds.Text);
+
+
+            // Check if the ConcessionAmttextBox value is 0 or null
+            decimal concessionAmount = 0;
+            if (!string.IsNullOrEmpty(ConcessionAmttextBox.Text))
+            {
+                decimal.TryParse(ConcessionAmttextBox.Text, out concessionAmount);
+            }
+
+            // Set the visibility of Crystal Report fields based on the concession amount
+            report.ReportDefinition.ReportObjects["Text27"].ObjectFormat.EnableSuppress = (concessionAmount == 0);
+            report.ReportDefinition.ReportObjects["FBCONCESSION1"].ObjectFormat.EnableSuppress = (concessionAmount == 0);
+
+
+
+
+            view.crystalReportViewer2.ReportSource = report;
+            view.Show();
+        }
+
+        private void textBoxDissposableAmt_TextChanged(object sender, EventArgs e)
+        {
+            UpdateReceivablesAmt();
+            UpdateChargeableAmt();
+        }
+
+        private void buttonDel_Click(object sender, EventArgs e)
+        {
+            // Ensure that the user has selected a row in the gRNHdrDataGridView
+            if (FinalBillListdataGridView.SelectedRows.Count > 0)
+            {
+                // Get the selected row
+                DataGridViewRow selectedRow = FinalBillListdataGridView.SelectedRows[0];
+
+                // Retrieve the value from the "Id" column and set it to idToDelete
+                string idToDelete = selectedRow.Cells["Id"].Value.ToString();
+
+                // Prompt the user to confirm the deletion
+                DialogResult result = MessageBox.Show("Are you sure you want to delete this record?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    // Perform deletion
+                    DeleteRecord(idToDelete);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a record to delete.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void DeleteRecord(string idToDelete)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+
+                using (SqlTransaction transaction = con.BeginTransaction())
+                {
+                    try
+                    {
+                        // Delete from DischargeLin table first
+                        using (SqlCommand cmdDischargeLin = new SqlCommand("DELETE FROM FinalBillOtherAmount WHERE FBOItemsTID = @Id", con, transaction))
+                        {
+                            cmdDischargeLin.Parameters.AddWithValue("@Id", idToDelete);
+                            cmdDischargeLin.ExecuteNonQuery();
+                        }
+
+                        // Then delete from Discharge table
+                        using (SqlCommand cmdDischarge = new SqlCommand("DELETE FROM FinalBillHdr WHERE Id = @Id", con, transaction))
+                        {
+                            cmdDischarge.Parameters.AddWithValue("@Id", idToDelete);
+                            cmdDischarge.ExecuteNonQuery();
+                        }
+
+                        transaction.Commit();
+                        MessageBox.Show("Record deleted successfully!");
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        MessageBox.Show("Error while deleting record: " + ex.Message);
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+                }
+            }
+
+            // Refresh the displayed data after deletion
+            Display();
+
+        }
+
+        private void buttonIPD_Click(object sender, EventArgs e)
+        {
+            IPDFrm myForm = new IPDFrm();
+
+            myForm.ShowDialog();
+        }
+
+        private void dataGridViewDocChrg_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                string columnName = dataGridViewDocChrg.Columns[e.ColumnIndex].Name;
+
+                if (columnName == "DocAmount")
+                {
+                    UpdateTotal();
+                }
+                else if (columnName == "Doctor")
+                {
+                    // Handle live search for the "Doctor" column
+                    AutoFillDoctorName(dataGridViewDocChrg.Rows[e.RowIndex]);
+                }
+            }
+        }
+
+        private void AutoFillDoctorName(DataGridViewRow row)
+        {
+            string partialInput = row.Cells["Doctor"].Value?.ToString();
+
+            if (!string.IsNullOrEmpty(partialInput))
+            {
+                // Fetch matching doctor names from the database
+                List<string> matchingDoctorNames = GetMatchingDoctorNames(partialInput);
+
+                // Display the matching names in a dropdown or set the value based on your UI choice
+                // Here, I'll just set the value to the first matching name (if any)
+                if (matchingDoctorNames.Count > 0)
+                {
+                    row.Cells["Doctor"].Value = matchingDoctorNames[0];
+                }
+            }
+        }
+
+        private List<string> GetMatchingDoctorNames(string partialInput)
+        {
+            // Replace the following code with your actual database retrieval logic
+            List<string> matchingDoctorNames = new List<string>();
+
+            // Assuming you have a connection object named "connection" and a command object named "command"
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+
+                using (SqlCommand command = new SqlCommand("SELECT DocName FROM DoctorMast WHERE DocName LIKE @PartialInput", con))
+                {
+                    command.Parameters.AddWithValue("@PartialInput", "%" + partialInput + "%");
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            matchingDoctorNames.Add(reader["DocName"].ToString());
+                        }
+                    }
+                }
+            }
+
+            return matchingDoctorNames;
+        }
+
+        private void UpdateTotal()
+        {
+            decimal total = 0;
+
+            foreach (DataGridViewRow row in dataGridViewDocChrg.Rows)
+            {
+                if (row.Cells["DocAmount"].Value != null && !string.IsNullOrEmpty(row.Cells["DocAmount"].Value.ToString()))
+                {
+                    decimal value = 0;
+                    if (decimal.TryParse(row.Cells["DocAmount"].Value.ToString(), out value))
+                    {
+                        total += value;
+                    }
+                }
+            }
+
+            textBoxDocTot.Text = total.ToString();
+            DocFeesAmttextBox.Text = total.ToString();
+        }
+
+        private void dataGridViewDocChrg_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            foreach (DataGridViewRow row in dataGridViewDocChrg.Rows)
+            {
+                row.Cells["BillNo"].Value = idTextBox.Text;
+            }
+        }
+
+        private void buttonPrintDrChrgs_Click(object sender, EventArgs e)
+        {
+            ReportDocument report = new ReportDocument();
+            report.Load("Reports/FinalBillDr.rpt"); // Load your Crystal Report
+
+            DataTable dt = new DataTable();
+            foreach (DataGridViewColumn col in dataGridViewDocChrg.Columns)
+            {
+                dt.Columns.Add(col.Name);
+            }
+
+            foreach (DataGridViewRow row in dataGridViewDocChrg.Rows)
+            {
+                DataRow dRow = dt.NewRow();
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    dRow[cell.ColumnIndex] = cell.Value;
+                }
+                dt.Rows.Add(dRow);
+            }
+
+
+
+           //report.Subreports[0].DataSourceConnections.Clear();
+           //report.Subreports[0].SetDataSource(dataGridViewDocChrg.DataSource);
+
+            report.Subreports[0].DataSourceConnections.Clear();
+            report.Subreports[0].SetDataSource(dt);
+
+            FinalBillDr fbr = new FinalBillDr();
+
+            FinalBillDrViewer view = new FinalBillDrViewer();
+            report.SetParameterValue("FB_BILLNO", idTextBox.Text);
+            report.SetParameterValue("FB_BILLDATE", FinalpayDateDateTimePicker.Text);
+            report.SetParameterValue("FB_IPD", IPDSearchtextBox.Text);
+            report.SetParameterValue("FB_PATNAME", PatNametextBox.Text);
+            report.SetParameterValue("FB_GENDER", PatGendertextBox.Text);
+            report.SetParameterValue("FB_AGE", PatAgetextBox.Text);
+         
+
+
+            view.crystalReportViewer1.ReportSource = report;
+            view.Show();
+        }
+
+        private void AdmissiondateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            AdmissiondateTimePicker.CustomFormat = "dd-MM-yyyy HH:mm:ss";
+        }
     }
-
-
-
 }
