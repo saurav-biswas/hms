@@ -801,8 +801,14 @@ namespace HMS.Forms.Transaction.IPD
                 {
                     try
                     {
-                        
-                        // Then delete from IPD table
+                        // Check if there are related records in other tables
+                        if (HasRelatedRecords(idToDelete, con, transaction))
+                        {
+                            MessageBox.Show("Cannot delete the record because it has related records in other transactions.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return; // Exit the method without performing deletion
+                        }
+
+                        // Delete from IPD table
                         using (SqlCommand cmdDischarge = new SqlCommand("DELETE FROM IPD WHERE Id = @Id", con, transaction))
                         {
                             cmdDischarge.Parameters.AddWithValue("@Id", idToDelete);
@@ -826,8 +832,34 @@ namespace HMS.Forms.Transaction.IPD
 
             // Refresh the displayed data after deletion
             Display();
-            
         }
+
+        private bool HasRelatedRecords(string idToDelete, SqlConnection con, SqlTransaction transaction)
+        {
+            string[] relatedTables = { "BedManagement", "Discharge", "DisposableIssHdr", "FinalBillHdr", "Advance" };
+
+            foreach (string tableName in relatedTables)
+            {
+                string columnName = (tableName == "Advance") ? "PatID" : "IPD";
+                string checkQuery = $"SELECT COUNT(*) FROM {tableName} WHERE {columnName} = @Value";
+
+                using (SqlCommand checkCmd = new SqlCommand(checkQuery, con, transaction))
+                {
+                    checkCmd.Parameters.AddWithValue("@Value", idToDelete);
+
+                    int relatedRecordCount = (int)checkCmd.ExecuteScalar();
+
+                    if (relatedRecordCount > 0)
+                    {
+                        return true; // There are related records in this table
+                    }
+                }
+            }
+
+            return false; // No related records found in any table
+        }
+
+
 
         private void garAddress1TextBox_TextChanged(object sender, EventArgs e)
         {

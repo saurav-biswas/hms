@@ -310,6 +310,7 @@
             this.tableAdapterManager.DisposableIssLinTableAdapter = null;
             this.tableAdapterManager.DoctorDepartmentMastTableAdapter = null;
             this.tableAdapterManager.DoctorMastTableAdapter = null;
+            this.tableAdapterManager.FinalBillDrTableAdapter = null;
             this.tableAdapterManager.FinalBillHdrTableAdapter = null;
             this.tableAdapterManager.FinalBillOtherAmountTableAdapter = null;
             this.tableAdapterManager.GRNHdrTableAdapter = null;
@@ -375,6 +376,7 @@
             // 
             // Patient
             // 
+            this.Patient.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Patient.HeaderText = "Patient";
             this.Patient.Name = "Patient";
             this.Patient.ReadOnly = true;
@@ -445,6 +447,7 @@
         private System.Windows.Forms.BindingSource iPDBindingSource1;
         private System.Windows.Forms.TextBox textBoxIPD;
         private System.Windows.Forms.Button buttonIPD;
+        private System.Windows.Forms.Button buttonDel;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn PayDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn PatientID;
@@ -452,6 +455,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn AdvAmt;
         private System.Windows.Forms.DataGridViewTextBoxColumn PayMode;
         private System.Windows.Forms.DataGridViewTextBoxColumn IPD;
-        private System.Windows.Forms.Button buttonDel;
     }
 }

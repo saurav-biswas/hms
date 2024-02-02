@@ -84,6 +84,8 @@ namespace HMS {
         
         private DisLinDataTable tableDisLin;
         
+        private DrPayDataTable tableDrPay;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -201,6 +203,9 @@ namespace HMS {
                 }
                 if ((ds.Tables["DisLin"] != null)) {
                     base.Tables.Add(new DisLinDataTable(ds.Tables["DisLin"]));
+                }
+                if ((ds.Tables["DrPay"] != null)) {
+                    base.Tables.Add(new DrPayDataTable(ds.Tables["DrPay"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -522,6 +527,16 @@ namespace HMS {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public DrPayDataTable DrPay {
+            get {
+                return this.tableDrPay;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -676,6 +691,9 @@ namespace HMS {
                 }
                 if ((ds.Tables["DisLin"] != null)) {
                     base.Tables.Add(new DisLinDataTable(ds.Tables["DisLin"]));
+                }
+                if ((ds.Tables["DrPay"] != null)) {
+                    base.Tables.Add(new DrPayDataTable(ds.Tables["DrPay"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -890,6 +908,12 @@ namespace HMS {
                     this.tableDisLin.InitVars();
                 }
             }
+            this.tableDrPay = ((DrPayDataTable)(base.Tables["DrPay"]));
+            if ((initTable == true)) {
+                if ((this.tableDrPay != null)) {
+                    this.tableDrPay.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -960,6 +984,8 @@ namespace HMS {
             base.Tables.Add(this.tableOtherPayment);
             this.tableDisLin = new DisLinDataTable();
             base.Tables.Add(this.tableDisLin);
+            this.tableDrPay = new DrPayDataTable();
+            base.Tables.Add(this.tableDrPay);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1144,6 +1170,12 @@ namespace HMS {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializeDrPay() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
@@ -1286,6 +1318,9 @@ namespace HMS {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void DisLinRowChangeEventHandler(object sender, DisLinRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void DrPayRowChangeEventHandler(object sender, DrPayRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -12590,6 +12625,295 @@ namespace HMS {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class DrPayDataTable : global::System.Data.TypedTableBase<DrPayRow> {
+            
+            private global::System.Data.DataColumn columnBillNo;
+            
+            private global::System.Data.DataColumn columnDrDate;
+            
+            private global::System.Data.DataColumn columnDoctor;
+            
+            private global::System.Data.DataColumn columnDocAmount;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DrPayDataTable() {
+                this.TableName = "DrPay";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal DrPayDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected DrPayDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn BillNoColumn {
+                get {
+                    return this.columnBillNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn DrDateColumn {
+                get {
+                    return this.columnDrDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn DoctorColumn {
+                get {
+                    return this.columnDoctor;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn DocAmountColumn {
+                get {
+                    return this.columnDocAmount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DrPayRow this[int index] {
+                get {
+                    return ((DrPayRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event DrPayRowChangeEventHandler DrPayRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event DrPayRowChangeEventHandler DrPayRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event DrPayRowChangeEventHandler DrPayRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event DrPayRowChangeEventHandler DrPayRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AddDrPayRow(DrPayRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DrPayRow AddDrPayRow(string BillNo, string DrDate, string Doctor, string DocAmount) {
+                DrPayRow rowDrPayRow = ((DrPayRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        BillNo,
+                        DrDate,
+                        Doctor,
+                        DocAmount};
+                rowDrPayRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowDrPayRow);
+                return rowDrPayRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                DrPayDataTable cln = ((DrPayDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new DrPayDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columnBillNo = base.Columns["BillNo"];
+                this.columnDrDate = base.Columns["DrDate"];
+                this.columnDoctor = base.Columns["Doctor"];
+                this.columnDocAmount = base.Columns["DocAmount"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columnBillNo = new global::System.Data.DataColumn("BillNo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBillNo);
+                this.columnDrDate = new global::System.Data.DataColumn("DrDate", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDrDate);
+                this.columnDoctor = new global::System.Data.DataColumn("Doctor", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDoctor);
+                this.columnDocAmount = new global::System.Data.DataColumn("DocAmount", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDocAmount);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DrPayRow NewDrPayRow() {
+                return ((DrPayRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new DrPayRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(DrPayRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.DrPayRowChanged != null)) {
+                    this.DrPayRowChanged(this, new DrPayRowChangeEvent(((DrPayRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.DrPayRowChanging != null)) {
+                    this.DrPayRowChanging(this, new DrPayRowChangeEvent(((DrPayRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.DrPayRowDeleted != null)) {
+                    this.DrPayRowDeleted(this, new DrPayRowChangeEvent(((DrPayRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.DrPayRowDeleting != null)) {
+                    this.DrPayRowDeleting(this, new DrPayRowChangeEvent(((DrPayRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemoveDrPayRow(DrPayRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                HMSDataSet ds = new HMSDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "DrPayDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class DoctorDepartmentMastRow : global::System.Data.DataRow {
@@ -18169,6 +18493,133 @@ namespace HMS {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class DrPayRow : global::System.Data.DataRow {
+            
+            private DrPayDataTable tableDrPay;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal DrPayRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableDrPay = ((DrPayDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string BillNo {
+                get {
+                    try {
+                        return ((string)(this[this.tableDrPay.BillNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'BillNo\' in table \'DrPay\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDrPay.BillNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string DrDate {
+                get {
+                    try {
+                        return ((string)(this[this.tableDrPay.DrDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DrDate\' in table \'DrPay\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDrPay.DrDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Doctor {
+                get {
+                    try {
+                        return ((string)(this[this.tableDrPay.DoctorColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Doctor\' in table \'DrPay\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDrPay.DoctorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string DocAmount {
+                get {
+                    try {
+                        return ((string)(this[this.tableDrPay.DocAmountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DocAmount\' in table \'DrPay\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDrPay.DocAmountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsBillNoNull() {
+                return this.IsNull(this.tableDrPay.BillNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetBillNoNull() {
+                this[this.tableDrPay.BillNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsDrDateNull() {
+                return this.IsNull(this.tableDrPay.DrDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetDrDateNull() {
+                this[this.tableDrPay.DrDateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsDoctorNull() {
+                return this.IsNull(this.tableDrPay.DoctorColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetDoctorNull() {
+                this[this.tableDrPay.DoctorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsDocAmountNull() {
+                return this.IsNull(this.tableDrPay.DocAmountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetDocAmountNull() {
+                this[this.tableDrPay.DocAmountColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -19174,6 +19625,40 @@ namespace HMS {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public DisLinRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class DrPayRowChangeEvent : global::System.EventArgs {
+            
+            private DrPayRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DrPayRowChangeEvent(DrPayRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DrPayRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -34596,6 +35081,15 @@ SELECT FBDDR, FBDAMT, FBDBILLNO, FBDID, FBDDRDT FROM FinalBillDr WHERE (FBDID = 
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._finalBillHdrTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.FinalBillHdr.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._finalBillHdrTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._doctorMastTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.DoctorMast.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -34704,12 +35198,12 @@ SELECT FBDDR, FBDAMT, FBDBILLNO, FBDID, FBDDRDT FROM FinalBillDr WHERE (FBDID = 
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._suppMastTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.SuppMast.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._finalBillDrTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.FinalBillDr.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._suppMastTableAdapter.Update(updatedRows));
+                    result = (result + this._finalBillDrTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -34803,21 +35297,12 @@ SELECT FBDDR, FBDAMT, FBDBILLNO, FBDID, FBDDRDT FROM FinalBillDr WHERE (FBDID = 
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._finalBillHdrTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.FinalBillHdr.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._suppMastTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.SuppMast.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._finalBillHdrTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._finalBillDrTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.FinalBillDr.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._finalBillDrTableAdapter.Update(updatedRows));
+                    result = (result + this._suppMastTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -34836,6 +35321,14 @@ SELECT FBDDR, FBDAMT, FBDBILLNO, FBDID, FBDDRDT FROM FinalBillDr WHERE (FBDID = 
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._doctorDepartmentMastTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._finalBillHdrTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.FinalBillHdr.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._finalBillHdrTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -34935,11 +35428,11 @@ SELECT FBDDR, FBDAMT, FBDBILLNO, FBDID, FBDDRDT FROM FinalBillDr WHERE (FBDID = 
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._suppMastTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.SuppMast.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._finalBillDrTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.FinalBillDr.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._suppMastTableAdapter.Update(addedRows));
+                    result = (result + this._finalBillDrTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -35023,19 +35516,11 @@ SELECT FBDDR, FBDAMT, FBDBILLNO, FBDID, FBDDRDT FROM FinalBillDr WHERE (FBDID = 
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._finalBillHdrTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.FinalBillHdr.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._suppMastTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.SuppMast.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._finalBillHdrTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._finalBillDrTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.FinalBillDr.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._finalBillDrTableAdapter.Update(addedRows));
+                    result = (result + this._suppMastTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -35049,19 +35534,11 @@ SELECT FBDDR, FBDAMT, FBDBILLNO, FBDID, FBDDRDT FROM FinalBillDr WHERE (FBDID = 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateDeletedRows(HMSDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._finalBillDrTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.FinalBillDr.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._suppMastTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.SuppMast.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._finalBillDrTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._finalBillHdrTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.FinalBillHdr.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._finalBillHdrTableAdapter.Update(deletedRows));
+                    result = (result + this._suppMastTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -35145,11 +35622,11 @@ SELECT FBDDR, FBDAMT, FBDBILLNO, FBDID, FBDDRDT FROM FinalBillDr WHERE (FBDID = 
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._suppMastTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.SuppMast.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._finalBillDrTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.FinalBillDr.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._suppMastTableAdapter.Update(deletedRows));
+                    result = (result + this._finalBillDrTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -35246,6 +35723,14 @@ SELECT FBDDR, FBDAMT, FBDBILLNO, FBDID, FBDDRDT FROM FinalBillDr WHERE (FBDID = 
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._doctorMastTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._finalBillHdrTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.FinalBillHdr.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._finalBillHdrTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }

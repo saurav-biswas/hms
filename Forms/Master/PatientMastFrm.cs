@@ -206,44 +206,53 @@ namespace HMS.Forms.Master
             }
         }
 
+
+
         private void DeleteRecord(string idToDelete)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
 
-                using (SqlTransaction transaction = con.BeginTransaction())
+                // Check if there are related records in the IPD table
+                string checkQuery = "SELECT COUNT(*) FROM IPD WHERE PatID = @PatID";
+                using (SqlCommand checkCmd = new SqlCommand(checkQuery, con))
                 {
-                    try
-                    {
+                    checkCmd.Parameters.AddWithValue("@PatID", idToDelete);
 
-                        // Then delete from IPD table
-                        using (SqlCommand cmdDischarge = new SqlCommand("DELETE FROM PatientMast WHERE Id = @Id", con, transaction))
-                        {
-                            cmdDischarge.Parameters.AddWithValue("@Id", idToDelete);
-                            cmdDischarge.ExecuteNonQuery();
-                        }
+                    int relatedRecordCount = (int)checkCmd.ExecuteScalar();
 
-                        transaction.Commit();
-                        MessageBox.Show("Record deleted successfully!");
-                    }
-                    catch (Exception ex)
+                    if (relatedRecordCount > 0)
                     {
-                        transaction.Rollback();
-                        MessageBox.Show("Error while deleting record: " + ex.Message);
+                        MessageBox.Show("Cannot delete the record because it has related records in the IPD table.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return; // Exit the method without performing deletion
                     }
-                    finally
+                }
+
+                // If there are no related records, proceed with deletion
+                string deleteQuery = "DELETE FROM PatientMast WHERE Id = @Id";
+
+                using (SqlCommand cmd = new SqlCommand(deleteQuery, con))
+                {
+                    cmd.Parameters.AddWithValue("@Id", idToDelete);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
                     {
-                        con.Close();
+                        MessageBox.Show("Record deleted successfully.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to delete the record.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
 
-            // Refresh the displayed data after deletion
             Display();
             ClearFields();
-
         }
+
 
         private void buttonSave_Click(object sender, EventArgs e)
         {

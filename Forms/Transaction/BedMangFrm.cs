@@ -245,7 +245,7 @@ namespace HMS.Forms.Transaction
                     insertOrUpdateCommand.Parameters.AddWithValue("@Days", int.Parse(DaystextBox.Text));
                     insertOrUpdateCommand.Parameters.AddWithValue("@Rate", decimal.Parse(BedRateTextBox.Text));
                     insertOrUpdateCommand.Parameters.AddWithValue("@BedAmount", decimal.Parse(BedAmounttextBox.Text));
-                    insertOrUpdateCommand.Parameters.AddWithValue("@Patient", IPDSearchtextBox.Text);
+                    insertOrUpdateCommand.Parameters.AddWithValue("@Patient", PatientNametextBox.Text);
 
                     con.Open();
                     SqlTransaction transaction = con.BeginTransaction();
@@ -467,12 +467,21 @@ namespace HMS.Forms.Transaction
                 {
                     try
                     {
+                        // Get the value from "BedManagedataGridView.IPD"
+                        string ipdToDelete = BedManagedataGridView.SelectedRows[0].Cells["IPD"].Value.ToString();
 
-                        // Then delete from IPD table
-                        using (SqlCommand cmdDischarge = new SqlCommand("DELETE FROM BedManagement WHERE Id = @Id", con, transaction))
+                        // Check if there are related records in "FinalBillHdr.IPD" column
+                        if (HasRelatedRecords(ipdToDelete, "FinalBillHdr", "IPD", con, transaction))
                         {
-                            cmdDischarge.Parameters.AddWithValue("@Id", idToDelete);
-                            cmdDischarge.ExecuteNonQuery();
+                            MessageBox.Show("Cannot delete the record because it has related records in the FinalBillHdr table.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return; // Exit the method without performing deletion
+                        }
+
+                        // Delete from BedManagement table
+                        using (SqlCommand cmdDelete = new SqlCommand("DELETE FROM BedManagement WHERE Id = @Id", con, transaction))
+                        {
+                            cmdDelete.Parameters.AddWithValue("@Id", idToDelete);
+                            cmdDelete.ExecuteNonQuery();
                         }
 
                         transaction.Commit();
@@ -492,8 +501,23 @@ namespace HMS.Forms.Transaction
 
             // Refresh the displayed data after deletion
             Display();
-
         }
+
+        private bool HasRelatedRecords(string valueToDelete, string tableName, string columnName, SqlConnection con, SqlTransaction transaction)
+        {
+            string checkQuery = $"SELECT COUNT(*) FROM {tableName} WHERE {columnName} = @Value";
+
+            using (SqlCommand checkCmd = new SqlCommand(checkQuery, con, transaction))
+            {
+                checkCmd.Parameters.AddWithValue("@Value", valueToDelete);
+
+                int relatedRecordCount = (int)checkCmd.ExecuteScalar();
+
+                return (relatedRecordCount > 0);
+            }
+        }
+
+
 
         private void buttonIPD_Click(object sender, EventArgs e)
         {

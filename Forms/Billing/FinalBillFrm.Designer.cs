@@ -126,6 +126,7 @@
             this.iPDBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tableAdapterManager = new HMS.HMSDataSetTableAdapters.TableAdapterManager();
             this.FinalBillListdataGridView = new System.Windows.Forms.DataGridView();
+            this.bedManagementTableAdapter = new HMS.HMSDataSetTableAdapters.BedManagementTableAdapter();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PatientID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -148,7 +149,6 @@
             this.AdvanceAmt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TotalReceivable = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DissposableAmt = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bedManagementTableAdapter = new HMS.HMSDataSetTableAdapters.BedManagementTableAdapter();
             patIDLabel1 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             advAmtLabel = new System.Windows.Forms.Label();
@@ -893,6 +893,7 @@
             // 
             // taxNameComboBox
             // 
+            this.taxNameComboBox.DisplayMember = "TaxName";
             this.taxNameComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.taxNameComboBox.FormattingEnabled = true;
             this.taxNameComboBox.Location = new System.Drawing.Point(395, 43);
@@ -1185,6 +1186,10 @@
             this.FinalBillListdataGridView.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.FinalBillListdataGridView_CellMouseDoubleClick);
             this.FinalBillListdataGridView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.FinalBillListdataGridView_MouseDoubleClick);
             // 
+            // bedManagementTableAdapter
+            // 
+            this.bedManagementTableAdapter.ClearBeforeFill = true;
+            // 
             // Id
             // 
             this.Id.HeaderText = "Id";
@@ -1317,10 +1322,6 @@
             this.DissposableAmt.Name = "DissposableAmt";
             this.DissposableAmt.ReadOnly = true;
             // 
-            // bedManagementTableAdapter
-            // 
-            this.bedManagementTableAdapter.ClearBeforeFill = true;
-            // 
             // FinalBillFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1421,6 +1422,19 @@
         private System.Windows.Forms.TextBox textBoxPS;
         private System.Windows.Forms.TextBox textBoxPO;
         private System.Windows.Forms.TextBox textBoxAdvIds;
+        private System.Windows.Forms.Button buttonIPD;
+        private System.Windows.Forms.TabPage tabPageDrChrg;
+        private System.Windows.Forms.DataGridView dataGridViewDocChrg;
+        private System.Windows.Forms.TextBox textBoxDocTot;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FBOItemsTID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FBOItemsId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FBOItemsPerticulars;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FBOItemsAmt;
+        private System.Windows.Forms.Button buttonPrintDrChrgs;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BillNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DrDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Doctor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DocAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Date;
         private System.Windows.Forms.DataGridViewTextBoxColumn PatientID;
@@ -1443,18 +1457,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn AdvanceAmt;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalReceivable;
         private System.Windows.Forms.DataGridViewTextBoxColumn DissposableAmt;
-        private System.Windows.Forms.Button buttonIPD;
-        private System.Windows.Forms.TabPage tabPageDrChrg;
-        private System.Windows.Forms.DataGridView dataGridViewDocChrg;
-        private System.Windows.Forms.TextBox textBoxDocTot;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FBOItemsTID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FBOItemsId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FBOItemsPerticulars;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FBOItemsAmt;
-        private System.Windows.Forms.Button buttonPrintDrChrgs;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BillNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DrDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Doctor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DocAmount;
     }
 }

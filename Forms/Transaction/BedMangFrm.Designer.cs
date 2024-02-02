@@ -229,7 +229,7 @@ namespace HMS.Forms.Transaction
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(671, 141);
+            label3.Location = new System.Drawing.Point(680, 141);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(46, 13);
             label3.TabIndex = 104;
@@ -330,6 +330,7 @@ namespace HMS.Forms.Transaction
             this.tableAdapterManager.DisposableIssLinTableAdapter = null;
             this.tableAdapterManager.DoctorDepartmentMastTableAdapter = null;
             this.tableAdapterManager.DoctorMastTableAdapter = null;
+            this.tableAdapterManager.FinalBillDrTableAdapter = null;
             this.tableAdapterManager.FinalBillHdrTableAdapter = null;
             this.tableAdapterManager.FinalBillOtherAmountTableAdapter = null;
             this.tableAdapterManager.GRNHdrTableAdapter = null;

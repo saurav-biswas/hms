@@ -332,10 +332,11 @@ namespace HMS.Forms.Billing
         {
             // Parse values from BedAmtTextBox and OtherAmttextBox
             if (decimal.TryParse(BedAmtTextBox.Text, out decimal bedAmount) &&
-                decimal.TryParse(OtherAmttextBox.Text, out decimal otherAmount))
+                decimal.TryParse(OtherAmttextBox.Text, out decimal otherAmount) &&
+                decimal.TryParse(textBoxDissposableAmt.Text, out decimal DissposableAmount))
             {
                 // Calculate total amount
-                decimal totalAmount = bedAmount + otherAmount;
+                decimal totalAmount = bedAmount + otherAmount + + DissposableAmount;
 
                 // Display the total amount in DetailTotalAmttextBox
                 DetailTotalAmttextBox.Text = totalAmount.ToString();
@@ -424,6 +425,7 @@ namespace HMS.Forms.Billing
         private void DocFeesAmttextBox_TextChanged(object sender, EventArgs e)
         {
             UpdateChargeableAmt();
+
         }
 
         private void MedicinesAmttextBox_TextChanged(object sender, EventArgs e)
@@ -447,11 +449,11 @@ namespace HMS.Forms.Billing
             if (decimal.TryParse(DocFeesAmttextBox.Text, out decimal docFeesAmount) &&
                 decimal.TryParse(MedicinesAmttextBox.Text, out decimal medicinesAmount) &&
                 decimal.TryParse(BloodAmttextBox.Text, out decimal bloodAmount) &&
-                decimal.TryParse(OthrChrgAmtstextBox.Text, out decimal otherChargesAmount) &&
-                decimal.TryParse(textBoxDissposableAmt.Text, out decimal DissposableAmount))
+                decimal.TryParse(OthrChrgAmtstextBox.Text, out decimal otherChargesAmount))
+                
             {
                 // Calculate chargeable amount by summing all charges
-                decimal chargeableAmount = docFeesAmount + medicinesAmount + bloodAmount + otherChargesAmount + DissposableAmount;
+                decimal chargeableAmount = docFeesAmount + medicinesAmount + bloodAmount + otherChargesAmount;
 
                 // Display the chargeable amount in ChargeableAmttextBox
                 ChargeableAmttextBox.Text = chargeableAmount.ToString();
@@ -557,7 +559,7 @@ namespace HMS.Forms.Billing
                         {
                             // Insert a new record
                             using (SqlCommand cmdHeader = new SqlCommand("INSERT INTO FinalBillHdr (Id, IPD, BillDate, TaxRate, TaxAmt, Concession, DrFees, Medicine, Blood, OtherCharges, AdvanceReceived, TotalReceivable, PatientID, PatientName, PayMode, BedTAmt, OtherTAmt, TaxName, DtlTAmt, TotalAmt, ChargableAmt, DissposableAmt) " +
-                                "VALUES (@Id, @IPD, @BillDate, @TaxRate, @TaxAmt, @Concession, @DrFees, @Medicine, @Blood, @OtherCharges, @AdvanceReceived, @TotalReceivable, @PatientID, @PatientName, @PayMode, @BedTAmt, @OtherTAmt, @TaxName, @DtlTAmt, @TotalAmt, @ChargableAmt, DissposableAmt)", con))
+                                "VALUES (@Id, @IPD, @BillDate, @TaxRate, @TaxAmt, @Concession, @DrFees, @Medicine, @Blood, @OtherCharges, @AdvanceReceived, @TotalReceivable, @PatientID, @PatientName, @PayMode, @BedTAmt, @OtherTAmt, @TaxName, @DtlTAmt, @TotalAmt, @ChargableAmt, @DissposableAmt)", con))
                             {
                                 // Add parameters with appropriate types
                                 cmdHeader.Parameters.AddWithValue("@Id", idTextBox.Text);
@@ -699,7 +701,7 @@ namespace HMS.Forms.Billing
                 idTextBox.Text = "";
                 IPDSearchtextBox.Text = "RNH/";
                 FinalpayDateDateTimePicker.Value = DateTime.Now;
-                percentageTextBox.Text = "";
+                percentageTextBox.Text = "15";
                 TaxAmttextBox.Text = "0.00";
                 ConcessionAmttextBox.Text = "0.00";
                 DocFeesAmttextBox.Text = "0.00";
@@ -718,7 +720,7 @@ namespace HMS.Forms.Billing
                 TotAmttextBox.Text = "0.00";
                 ChargeableAmttextBox.Text = "0.00";
                 textBoxDissposableAmt.Text = "0.00";
-                percentageTextBox.Text = "";
+                percentageTextBox.Text = "15";
                 PatGendertextBox.Text = "";
                 PatAgetextBox.Text = "";
                 GarNametextBox.Text = "";
@@ -898,6 +900,7 @@ namespace HMS.Forms.Billing
             ConcessionAmttextBox.Text           = FinalBillListdataGridView.SelectedRows[0].Cells[12].Value.ToString();
             TotAmttextBox.Text                  = FinalBillListdataGridView.SelectedRows[0].Cells[13].Value.ToString();
             DocFeesAmttextBox.Text              = FinalBillListdataGridView.SelectedRows[0].Cells[14].Value.ToString();
+            textBoxDocTot.Text                  = FinalBillListdataGridView.SelectedRows[0].Cells[14].Value.ToString();
             MedicinesAmttextBox.Text            = FinalBillListdataGridView.SelectedRows[0].Cells[15].Value.ToString();
             BloodAmttextBox.Text                = FinalBillListdataGridView.SelectedRows[0].Cells[16].Value.ToString();
             OthrChrgAmtstextBox.Text            = FinalBillListdataGridView.SelectedRows[0].Cells[17].Value.ToString();
@@ -1223,23 +1226,30 @@ namespace HMS.Forms.Billing
             UpdateChargeableAmt();
         }
 
+       
+
         private void buttonDel_Click(object sender, EventArgs e)
         {
-            // Ensure that the user has selected a row in the gRNHdrDataGridView
+            // Ensure that the user has selected a row in the FinalBillListdataGridView
             if (FinalBillListdataGridView.SelectedRows.Count > 0)
             {
                 // Get the selected row
                 DataGridViewRow selectedRow = FinalBillListdataGridView.SelectedRows[0];
 
-                // Retrieve the value from the "Id" column and set it to idToDelete
+                // Retrieve the values from the DataGridView
                 string idToDelete = selectedRow.Cells["Id"].Value.ToString();
+                string ipd = selectedRow.Cells["IPD"].Value.ToString();
+                string patientId = selectedRow.Cells["PatientID"].Value.ToString();
 
                 // Prompt the user to confirm the deletion
                 DialogResult result = MessageBox.Show("Are you sure you want to delete this record?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
                 {
-                    // Perform deletion
+                   // Assuming you have a method to update PatientMast.PatBalAmt
+                    UpdatePatientBalance(ipd, patientId);
+
+                    // Assuming you have a method to delete the record
                     DeleteRecord(idToDelete);
                 }
             }
@@ -1248,6 +1258,79 @@ namespace HMS.Forms.Billing
                 MessageBox.Show("Please select a record to delete.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+        private void UpdatePatientBalance(string ipd, string patientId)
+        {
+            // Assuming you have a method to retrieve the sum of Advance.AdvAmt
+            decimal sumAdvanceAmt = GetSumAdvanceAmt(ipd);
+
+            // Assuming you have a method to update PatientMast.PatBalAmt
+            UpdatePatBalAmt(patientId, sumAdvanceAmt);
+        }
+
+        private decimal GetSumAdvanceAmt(string ipd)
+        {
+            decimal sumAdvanceAmt = 0;
+
+            // Assuming you have a SqlConnection named 'sqlConnection'
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+
+                // Assuming you have a SqlCommand named 'cmd'
+                using (SqlCommand cmd = new SqlCommand("SELECT SUM(AdvAmt) FROM Advance WHERE PatID = @IPD", con))
+                {
+                    cmd.Parameters.AddWithValue("@IPD", ipd);
+
+                    // ExecuteScalar is used to retrieve a single value from the database
+                    object result = cmd.ExecuteScalar();
+
+                    // Check if the result is not null and is a valid decimal value
+                    if (result != null && decimal.TryParse(result.ToString(), out sumAdvanceAmt))
+                    {
+                        // The sum is obtained from the database
+                    }
+                }
+            }
+
+            return sumAdvanceAmt;
+        }
+
+        private void UpdatePatBalAmt(string patientId, decimal newBalance)
+        {
+            // Assuming you have a SqlConnection named 'sqlConnection'
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+
+                // Assuming you have a SqlCommand named 'cmd'
+                using (SqlCommand cmd = new SqlCommand("UPDATE PatientMast SET PatBalAmt = @NewBalance WHERE Id = @PatientID", con))
+                {
+                    cmd.Parameters.AddWithValue("@NewBalance", newBalance);
+                    cmd.Parameters.AddWithValue("@PatientID", patientId);
+
+                    // Execute the update query
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    // Check if the update was successful
+                    if (rowsAffected > 0)
+                    {
+                        // Update successful
+                    }
+                    else
+                    {
+                        // Update failed, handle accordingly
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
+
 
         private void DeleteRecord(string idToDelete)
         {
@@ -1265,6 +1348,15 @@ namespace HMS.Forms.Billing
                             cmdDischargeLin.Parameters.AddWithValue("@Id", idToDelete);
                             cmdDischargeLin.ExecuteNonQuery();
                         }
+
+
+                        // Delete from DischargeLin table first
+                        using (SqlCommand cmdDischargeLin = new SqlCommand("DELETE FROM FinalBillDr WHERE FBDBILLNO = @Id", con, transaction))
+                        {
+                            cmdDischargeLin.Parameters.AddWithValue("@Id", idToDelete);
+                            cmdDischargeLin.ExecuteNonQuery();
+                        }
+
 
                         // Then delete from Discharge table
                         using (SqlCommand cmdDischarge = new SqlCommand("DELETE FROM FinalBillHdr WHERE Id = @Id", con, transaction))
@@ -1413,13 +1505,14 @@ namespace HMS.Forms.Billing
             }
 
 
-
-           //report.Subreports[0].DataSourceConnections.Clear();
-           //report.Subreports[0].SetDataSource(dataGridViewDocChrg.DataSource);
+            ShowDataTableValues(dt);
 
             report.Subreports[0].DataSourceConnections.Clear();
-            report.Subreports[0].SetDataSource(dt);
+            report.Subreports[0].SetDataSource(dataGridViewDocChrg.DataSource);
 
+            //report.Subreports[0].DataSourceConnections.Clear();
+            //report.Subreports[0].SetDataSource(dt);
+           
             FinalBillDr fbr = new FinalBillDr();
 
             FinalBillDrViewer view = new FinalBillDrViewer();
@@ -1440,5 +1533,32 @@ namespace HMS.Forms.Billing
         {
             AdmissiondateTimePicker.CustomFormat = "dd-MM-yyyy HH:mm:ss";
         }
+
+        private void ShowDataTableValues(DataTable dt)
+        {
+            StringBuilder message = new StringBuilder();
+
+            // Display column names
+            message.AppendLine("Column Names:");
+            foreach (DataColumn column in dt.Columns)
+            {
+                message.Append(column.ColumnName).Append("\t");
+            }
+            message.AppendLine();
+
+            // Display data rows
+            message.AppendLine("Data Rows:");
+            foreach (DataRow row in dt.Rows)
+            {
+                foreach (var item in row.ItemArray)
+                {
+                    message.Append(item.ToString()).Append("\t");
+                }
+                message.AppendLine();
+            }
+
+            MessageBox.Show(message.ToString(), "DataTable Values");
+        }
+
     }
 }

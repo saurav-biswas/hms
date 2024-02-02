@@ -2433,7 +2433,7 @@ SELECT FBDDR, FBDAMT, FBDBILLNO, FBDID, FBDDRDT FROM FinalBillDr WHERE (FBDID = 
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="TaxName" msprop:Generator_ColumnPropNameInRow="TaxName" msprop:Generator_ColumnPropNameInTable="TaxNameColumn" msprop:Generator_ColumnVarNameInTable="columnTaxName" msprop:Generator_UserColumnName="TaxName" minOccurs="0">
+              <xs:element name="TaxName" msprop:Generator_UserColumnName="TaxName" msprop:Generator_ColumnPropNameInTable="TaxNameColumn" msprop:Generator_ColumnPropNameInRow="TaxName" msprop:Generator_ColumnVarNameInTable="columnTaxName" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
@@ -3265,8 +3265,8 @@ SELECT FBDDR, FBDAMT, FBDBILLNO, FBDID, FBDDRDT FROM FinalBillDr WHERE (FBDID = 
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="DischargeDate" msprop:Generator_UserColumnName="DischargeDate" msprop:Generator_ColumnPropNameInTable="DischargeDateColumn" msprop:Generator_ColumnPropNameInRow="DischargeDate" msprop:Generator_ColumnVarNameInTable="columnDischargeDate" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="AdmissionDt" msprop:Generator_UserColumnName="AdmissionDt" msprop:Generator_ColumnPropNameInTable="AdmissionDtColumn" msprop:Generator_ColumnPropNameInRow="AdmissionDt" msprop:Generator_ColumnVarNameInTable="columnAdmissionDt" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DischargeDate" msprop:Generator_ColumnPropNameInTable="DischargeDateColumn" msprop:Generator_ColumnPropNameInRow="DischargeDate" msprop:Generator_UserColumnName="DischargeDate" msprop:Generator_ColumnVarNameInTable="columnDischargeDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="AdmissionDt" msprop:Generator_ColumnPropNameInTable="AdmissionDtColumn" msprop:Generator_ColumnPropNameInRow="AdmissionDt" msprop:Generator_UserColumnName="AdmissionDt" msprop:Generator_ColumnVarNameInTable="columnAdmissionDt" type="xs:dateTime" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -3806,7 +3806,7 @@ SELECT FBDDR, FBDAMT, FBDBILLNO, FBDID, FBDDRDT FROM FinalBillDr WHERE (FBDID = 
               <xs:element name="TotalAmt" msprop:Generator_ColumnPropNameInTable="TotalAmtColumn" msprop:Generator_ColumnPropNameInRow="TotalAmt" msprop:Generator_UserColumnName="TotalAmt" msprop:Generator_ColumnVarNameInTable="columnTotalAmt" type="xs:decimal" />
               <xs:element name="ChargableAmt" msprop:Generator_ColumnPropNameInTable="ChargableAmtColumn" msprop:Generator_ColumnPropNameInRow="ChargableAmt" msprop:Generator_UserColumnName="ChargableAmt" msprop:Generator_ColumnVarNameInTable="columnChargableAmt" type="xs:decimal" />
               <xs:element name="DissposableAmt" msprop:Generator_ColumnPropNameInTable="DissposableAmtColumn" msprop:Generator_ColumnPropNameInRow="DissposableAmt" msprop:Generator_UserColumnName="DissposableAmt" msprop:Generator_ColumnVarNameInTable="columnDissposableAmt" type="xs:decimal" minOccurs="0" />
-              <xs:element name="BillDate" msprop:Generator_ColumnPropNameInRow="BillDate" msprop:Generator_ColumnPropNameInTable="BillDateColumn" msprop:Generator_ColumnVarNameInTable="columnBillDate" msprop:Generator_UserColumnName="BillDate" type="xs:dateTime" />
+              <xs:element name="BillDate" msprop:Generator_UserColumnName="BillDate" msprop:Generator_ColumnPropNameInTable="BillDateColumn" msprop:Generator_ColumnPropNameInRow="BillDate" msprop:Generator_ColumnVarNameInTable="columnBillDate" type="xs:dateTime" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -3830,6 +3830,16 @@ SELECT FBDDR, FBDAMT, FBDBILLNO, FBDID, FBDDRDT FROM FinalBillDr WHERE (FBDID = 
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DrPay" msprop:Generator_RowEvHandlerName="DrPayRowChangeEventHandler" msprop:Generator_RowDeletedName="DrPayRowDeleted" msprop:Generator_RowDeletingName="DrPayRowDeleting" msprop:Generator_RowEvArgName="DrPayRowChangeEvent" msprop:Generator_TablePropName="DrPay" msprop:Generator_RowChangedName="DrPayRowChanged" msprop:Generator_RowChangingName="DrPayRowChanging" msprop:Generator_TableClassName="DrPayDataTable" msprop:Generator_RowClassName="DrPayRow" msprop:Generator_TableVarName="tableDrPay" msprop:Generator_UserTableName="DrPay">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BillNo" msprop:Generator_ColumnPropNameInRow="BillNo" msprop:Generator_ColumnPropNameInTable="BillNoColumn" msprop:Generator_ColumnVarNameInTable="columnBillNo" msprop:Generator_UserColumnName="BillNo" type="xs:string" minOccurs="0" />
+              <xs:element name="DrDate" msprop:Generator_ColumnPropNameInRow="DrDate" msprop:Generator_ColumnPropNameInTable="DrDateColumn" msprop:Generator_ColumnVarNameInTable="columnDrDate" msprop:Generator_UserColumnName="DrDate" type="xs:string" minOccurs="0" />
+              <xs:element name="Doctor" msprop:Generator_ColumnPropNameInRow="Doctor" msprop:Generator_ColumnPropNameInTable="DoctorColumn" msprop:Generator_ColumnVarNameInTable="columnDoctor" msprop:Generator_UserColumnName="Doctor" type="xs:string" minOccurs="0" />
+              <xs:element name="DocAmount" msprop:Generator_ColumnPropNameInRow="DocAmount" msprop:Generator_ColumnPropNameInTable="DocAmountColumn" msprop:Generator_ColumnVarNameInTable="columnDocAmount" msprop:Generator_UserColumnName="DocAmount" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
