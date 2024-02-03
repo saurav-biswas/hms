@@ -298,14 +298,14 @@
             // iPDRegisterToolStripMenuItem
             // 
             this.iPDRegisterToolStripMenuItem.Name = "iPDRegisterToolStripMenuItem";
-            this.iPDRegisterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.iPDRegisterToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.iPDRegisterToolStripMenuItem.Text = "IPD Register";
             this.iPDRegisterToolStripMenuItem.Click += new System.EventHandler(this.iPDRegisterToolStripMenuItem_Click);
             // 
             // stockReportToolStripMenuItem
             // 
             this.stockReportToolStripMenuItem.Name = "stockReportToolStripMenuItem";
-            this.stockReportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.stockReportToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.stockReportToolStripMenuItem.Text = "Stock Report";
             this.stockReportToolStripMenuItem.Click += new System.EventHandler(this.stockReportToolStripMenuItem_Click);
             // 
@@ -342,7 +342,7 @@
             this.labelFrmName.Name = "labelFrmName";
             this.labelFrmName.Size = new System.Drawing.Size(254, 13);
             this.labelFrmName.TabIndex = 0;
-            this.labelFrmName.Text = "HMS | 29-01-2024 | Developed By Kolkata Websites";
+            this.labelFrmName.Text = "HMS | 02-02-2024 | Developed By Kolkata Websites";
             // 
             // panel2
             // 

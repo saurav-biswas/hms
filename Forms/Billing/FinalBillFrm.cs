@@ -32,11 +32,13 @@ namespace HMS.Forms.Billing
         private DataTable dt = new DataTable();
         public CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer1;
 
+
         public FinalBillFrm()
         {
             InitializeComponent();
             IPDSearchtextBox.TextChanged += IPDSearchtextBox_TextChanged;
-           
+            // Subscribe to the TextChanged event of textBoxDocTot
+            textBoxDocTot.TextChanged += textBoxDocTot_TextChanged;
         }      
 
         
@@ -315,10 +317,11 @@ namespace HMS.Forms.Billing
         {
             // Parse values from BedAmtTextBox and OtherAmttextBox
             if (decimal.TryParse(BedAmtTextBox.Text, out decimal bedAmount) &&
-                decimal.TryParse(OtherAmttextBox.Text, out decimal otherAmount))
+                decimal.TryParse(OtherAmttextBox.Text, out decimal otherAmount) &&
+                decimal.TryParse(textBoxDissposableAmt.Text, out decimal DispAmount))
             {
                 // Calculate the sum and display it in DetailTotalAmttextBox
-                decimal totalAmount = bedAmount + otherAmount;
+                decimal totalAmount = bedAmount + otherAmount + DispAmount;
                 DetailTotalAmttextBox.Text = totalAmount.ToString(); // Assuming the amounts are in currency format
             }
             else
@@ -332,11 +335,11 @@ namespace HMS.Forms.Billing
         {
             // Parse values from BedAmtTextBox and OtherAmttextBox
             if (decimal.TryParse(BedAmtTextBox.Text, out decimal bedAmount) &&
-                decimal.TryParse(OtherAmttextBox.Text, out decimal otherAmount) &&
-                decimal.TryParse(textBoxDissposableAmt.Text, out decimal DissposableAmount))
+                decimal.TryParse(OtherAmttextBox.Text, out decimal otherAmount))
+                //decimal.TryParse(textBoxDissposableAmt.Text, out decimal DissposableAmount))
             {
                 // Calculate total amount
-                decimal totalAmount = bedAmount + otherAmount + + DissposableAmount;
+                decimal totalAmount = bedAmount + otherAmount;
 
                 // Display the total amount in DetailTotalAmttextBox
                 DetailTotalAmttextBox.Text = totalAmount.ToString();
@@ -1224,6 +1227,7 @@ namespace HMS.Forms.Billing
         {
             UpdateReceivablesAmt();
             UpdateChargeableAmt();
+            UpdateDTotalAmount();
         }
 
        
@@ -1487,8 +1491,8 @@ namespace HMS.Forms.Billing
         {
             ReportDocument report = new ReportDocument();
             report.Load("Reports/FinalBillDr.rpt"); // Load your Crystal Report
-
-            DataTable dt = new DataTable();
+            DataTable dt = new DataTable("DrPay"); // Specify your DataTable name
+            //DataTable dt = new DataTable();
             foreach (DataGridViewColumn col in dataGridViewDocChrg.Columns)
             {
                 dt.Columns.Add(col.Name);
@@ -1507,11 +1511,11 @@ namespace HMS.Forms.Billing
 
             ShowDataTableValues(dt);
 
-            report.Subreports[0].DataSourceConnections.Clear();
-            report.Subreports[0].SetDataSource(dataGridViewDocChrg.DataSource);
-
             //report.Subreports[0].DataSourceConnections.Clear();
-            //report.Subreports[0].SetDataSource(dt);
+            //report.Subreports[0].SetDataSource(dataGridViewDocChrg.DataSource);
+
+            report.Subreports[0].DataSourceConnections.Clear();
+            report.Subreports[0].SetDataSource(dt);
            
             FinalBillDr fbr = new FinalBillDr();
 
@@ -1529,14 +1533,13 @@ namespace HMS.Forms.Billing
             view.Show();
         }
 
-        private void AdmissiondateTimePicker_ValueChanged(object sender, EventArgs e)
-        {
-            AdmissiondateTimePicker.CustomFormat = "dd-MM-yyyy HH:mm:ss";
-        }
-
         private void ShowDataTableValues(DataTable dt)
         {
             StringBuilder message = new StringBuilder();
+
+            // Display DataTable name
+            message.AppendLine("DataTable Name: " + dt.TableName);
+
 
             // Display column names
             message.AppendLine("Column Names:");
@@ -1558,6 +1561,27 @@ namespace HMS.Forms.Billing
             }
 
             MessageBox.Show(message.ToString(), "DataTable Values");
+        }
+
+
+        private void AdmissiondateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            AdmissiondateTimePicker.CustomFormat = "dd-MM-yyyy HH:mm:ss";
+        }
+
+        private void textBoxDocTot_TextChanged(object sender, EventArgs e)
+        {
+            // Check if the value of textBoxDocTot is greater than zero
+            if (decimal.TryParse(textBoxDocTot.Text, out decimal docTotValue) && docTotValue > 0)
+            {
+                // If true, set DocFeesAmttextBox to readonly
+                DocFeesAmttextBox.ReadOnly = true;
+            }
+            else
+            {
+                // If false, set DocFeesAmttextBox to not readonly
+                DocFeesAmttextBox.ReadOnly = false;
+            }
         }
 
     }

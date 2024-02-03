@@ -85,8 +85,6 @@
             this.FinalpayDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.idTextBox = new System.Windows.Forms.TextBox();
             this.percentageTextBox = new System.Windows.Forms.TextBox();
-            this.taxMastBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.hMSDataSet = new HMS.HMSDataSet();
             this.ReceivablesAmttextBox = new System.Windows.Forms.TextBox();
             this.payModeComboBox = new System.Windows.Forms.ComboBox();
             this.AdvanceAmttextBox = new System.Windows.Forms.TextBox();
@@ -122,11 +120,7 @@
             this.OtherAmttextBox = new System.Windows.Forms.TextBox();
             this.Savebutton = new System.Windows.Forms.Button();
             this.printbutton = new System.Windows.Forms.Button();
-            this.bedManagementBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.iPDBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tableAdapterManager = new HMS.HMSDataSetTableAdapters.TableAdapterManager();
             this.FinalBillListdataGridView = new System.Windows.Forms.DataGridView();
-            this.bedManagementTableAdapter = new HMS.HMSDataSetTableAdapters.BedManagementTableAdapter();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PatientID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -149,6 +143,12 @@
             this.AdvanceAmt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TotalReceivable = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DissposableAmt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.taxMastBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.hMSDataSet = new HMS.HMSDataSet();
+            this.bedManagementBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.iPDBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tableAdapterManager = new HMS.HMSDataSetTableAdapters.TableAdapterManager();
+            this.bedManagementTableAdapter = new HMS.HMSDataSetTableAdapters.BedManagementTableAdapter();
             patIDLabel1 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             advAmtLabel = new System.Windows.Forms.Label();
@@ -174,17 +174,17 @@
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.FBMaintabPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.taxMastBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hMSDataSet)).BeginInit();
             this.tabPageDrChrg.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDocChrg)).BeginInit();
             this.FBBedtabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bedManagementDataGridView)).BeginInit();
             this.FBOtherItemstabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OtherItemsdataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FinalBillListdataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.taxMastBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hMSDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bedManagementBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iPDBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FinalBillListdataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // patIDLabel1
@@ -745,16 +745,6 @@
             this.percentageTextBox.TabIndex = 86;
             this.percentageTextBox.Text = "15";
             // 
-            // taxMastBindingSource
-            // 
-            this.taxMastBindingSource.DataMember = "TaxMast";
-            this.taxMastBindingSource.DataSource = this.hMSDataSet;
-            // 
-            // hMSDataSet
-            // 
-            this.hMSDataSet.DataSetName = "HMSDataSet";
-            this.hMSDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // ReceivablesAmttextBox
             // 
             this.ReceivablesAmttextBox.Location = new System.Drawing.Point(882, 229);
@@ -985,6 +975,7 @@
             this.textBoxDocTot.TabIndex = 63;
             this.textBoxDocTot.Text = "0";
             this.textBoxDocTot.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxDocTot.TextChanged += new System.EventHandler(this.textBoxDocTot_TextChanged);
             // 
             // FBBedtabPage
             // 
@@ -1105,48 +1096,6 @@
             this.printbutton.UseVisualStyleBackColor = true;
             this.printbutton.Click += new System.EventHandler(this.printbutton_Click);
             // 
-            // bedManagementBindingSource
-            // 
-            this.bedManagementBindingSource.DataMember = "BedManagement";
-            this.bedManagementBindingSource.DataSource = this.hMSDataSet;
-            // 
-            // iPDBindingSource
-            // 
-            this.iPDBindingSource.DataMember = "IPD";
-            this.iPDBindingSource.DataSource = this.hMSDataSet;
-            // 
-            // tableAdapterManager
-            // 
-            this.tableAdapterManager.AdvanceTableAdapter = null;
-            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
-            this.tableAdapterManager.BedManagementTableAdapter = null;
-            this.tableAdapterManager.BedNumberMastTableAdapter = null;
-            this.tableAdapterManager.BedTypeMastTableAdapter = null;
-            this.tableAdapterManager.BloodGroupMastTableAdapter = null;
-            this.tableAdapterManager.Connection = null;
-            this.tableAdapterManager.DischargeLinTableAdapter = null;
-            this.tableAdapterManager.DischargeTableAdapter = null;
-            this.tableAdapterManager.DisposableIssHdrTableAdapter = null;
-            this.tableAdapterManager.DisposableIssLinTableAdapter = null;
-            this.tableAdapterManager.DoctorDepartmentMastTableAdapter = null;
-            this.tableAdapterManager.DoctorMastTableAdapter = null;
-            this.tableAdapterManager.FinalBillDrTableAdapter = null;
-            this.tableAdapterManager.FinalBillHdrTableAdapter = null;
-            this.tableAdapterManager.FinalBillOtherAmountTableAdapter = null;
-            this.tableAdapterManager.GRNHdrTableAdapter = null;
-            this.tableAdapterManager.GRNLinTableAdapter = null;
-            this.tableAdapterManager.IPDTableAdapter = null;
-            this.tableAdapterManager.ItCatMastTableAdapter = null;
-            this.tableAdapterManager.ItMastTableAdapter = null;
-            this.tableAdapterManager.OPDTableAdapter = null;
-            this.tableAdapterManager.PatientMastTableAdapter = null;
-            this.tableAdapterManager.PrescriptionTableAdapter = null;
-            this.tableAdapterManager.PresMedTableAdapter = null;
-            this.tableAdapterManager.SuppMastTableAdapter = null;
-            this.tableAdapterManager.TaxMastTableAdapter = null;
-            this.tableAdapterManager.UpdateOrder = HMS.HMSDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
-            this.tableAdapterManager.UsersTableAdapter = null;
-            // 
             // FinalBillListdataGridView
             // 
             this.FinalBillListdataGridView.AllowUserToAddRows = false;
@@ -1185,10 +1134,6 @@
             this.FinalBillListdataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FinalBillListdataGridView_CellContentClick);
             this.FinalBillListdataGridView.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.FinalBillListdataGridView_CellMouseDoubleClick);
             this.FinalBillListdataGridView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.FinalBillListdataGridView_MouseDoubleClick);
-            // 
-            // bedManagementTableAdapter
-            // 
-            this.bedManagementTableAdapter.ClearBeforeFill = true;
             // 
             // Id
             // 
@@ -1322,6 +1267,62 @@
             this.DissposableAmt.Name = "DissposableAmt";
             this.DissposableAmt.ReadOnly = true;
             // 
+            // taxMastBindingSource
+            // 
+            this.taxMastBindingSource.DataMember = "TaxMast";
+            this.taxMastBindingSource.DataSource = this.hMSDataSet;
+            // 
+            // hMSDataSet
+            // 
+            this.hMSDataSet.DataSetName = "HMSDataSet";
+            this.hMSDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // bedManagementBindingSource
+            // 
+            this.bedManagementBindingSource.DataMember = "BedManagement";
+            this.bedManagementBindingSource.DataSource = this.hMSDataSet;
+            // 
+            // iPDBindingSource
+            // 
+            this.iPDBindingSource.DataMember = "IPD";
+            this.iPDBindingSource.DataSource = this.hMSDataSet;
+            // 
+            // tableAdapterManager
+            // 
+            this.tableAdapterManager.AdvanceTableAdapter = null;
+            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.BedManagementTableAdapter = null;
+            this.tableAdapterManager.BedNumberMastTableAdapter = null;
+            this.tableAdapterManager.BedTypeMastTableAdapter = null;
+            this.tableAdapterManager.BloodGroupMastTableAdapter = null;
+            this.tableAdapterManager.Connection = null;
+            this.tableAdapterManager.DischargeLinTableAdapter = null;
+            this.tableAdapterManager.DischargeTableAdapter = null;
+            this.tableAdapterManager.DisposableIssHdrTableAdapter = null;
+            this.tableAdapterManager.DisposableIssLinTableAdapter = null;
+            this.tableAdapterManager.DoctorDepartmentMastTableAdapter = null;
+            this.tableAdapterManager.DoctorMastTableAdapter = null;
+            this.tableAdapterManager.FinalBillDrTableAdapter = null;
+            this.tableAdapterManager.FinalBillHdrTableAdapter = null;
+            this.tableAdapterManager.FinalBillOtherAmountTableAdapter = null;
+            this.tableAdapterManager.GRNHdrTableAdapter = null;
+            this.tableAdapterManager.GRNLinTableAdapter = null;
+            this.tableAdapterManager.IPDTableAdapter = null;
+            this.tableAdapterManager.ItCatMastTableAdapter = null;
+            this.tableAdapterManager.ItMastTableAdapter = null;
+            this.tableAdapterManager.OPDTableAdapter = null;
+            this.tableAdapterManager.PatientMastTableAdapter = null;
+            this.tableAdapterManager.PrescriptionTableAdapter = null;
+            this.tableAdapterManager.PresMedTableAdapter = null;
+            this.tableAdapterManager.SuppMastTableAdapter = null;
+            this.tableAdapterManager.TaxMastTableAdapter = null;
+            this.tableAdapterManager.UpdateOrder = HMS.HMSDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            this.tableAdapterManager.UsersTableAdapter = null;
+            // 
+            // bedManagementTableAdapter
+            // 
+            this.bedManagementTableAdapter.ClearBeforeFill = true;
+            // 
             // FinalBillFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1340,8 +1341,6 @@
             this.tabControl1.ResumeLayout(false);
             this.FBMaintabPage.ResumeLayout(false);
             this.FBMaintabPage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.taxMastBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hMSDataSet)).EndInit();
             this.tabPageDrChrg.ResumeLayout(false);
             this.tabPageDrChrg.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDocChrg)).EndInit();
@@ -1351,9 +1350,11 @@
             this.FBOtherItemstabPage.ResumeLayout(false);
             this.FBOtherItemstabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OtherItemsdataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FinalBillListdataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.taxMastBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hMSDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bedManagementBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iPDBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FinalBillListdataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
